@@ -68,9 +68,9 @@ int		ft_ll(char **str, va_list *arg, t_flags *param, int *l)
 	return (val);
 }
 
-int		ft_h_j(__intmax_t *num, int *l, int *val, t_flags *param)
+int		ft_h_j(intmax_t *num, int *l, int *val, t_flags *param)
 {
-	__intmax_t new_num;
+	intmax_t new_num;
 
 	(*l) = 0;
 	if ((*num == 0) && (param->pres != 0))
@@ -99,12 +99,12 @@ int		ft_h_j(__intmax_t *num, int *l, int *val, t_flags *param)
 
 int		ft_j(char **str, va_list *arg, t_flags *param, int *l)
 {
-	__intmax_t	num;
+	intmax_t	num;
 	int			val;
 	int			i;
 	int			pres;
 
-	num = va_arg(*arg, __intmax_t);
+	num = va_arg(*arg, intmax_t);
 	val = ft_h_j(&num, l, &val, param);
 	if (!(*str = ft_strnew((size_t)(val + 1))))
 		return (-1);

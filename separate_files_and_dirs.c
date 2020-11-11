@@ -1,7 +1,7 @@
 #include "ft_ls.h"
 
 int	ft_is_dir(mode_t mode) {
-	mode = mode & __S_IFMT;
+	mode = mode & S_IFMT;
 	if (S_ISDIR(mode))
 		return (1);
 	else

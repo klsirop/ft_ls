@@ -12,7 +12,7 @@
 
 #include "../includes/ft_printf.h"
 
-static size_t	digit_count_large(__uintmax_t nb, int base)
+static size_t	digit_count_large(uintmax_t nb, int base)
 {
 	size_t		i;
 
@@ -25,7 +25,7 @@ static size_t	digit_count_large(__uintmax_t nb, int base)
 	return (i);
 }
 
-char			*ft_itoa_base_large(__uint64_t value, int base)
+char			*ft_itoa_base_large(uint64_t value, int base)
 {
 	char	*ret;
 	char	*tab_base;

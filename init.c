@@ -26,4 +26,5 @@ void	ft_init_file_info(t_file_info **file_info) {
 	(*file_info)->link_name = NULL;
 	(*file_info)->file_name = NULL;
 	(*file_info)->next = NULL;
+	(*file_info)->total = 0;
 }

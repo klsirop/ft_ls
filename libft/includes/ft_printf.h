@@ -253,7 +253,7 @@ int					ft_l(char **str, va_list *arg, t_flags *param, int *l);
 int					ft_h_ll(long long int *num, int *l, int *val,
 							t_flags *param);
 int					ft_ll(char **str, va_list *arg, t_flags *param, int *l);
-int					ft_h_j(__intmax_t *num, int *l, int *val, t_flags *param);
+int					ft_h_j(intmax_t *num, int *l, int *val, t_flags *param);
 int					ft_j(char **str, va_list *arg, t_flags *param, int *l);
 
 /*
@@ -262,7 +262,7 @@ int					ft_j(char **str, va_list *arg, t_flags *param, int *l);
 
 int					ft_h_z(ssize_t *num, int *l, int *val, t_flags *param);
 int					ft_z(char **str, va_list *arg, t_flags *param, int *l);
-int					ft_h_lll(__int64_t *num, int *l, int *val, t_flags *param);
+int					ft_h_lll(int64_t *num, int *l, int *val, t_flags *param);
 int					ft_lll(char **str, va_list *arg, t_flags *param, int *l);
 
 /*
@@ -283,7 +283,7 @@ int					ft_l_u(char **str, va_list *arg, t_flags *param, int *l);
 int					ft_hllu(unsigned long long *num, int *l, int *val,
 							t_flags *param);
 int					ft_ll_u(char **str, va_list *arg, t_flags *param, int *l);
-int					ft_h_j_u(__uintmax_t *num, int *l, int *val, t_flags *param);
+int					ft_h_j_u(uintmax_t *num, int *l, int *val, t_flags *param);
 int					ft_j_u(char **str, va_list *arg, t_flags *param, int *l);
 
 /*
@@ -292,7 +292,7 @@ int					ft_j_u(char **str, va_list *arg, t_flags *param, int *l);
 
 int					ft_h_z_u(size_t *num, int *l, int *val, t_flags *param);
 int					ft_z_u(char **str, va_list *arg, t_flags *param, int *l);
-int					ft_h_lll_u(__uint64_t *num, int *l, int *val,
+int					ft_h_lll_u(uint64_t *num, int *l, int *val,
 								t_flags *param);
 int					ft_z_lll(char **str, va_list *arg, t_flags *param, int *l);
 

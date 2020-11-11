@@ -77,7 +77,7 @@ void	ft_printf_width(char *str, int width, int is_left) {
 
 	full_arg = ft_strconcat(arg, "s");
 	ft_strdel(&arg);
-
+	// ft_printf("%s\n", full_arg);
 	ft_printf(full_arg, str);
 	ft_strdel(&full_arg);
 }
@@ -92,18 +92,22 @@ void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info) {
 	ft_init_width_info(width_info);
 	ft_find_all_width(file_info, width_info);
 	// ft_printf("hard links: %d\n", width_info->hard_links);
-	// ft_printf("day: %d\n", width_info->day);
+	// ft_printf("name: %d\n", width_info->filename);
+
+	if (file_info) {
+		ft_printf("total %d\n", file_info->total);
+	}
 
 	tmp = file_info;
 	while (tmp) {
-
+		
 		ft_printf("%c", tmp->rights->mode);
 		ft_printf("%s", tmp->rights->usr_rights);
 		ft_printf("%s", tmp->rights->grp_rights);
 		ft_printf("%s", tmp->rights->oth_rights);
 		ft_printf("%c", tmp->rights->acl);
 
-		// ft_printf(" ");
+		ft_printf(" ");
 
 		tmp_str = ft_itoa(tmp->hard_links);
 		ft_printf_width(tmp_str, width_info->hard_links, 0);
@@ -111,10 +115,10 @@ void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info) {
 
 		ft_printf(" ");
 		ft_printf_width(tmp->usr_name, width_info->user, 0);
-		ft_printf(" ");
+		ft_printf("  ");
 		ft_printf("%s", tmp->grp_name);
 
-		ft_printf(" ");
+		ft_printf("  ");
 		tmp_str = ft_itoa(tmp->file_size);
 		ft_printf_width(tmp_str, width_info->size, 0);
 		ft_strdel(&tmp_str);
@@ -129,7 +133,7 @@ void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info) {
 		ft_printf("%s", tmp->time->min);
 
 		ft_printf(" ");
-		ft_printf_width(tmp->file_name, width_info->filename, 1);
+		ft_printf("%s", tmp->file_name);
 
 		if (tmp->link_name) {
 			ft_printf(" -> ");

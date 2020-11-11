@@ -39,19 +39,20 @@ int		ft_no_point_strcmp(char *lhs, char *rhs) {
 	lhs_no_point = NULL;
 	rhs_no_point = NULL;
 
-	if ((lhs)[0] == '.')
-		ft_delete_point(&lhs_no_point, lhs);
-	else
-		lhs_no_point = ft_strdup(lhs);
+	// if ((lhs)[0] == '.')
+	// 	ft_delete_point(&lhs_no_point, lhs);
+	// else
+	// 	lhs_no_point = ft_strdup(lhs);
 
-	if ((rhs)[0] == '.')
-		ft_delete_point(&rhs_no_point, rhs);
-	else
-		rhs_no_point = ft_strdup(rhs);
+	// if ((rhs)[0] == '.')
+	// 	ft_delete_point(&rhs_no_point, rhs);
+	// else
+	// 	rhs_no_point = ft_strdup(rhs);
 
 	// ft_printf("before: %s after: %s\n", lhs, lhs_no_point);
 	// ft_printf("before: %s after: %s\n", rhs, rhs_no_point);
-
+	lhs_no_point = ft_strdup(lhs);
+	rhs_no_point = ft_strdup(rhs);
 	res = ft_strcmp(lhs_no_point, rhs_no_point);
 
 	ft_strdel(&lhs_no_point);
@@ -72,6 +73,7 @@ int		ft_is_right_order_by_alph(char *lhs, char *rhs, enum e_order_type order_typ
 		else
 			return 0;
 	}
+	return (0);
 }
 
 int		ft_is_right_order(t_lis *lhs, t_lis *rhs, enum e_order_type order_type) {

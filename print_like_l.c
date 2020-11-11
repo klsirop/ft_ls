@@ -95,7 +95,7 @@ void ft_print_time_modify(struct stat status, t_file_info* file_info) {
 }
 
 void	ft_get_file_type(mode_t mode, t_file_info* file_info) {
-	mode = mode & __S_IFMT;
+	mode = mode & S_IFMT;
 	if (S_ISDIR(mode))
 		file_info->rights->mode = 'd';
 	else if (S_ISREG(mode))
@@ -188,7 +188,7 @@ void	ft_get_spec_rights(mode_t mode, t_file_info* file_info) {
 void	ft_get_file_acl(char *path_to_file, t_file_info* file_info) {
 	char	buf[101];
 
-	if (listxattr(path_to_file, buf, sizeof(buf)) > 0)
+	if (listxattr(path_to_file, buf, sizeof(buf), 0) > 0)
 		file_info->rights->acl = '@';
 	file_info->rights->acl = ' ';
 }
@@ -224,7 +224,7 @@ void	ft_print_link(struct stat status, char *path_to_file, t_file_info *file_inf
 	file_info->link_name = ft_strdup(buf);
 }
 
-void	ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info* dir_info, t_file_info *file_info) {
+int	ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info* dir_info, t_file_info *file_info) {
 	struct stat status;
 	char *path_to_file;
 	char *tmp;
@@ -242,6 +242,7 @@ void	ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info* dir_info, t_f
 
 	// blocks = status.st_blocks;
 	// ft_printf(":%s\n", path_to_file);
+	// file_info->total += status.st_blocks;
 	// ft_printf("bblocks: %d\n", status.st_blocks);
 
 	ft_print_rights(status, path_to_file, file_info);
@@ -254,5 +255,6 @@ void	ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info* dir_info, t_f
 	if (file_info->rights->mode == 'l')
 		ft_print_link(status, path_to_file, file_info);
 	ft_strdel(&path_to_file);
-
+	return status.st_blocks;
+	// return 0;
 }

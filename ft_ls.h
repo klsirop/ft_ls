@@ -87,6 +87,7 @@ typedef struct	s_file_info {
 	t_dtime *time;
 	char *link_name;
 	char *file_name;
+	int total;
 	struct s_file_info *next;
 
 }				t_file_info;
@@ -213,7 +214,7 @@ void	ft_free_t_file_info(t_file_info **head);
 ** print_like_l.c
 */
 
-void	ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info* dir_info, t_file_info *file_info);
+int	ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info* dir_info, t_file_info *file_info);
 char *ft_strconcat(char *s1, char *s2);
 
 /*

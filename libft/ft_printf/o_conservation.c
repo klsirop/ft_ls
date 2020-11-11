@@ -28,7 +28,7 @@ char	*ft_getarg_8(t_flags *param, va_list *arg)
 	else if (param->size != NULL && !ft_strcmp(param->size, "hh"))
 		str = ft_itoa_base(((unsigned char)va_arg(*arg, unsigned int)), 8);
 	else if (param->size != NULL && !ft_strcmp(param->size, "j"))
-		str = ft_itoa_base_large(va_arg(*arg, __uintmax_t), 8);
+		str = ft_itoa_base_large(va_arg(*arg, uintmax_t), 8);
 	else if (param->size != NULL && !ft_strcmp(param->size, "z"))
 		str = ft_itoa_base_large(va_arg(*arg, size_t), 8);
 	else if (param->size != NULL && !ft_strcmp(param->size, "L"))
