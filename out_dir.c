@@ -54,5 +54,6 @@ void	ft_out_dir(char* name, t_dir_info* dir_info, t_file_info **file_info) {
 		}
 		tmp = tmp->next;
 	}
-	(*file_info)->total = total;
+	if (*file_info)
+		(*file_info)->total = total;
 }

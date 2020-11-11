@@ -82,7 +82,7 @@ void	ft_printf_width(char *str, int width, int is_left) {
 	ft_strdel(&full_arg);
 }
 
-void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info) {
+void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info, int is_dir) {
 	t_field_width *width_info;
 	t_file_info *tmp;
 	char *tmp_str;
@@ -94,7 +94,7 @@ void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info) {
 	// ft_printf("hard links: %d\n", width_info->hard_links);
 	// ft_printf("name: %d\n", width_info->filename);
 
-	if (file_info) {
+	if (file_info && is_dir) {
 		ft_printf("total %d\n", file_info->total);
 	}
 
@@ -145,12 +145,12 @@ void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info) {
 	}
 }
 
-void	ft_print_dir(t_dir_info* dir_info, t_file_info *file_info) {
+void	ft_print_dir(t_dir_info* dir_info, t_file_info *file_info, int is_dir) {
 	t_file_info *tmp;
 	int is_first;
 
 	if (dir_info->info_type == L) {
-		ft_output_l(dir_info, file_info);
+		ft_output_l(dir_info, file_info, is_dir);
 		return ;
 	}
 

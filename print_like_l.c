@@ -73,9 +73,14 @@ void ft_print_time_modify(struct stat status, t_file_info* file_info) {
 	char *full_time;
 	char **separate_date;
 	char **separate_time;
+	struct timespec mtimespec;
 
 	mtime = status.st_mtime;
+	// mtimespec = status.st_mtimespec;
+	// ft_printf("%d\n", mtimespec.tv_nsec);
+	// ft_printf("%d\n", mtime);
 	full_time = ft_strdup(ctime(&mtime));
+	// ft_printf("%s\n", full_time);
 	separate_date = ft_strsplit(full_time, ' ');
 	separate_time = ft_strsplit(separate_date[3], ':');
 

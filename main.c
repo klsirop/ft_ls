@@ -25,7 +25,7 @@ void	ft_out_files(t_info* info, t_dir_info* dir_info) {
 		tmp = tmp->next;
 	}
 
-	ft_print_dir(dir_info, file_info);
+	ft_print_dir(dir_info, file_info, 0);
 	ft_free_t_file_info(&file_info);
 
 }
@@ -52,12 +52,11 @@ void	ft_out_dirs(t_info* info, t_dir_info* dir_info) {
 
 		if (!(tmp == info->dir_names && tmp->next == NULL))
 			ft_printf("%s:\n", tmp->val);
-
 		// remember info
 		ft_out_dir(tmp->val, dir_info, &file_info);
 
 		// print info
-		ft_print_dir(dir_info, file_info);
+		ft_print_dir(dir_info, file_info, 1);
 
 		ft_free_t_file_info(&file_info);
 

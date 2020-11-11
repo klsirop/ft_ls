@@ -10,7 +10,10 @@ void	ft_is_right_dir_names(t_info* info) {
 	while (tmp) {
 
 		if (lstat(tmp->val, &status)) {
-			ft_printf("ls: cannot access \'%s\': No such file or directory\n", tmp->val);
+			ft_putstr_fd("ls: ", 2);
+			ft_putstr_fd(tmp->val, 2);
+			ft_putstr_fd(": No such file or directory\n", 2);
+			// ft_printf("ls: %s: No such file or directory\n", tmp->val);
 			tmp = tmp->next;
 			ft_list_delete_element(&info, prev);
 		} else {

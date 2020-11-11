@@ -202,7 +202,7 @@ void	ft_out_dir(char* name, t_dir_info* dir_info, t_file_info **file_info);
 ** print_dir.c
 */
 
-void	ft_print_dir(t_dir_info* dir_info, t_file_info *file_info);
+void	ft_print_dir(t_dir_info* dir_info, t_file_info *file_info, int is_dir);
 
 /*
 ** free.c

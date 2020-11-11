@@ -5,7 +5,7 @@ void ft_parse_flag(char* word, char** flags) {
 	int i;
 
 	i = 1;
-	known_flags = ft_strdup("lRartufUgG");
+	known_flags = ft_strdup("lRartufUgG1");
 	while (word[i] != '\0') {
 		if (!ft_strchr(known_flags, word[i])) {
 			ft_wrong_flag(word[i]);
@@ -27,9 +27,18 @@ void ft_parse_names(char* word, t_lis** names) {
 }
 
 void ft_parse_word(char* word, t_info* info) {
-	if (word[0] == '-') {
+	static int is_end_option;
+
+	if (!ft_strcmp(word, "--")) {
+		is_end_option = 1;
+		return ;
+	}
+
+	if (!is_end_option && word[0] == '-' && ft_strcmp(word, "-")) {
+		// ft_printf("0 %s %d\n", word, ft_strcmp(word, "-"));
 		ft_parse_flag(word, &(info->flags));
 	} else {
+		// ft_printf("1 %s %d\n", word, ft_strcmp(word, "-"));
 		ft_parse_names(word, &(info->names));
 	}
 }
