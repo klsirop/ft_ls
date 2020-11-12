@@ -5,7 +5,7 @@ void	ft_out_files(t_info* info, t_dir_info* dir_info) {
 	t_lis* tmp;
 	t_file_info *tmp_file_info;
 
-	ft_sort_by(info->file_names, dir_info);
+	ft_sort_by(info->file_names, dir_info->sort_order);
 	file_info = NULL;
 	tmp = info->file_names;
 	while (tmp) {
@@ -36,7 +36,7 @@ void	ft_out_dirs(t_info* info, t_dir_info* dir_info) {
 	int is_first;
 
 	file_info = NULL;
-	ft_sort_by(info->dir_names, dir_info);
+	ft_sort_by(info->dir_names, dir_info->sort_order);
 
 	is_first = 1;
 	tmp = info->dir_names;
@@ -50,11 +50,11 @@ void	ft_out_dirs(t_info* info, t_dir_info* dir_info) {
 		if (is_first)
 			is_first = 0;
 
-		if (!(tmp == info->dir_names && tmp->next == NULL))
+		if (!(tmp == info->dir_names && tmp->next == NULL) || info->deleted_dir == 1)
 			ft_printf("%s:\n", tmp->val);
 		// remember info
+		// ft_printf("val: %s\n", tmp->val);
 		ft_out_dir(tmp->val, dir_info, &file_info);
-
 		// print info
 		ft_print_dir(dir_info, file_info, 1);
 

@@ -46,6 +46,7 @@ typedef struct	s_info {
 	t_lis*		names;
 	t_lis*		file_names;
 	t_lis*		dir_names;
+	int			deleted_dir;
 }				t_info;
 
 typedef struct	s_dir_info {
@@ -75,6 +76,7 @@ typedef struct s_dtime
 	char *day;
 	char *hour;
 	char *min;
+	char *year;
 }				t_dtime;
 
 
@@ -102,6 +104,7 @@ typedef struct s_field_width
 	int day;
 	int filename;
 	int linkname;
+	int time;
 }				t_field_width;
 
 
@@ -124,6 +127,7 @@ void ft_parse_input(int argc, char **argv, t_info* info);
 */
 
 void ft_wrong_flag(char wrong_flag);
+void	ft_error_permission_denided(char *dir_name);
 
 /*
 ** list.c
@@ -134,6 +138,7 @@ void	ft_list_delete_element(t_info** info, t_lis* prev);
 int 	ft_find_list_len(t_lis *head);
 void ft_file_list_add(t_file_info** head, char *str);
 void ft_file_list_add_l(t_file_info** head, t_file_info *new_el);
+void	ft_print_list(t_lis *head);
 
 /*
 ** ft_add_char_to_string.c
@@ -188,7 +193,7 @@ void	ft_sort_names(t_lis **names, t_dir_info* dir_info);
 ** sort_names.c
 */
 
-void	ft_sort_by(t_lis *names, t_dir_info* dir_info);
+void	ft_sort_by(t_lis *names, enum e_order_type sort_order);
 int		ft_is_right_order(t_lis *lhs, t_lis *rhs, enum e_order_type order_type);
 
 /*

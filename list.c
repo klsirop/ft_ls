@@ -85,6 +85,17 @@ int 	ft_find_list_len(t_lis *head) {
 	return (len);
 }
 
+void	ft_print_list(t_lis *head) {
+	t_lis *tmp;
+
+	tmp = head;
+	while (tmp) {
+		ft_printf("%s ", tmp->val);
+		tmp = tmp->next;
+	}
+	ft_printf("\n");
+}
+
 // void	ft_find_place_in_list(t_lis **head, struct dirent* dirent, t_dir_info* dir_info) {
 // 	t_lis *new_el;
 // 	t_lis *tmp;

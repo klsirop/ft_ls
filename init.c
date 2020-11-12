@@ -6,6 +6,7 @@ void	ft_init_info(t_info **info) {
 	(*info)->names = NULL;
 	(*info)->dir_names = NULL;
 	(*info)->file_names = NULL;
+	(*info)->deleted_dir = 0;
 }
 
 void	ft_init_dir_info(t_dir_info** dir_info) {

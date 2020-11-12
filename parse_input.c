@@ -29,17 +29,18 @@ void ft_parse_names(char* word, t_lis** names) {
 void ft_parse_word(char* word, t_info* info) {
 	static int is_end_option;
 
-	if (!ft_strcmp(word, "--")) {
+	if (!ft_strcmp(word, "--") && !is_end_option) {
 		is_end_option = 1;
 		return ;
 	}
 
-	if (!is_end_option && word[0] == '-' && ft_strcmp(word, "-")) {
+	if (!is_end_option && !is_end_option && word[0] == '-' && ft_strcmp(word, "-")) {
 		// ft_printf("0 %s %d\n", word, ft_strcmp(word, "-"));
 		ft_parse_flag(word, &(info->flags));
 	} else {
 		// ft_printf("1 %s %d\n", word, ft_strcmp(word, "-"));
 		ft_parse_names(word, &(info->names));
+		is_end_option = 1;
 	}
 }
 

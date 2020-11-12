@@ -47,8 +47,19 @@ void	ft_find_all_width(t_file_info *file_info, t_field_width *width_info) {
 				width_info->linkname = len;
 		}
 
+		if (tmp->time->year) {
+			len = ft_strlen(tmp->time->year);
+			if (width_info->time < len)
+				width_info->time = len;
+		} else {
+			if (width_info->time < 5)
+				width_info->time = 5;
+		}
+
 		tmp = tmp->next;
 	}
+	if (width_info->day < 2)
+		width_info->day = 2;
 }
 
 void	ft_init_width_info(t_field_width *width_info) {
@@ -80,6 +91,17 @@ void	ft_printf_width(char *str, int width, int is_left) {
 	// ft_printf("%s\n", full_arg);
 	ft_printf(full_arg, str);
 	ft_strdel(&full_arg);
+}
+
+void	ft_print_hour_min(char *hour, char *min, int wid) {
+	char *hour_c;
+	char *hour_c_min;
+
+	hour_c = ft_strconcat(hour, ":");
+	hour_c_min = ft_strconcat(hour_c, min);
+	ft_strdel(&hour_c);
+	ft_printf_width(hour_c_min, wid, 0);
+	ft_strdel(&hour_c_min);
 }
 
 void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info, int is_dir) {
@@ -128,9 +150,14 @@ void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info, int is_dir) {
 		ft_printf(" ");
 		ft_printf_width(tmp->time->day, width_info->day, 0);
 		ft_printf(" ");
-		ft_printf("%s", tmp->time->hour);
-		ft_printf(":");
-		ft_printf("%s", tmp->time->min);
+
+		if (tmp->time->hour) {
+			// ft_print_hour_min(tmp->time->hour, tmp->time->min, width_info->time);
+			ft_printf("%s:%s", tmp->time->hour, tmp->time->min);
+		} else {
+			ft_printf(" %s", tmp->time->year);
+			// ft_printf_width(tmp->time->year, width_info->time, 0);
+		}
 
 		ft_printf(" ");
 		ft_printf("%s", tmp->file_name);
@@ -157,7 +184,7 @@ void	ft_print_dir(t_dir_info* dir_info, t_file_info *file_info, int is_dir) {
 	is_first = 1;
 	tmp = file_info;
 	while (tmp) {
-		// ft_printf("ok\n");
+		// ft_printf("OK\n");
 		if (dir_info->info_type == U) {
 			if (!is_first) {
 				ft_printf("\n");

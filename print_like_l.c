@@ -74,13 +74,17 @@ void ft_print_time_modify(struct stat status, t_file_info* file_info) {
 	char **separate_date;
 	char **separate_time;
 	struct timespec mtimespec;
+	time_t now_time;
+	char *now_time_str;
+	char *now_year;
+	char **separate_now_time;
+	char *file_year;
 
 	mtime = status.st_mtime;
 	// mtimespec = status.st_mtimespec;
 	// ft_printf("%d\n", mtimespec.tv_nsec);
 	// ft_printf("%d\n", mtime);
 	full_time = ft_strdup(ctime(&mtime));
-	// ft_printf("%s\n", full_time);
 	separate_date = ft_strsplit(full_time, ' ');
 	separate_time = ft_strsplit(separate_date[3], ':');
 
@@ -88,8 +92,23 @@ void ft_print_time_modify(struct stat status, t_file_info* file_info) {
 
 	file_info->time->month = ft_strdup(separate_date[1]);
 	file_info->time->day = ft_strdup(separate_date[2]);
-	file_info->time->hour = ft_strdup(separate_time[0]);
-	file_info->time->min = ft_strdup(separate_time[1]);
+
+	file_info->time->hour = NULL;
+	file_info->time->min = NULL;
+	file_info->time->year = NULL;
+	now_time = time(&now_time);
+	now_time_str = ft_strdup(ctime(&now_time));
+	separate_now_time = ft_strsplit(now_time_str, ' ');
+	now_year = ft_strsub(separate_now_time[4], 0, 4);
+	file_year = ft_strsub(separate_date[4], 0, ft_strlen(separate_date[4]) - 1);
+	// ft_printf("%s", file_year);
+
+	if (!ft_strcmp(now_year, file_year)) {
+		file_info->time->hour = ft_strdup(separate_time[0]);
+		file_info->time->min = ft_strdup(separate_time[1]);
+	} else {
+		file_info->time->year = ft_strdup(file_year);
+	}
 
 
 	ft_free_after_split(separate_time);

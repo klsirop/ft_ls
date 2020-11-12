@@ -8,3 +8,10 @@ void ft_wrong_flag(char wrong_flag) {
 	ft_putstr_fd("\nusage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]\n", 2);
 	exit(1);
 }
+
+void	ft_error_permission_denided(char *dir_name) {
+	ft_putstr_fd("ls: ", 2);
+	ft_putstr_fd(dir_name, 2);
+	ft_putstr_fd(": Permission denied\n", 2);
+	exit(1);
+}

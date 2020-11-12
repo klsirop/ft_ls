@@ -62,12 +62,16 @@ int		ft_no_point_strcmp(char *lhs, char *rhs) {
 }
 
 int		ft_is_right_order_by_alph(char *lhs, char *rhs, enum e_order_type order_type) {
-	if (order_type == ALPH) {
-		if (ft_no_point_strcmp(lhs, rhs) > 0)
+	if (order_type == ALPH || order_type == TMOD || order_type == TACC) {
+		// ft_printf("alph\n");
+		// ft_printf("%s %s\n", lhs, rhs);
+		if (ft_no_point_strcmp(lhs, rhs) > 0) {
+			// ft_printf("one\n");
 			return 1;
+		}
 		else
 			return 0;
-	} else if (order_type == RALPH) {
+	} else {
 		if (ft_no_point_strcmp(lhs, rhs) < 0)
 			return 1;
 		else
@@ -110,13 +114,20 @@ int		ft_is_right_order(t_lis *lhs, t_lis *rhs, enum e_order_type order_type) {
 		else
 			return 0;
 	} else if (order_type == TMOD) {
-		// ft_printf("%s %ld %s %ld\n", lhs->val, lhs_stat.st_mtime, rhs->val, rhs_stat.st_mtime);
-		if (lhs_stat.st_mtime < rhs_stat.st_mtime)
+		// ft_printf("%s %s | %s %s\n", lhs->val, ctime(&lhs_stat.st_mtime), rhs->val, ctime(&rhs_stat.st_mtime));
+		// ft_printf("%s %ld | %s %ld\n", lhs->val, lhs_stat.st_mtime, rhs->val, rhs_stat.st_mtime);
+		if (lhs_stat.st_mtime < rhs_stat.st_mtime) {
+			// ft_printf("dont\n");
 			return 1;
-		else if (lhs_stat.st_mtime == rhs_stat.st_mtime)
+		}
+		else if (lhs_stat.st_mtime == rhs_stat.st_mtime) {
+			// ft_printf("do\n");
 			return ft_is_right_order_by_alph(lhs->val, rhs->val, order_type);
-		else
+		}
+		else {
+			// ft_printf("dont1\n");
 			return 0;
+		}
 	} else if (order_type == RTMOD) {
 		if (lhs_stat.st_mtime >= rhs_stat.st_mtime)
 			return 1;
@@ -129,7 +140,7 @@ int		ft_is_right_order(t_lis *lhs, t_lis *rhs, enum e_order_type order_type) {
 	return 0;
 }
 
-void	ft_sort_by(t_lis *names, t_dir_info* dir_info) {
+void	ft_sort_by(t_lis *names, enum e_order_type sort_order) {
 	t_lis *tmp;
 	int len;
 	int i;
@@ -140,7 +151,7 @@ void	ft_sort_by(t_lis *names, t_dir_info* dir_info) {
 	while (i < len) {
 		tmp = names;
 		while (tmp) {
-			if (tmp && tmp->next && ft_is_right_order(tmp, tmp->next, dir_info->sort_order)) {
+			if (tmp && tmp->next && ft_is_right_order(tmp, tmp->next, sort_order)) {
 				ft_swap_list_elements(tmp, tmp->next);
 			}
 			tmp = tmp->next;
