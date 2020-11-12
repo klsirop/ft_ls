@@ -30,12 +30,67 @@ void	ft_out_files(t_info* info, t_dir_info* dir_info) {
 
 }
 
-void	ft_out_dirs(t_info* info, t_dir_info* dir_info) {
+char	*ft_get_next_dir_name(char *start, char *end) {
+	char *tmp;
+	char *full;
+
+	tmp = ft_strconcat(start, "/");
+	full = ft_strconcat(tmp, end);
+	ft_strdel(&tmp);
+	return full;
+}
+
+// just output dir
+void	ft_do_papka(char *dir_name, t_dir_info *dir_info) {
+	static int count;
 	t_file_info* file_info;
+	int there_is_dirs_in_dir;
+	t_lis *names_in_dir;
+	t_lis *tmp;
+	char *full_name;
+
+	there_is_dirs_in_dir = 0;
+
+	file_info = NULL;
+	ft_out_dir(dir_name, dir_info, &file_info);
+	ft_print_dir(dir_info, file_info, 1);
+	ft_free_t_file_info(&file_info);
+
+	names_in_dir = NULL;
+	if (dir_info->is_Rec) {
+		// ft_printf("\ndir name: %s\n", dir_name);
+		there_is_dirs_in_dir = ft_insert_all_dir_names(dir_name, &names_in_dir, dir_info, 1);
+		// ft_printf("there_is_rec: %d\n", there_is_dirs_in_dir);
+		// ft_printf("list dirs: ");
+		// ft_print_list(names_in_dir);
+		if (there_is_dirs_in_dir != 0) {
+			tmp = names_in_dir;
+			while (tmp) {
+				// ft_printf("will do papka: %s\n", tmp->val);
+				full_name = ft_get_next_dir_name(dir_name, tmp->val);
+				ft_printf("\n%s:\n", full_name);
+				ft_do_papka(full_name, dir_info);
+				// ft_printf("end do papka\n");
+				ft_strdel(&full_name);
+				tmp = tmp->next;
+			}
+		}
+		ft_delete_list(&names_in_dir);
+		names_in_dir = NULL;
+	}
+	if (there_is_dirs_in_dir == 0) {
+		// if (full_name) {
+		// 	ft_strdel(&full_name);
+		// }
+		return ;
+	}
+}
+
+void	ft_out_dirs(t_info* info, t_dir_info* dir_info) {
 	t_lis* tmp;
 	int is_first;
 
-	file_info = NULL;
+	
 	ft_sort_by(info->dir_names, dir_info->sort_order);
 
 	is_first = 1;
@@ -54,18 +109,14 @@ void	ft_out_dirs(t_info* info, t_dir_info* dir_info) {
 			ft_printf("%s:\n", tmp->val);
 		// remember info
 		// ft_printf("val: %s\n", tmp->val);
-		ft_out_dir(tmp->val, dir_info, &file_info);
-		// print info
-		ft_print_dir(dir_info, file_info, 1);
 
-		ft_free_t_file_info(&file_info);
-
-		if (dir_info->is_Rec) {
-			
-		}
+		ft_do_papka(tmp->val, dir_info);
 
 		tmp = tmp->next;
 	}
+	// if (dir_info->is_Rec) {
+			
+	// }
 }
 
 void	ft_out_argc(t_info* info, t_dir_info* dir_info) {

@@ -1,24 +1,30 @@
 #include "ft_ls.h"
 
-int	ft_is_dir(char *name, mode_t mode) {
+int	ft_is_dir(char *name) {
 	char buf[256];
+	struct stat link_status;
 	struct stat status;
 	mode_t link_mode;
+	mode_t mode;
 
+	lstat(name, &status);
+	mode = status.st_mode;
+	// ft_printf("name: %s\n", name);
 	if (S_ISLNK(mode)) {
+		// ft_printf("it is link\n");
 		ft_memset(buf, '\0', 256);
 		readlink(name, buf, 255);
 		// ft_printf("buf: %s\n", buf);
 		//get buf rights - check is it dir
-		lstat(buf, &status);
-		link_mode = status.st_mode;
+		lstat(buf, &link_status);
+		link_mode = link_status.st_mode;
 		if (S_ISDIR(link_mode))
 			return (1);
 		else
 			return (0);
 	}
 	
-
+	
 	mode = mode & S_IFMT;
 	if (S_ISDIR(mode))
 		return (1);
@@ -35,7 +41,7 @@ void	ft_separate_files_and_dirs(t_info *info) {
 	while (tmp) {
 		lstat(tmp->val, &status);
 		mode = status.st_mode;
-		if (ft_is_dir(tmp->val, mode)) {
+		if (ft_is_dir(tmp->val)) {
 			ft_list_add(&(info->dir_names), tmp->val);
 		} else {
 			ft_list_add(&(info->file_names), tmp->val);

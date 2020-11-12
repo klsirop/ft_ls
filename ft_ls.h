@@ -139,6 +139,7 @@ int 	ft_find_list_len(t_lis *head);
 void ft_file_list_add(t_file_info** head, char *str);
 void ft_file_list_add_l(t_file_info** head, t_file_info *new_el);
 void	ft_print_list(t_lis *head);
+void	ft_delete_list(t_lis **head);
 
 /*
 ** ft_add_char_to_string.c
@@ -201,6 +202,7 @@ int		ft_is_right_order(t_lis *lhs, t_lis *rhs, enum e_order_type order_type);
 */
 
 void	ft_out_dir(char* name, t_dir_info* dir_info, t_file_info **file_info);
+int	ft_insert_all_dir_names(char *name, t_lis **head, t_dir_info* dir_info, int is_only_dirs);
 
 
 /*
@@ -227,3 +229,10 @@ char *ft_strconcat(char *s1, char *s2);
 */
 
 void	ft_separate_files_and_dirs(t_info *info);
+int	ft_is_dir(char *name);
+
+/*
+** main.c
+*/
+
+char	*ft_get_next_dir_name(char *start, char *end);

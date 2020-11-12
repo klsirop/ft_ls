@@ -96,6 +96,18 @@ void	ft_print_list(t_lis *head) {
 	ft_printf("\n");
 }
 
+void	ft_delete_list(t_lis **head) {
+	t_lis *tmp;
+
+	tmp = *head;
+	while (*head) {
+		*head = (*head)->next;
+		ft_strdel(&(tmp->val));
+		free(tmp);
+		tmp = *head;
+	}
+}
+
 // void	ft_find_place_in_list(t_lis **head, struct dirent* dirent, t_dir_info* dir_info) {
 // 	t_lis *new_el;
 // 	t_lis *tmp;

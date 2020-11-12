@@ -32,3 +32,4 @@ max_cmd_size
 если я не могу читать -permission denided		tmp->rights->usr[0] != 'r'
 если я могу читать и исполнять то вывод			tmp->rights->usr[0] == 'r' && tmp->rights->usr[2] == 'x'
 в остальных случаях ничего не выводится			else
+
