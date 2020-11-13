@@ -30,10 +30,10 @@ void	ft_print_sort_order(t_dir_info *dir_info) {
 		ft_printf("TMOD\n");
 	if (order_type == RTMOD)
 		ft_printf("RTMOD\n");
-	if (order_type == TACC)
-		ft_printf("TACC\n");
-	if (order_type == RTACC)
-		ft_printf("RTACC\n");
+	if (order_type == SIZE)
+		ft_printf("SIZE\n");
+	if (order_type == RSIZE)
+		ft_printf("RSIZE\n");
 }
 
 void ft_print_info_type(t_dir_info *dir_info) {
@@ -43,12 +43,16 @@ void ft_print_info_type(t_dir_info *dir_info) {
 	ft_printf("info type: ");
 	if (info_type == L)
 		ft_printf("%s\n", "L");
-	else if (info_type == LU)
-		ft_printf("%s\n", "LU");
-	else if (info_type == G)
-		ft_printf("%s\n", "G");
+	else if (info_type == LO)
+		ft_printf("%s\n", "LO");
+	else if (info_type == LG)
+		ft_printf("%s\n", "LG");
+	else if (info_type == LOG)
+		ft_printf("%s\n", "LOG");
 	else if (info_type == U)
 		ft_printf("%s\n", "U");
+	else
+		ft_printf("ERROR: NO SORT ORDER\n");
 }
 
 void	ft_print_is_R(t_dir_info *dir_info) {

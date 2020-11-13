@@ -5,7 +5,9 @@ void	ft_out_files(t_info* info, t_dir_info* dir_info) {
 	t_lis* tmp;
 	t_file_info *tmp_file_info;
 
-	ft_sort_by(info->file_names, dir_info->sort_order);
+	// if (info->file_names)
+	// 	ft_printf("ft_out_files: %s\n", info->file_names->val);
+	ft_sort_by(NULL, info->file_names, dir_info->sort_order);
 	file_info = NULL;
 	tmp = info->file_names;
 	while (tmp) {
@@ -15,7 +17,7 @@ void	ft_out_files(t_info* info, t_dir_info* dir_info) {
 		}
 		if (dir_info->info_type == U) {
 			ft_file_list_add(&file_info, tmp->val);
-		} else if (dir_info->info_type == L) {
+		} else {
 			tmp_file_info = NULL;
 			ft_init_file_info(&tmp_file_info);
 			ft_print_like_l(NULL, tmp->val, dir_info, tmp_file_info);
@@ -34,6 +36,10 @@ char	*ft_get_next_dir_name(char *start, char *end) {
 	char *tmp;
 	char *full;
 
+	if (!start) {
+		full = ft_strdup(end);
+		return full;
+	}
 	tmp = ft_strconcat(start, "/");
 	full = ft_strconcat(tmp, end);
 	ft_strdel(&tmp);
@@ -90,8 +96,9 @@ void	ft_out_dirs(t_info* info, t_dir_info* dir_info) {
 	t_lis* tmp;
 	int is_first;
 
-	
-	ft_sort_by(info->dir_names, dir_info->sort_order);
+	// if (info->dir_names)
+	// 	ft_printf("ft_out_dirs: %s\n", info->dir_names->val);
+	ft_sort_by(NULL, info->dir_names, dir_info->sort_order);
 
 	is_first = 1;
 	tmp = info->dir_names;
@@ -138,6 +145,7 @@ int main(int argc, char *argv[]) {
 	ft_init_info(&info);
 	// ft_init_file_info(&file_info);
 	ft_parse_input(argc, argv, info);
+	ft_manage_flags_overlap(info);
 	ft_is_right_dir_names(info);
 	ft_init_dir_info(&dir_info);
 	ft_find_sort_order(dir_info, info);

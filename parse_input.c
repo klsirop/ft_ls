@@ -5,13 +5,14 @@ void ft_parse_flag(char* word, char** flags) {
 	int i;
 
 	i = 1;
-	known_flags = ft_strdup("lRartufUgG1");
+	known_flags = ft_strdup("lRart1goUfS");
 	while (word[i] != '\0') {
 		if (!ft_strchr(known_flags, word[i])) {
 			ft_wrong_flag(word[i]);
 		}
 		else {
-			if (!(*flags) || !ft_strchr(*flags, word[i])) {
+			if (!(*flags) || !ft_strchr(*flags, word[i]) || word[i] == 'l' || word[i] == '1' ||
+				word[i] == 'o' || word[i] == 'g') {
 				ft_add_char_to_string(flags, word[i]);
 			}
 			// else if (word[i] == 'U' || word[i] == 'f' || word[i] == 't')

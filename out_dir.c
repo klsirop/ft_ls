@@ -49,7 +49,9 @@ int	ft_insert_all_dir_names(char *name, t_lis **head, t_dir_info* dir_info, int 
 	// ft_printf("okkkk\n");
 
 	//sort
-	ft_sort_by(*head, dir_info->sort_order);
+	// if (*head)
+	// 	ft_printf("ft_insert_all_dir_names: %s\n", (*head)->val);
+	ft_sort_by(name, *head, dir_info->sort_order);
 	return res;
 }
 
@@ -76,7 +78,7 @@ void	ft_out_dir(char* name, t_dir_info* dir_info, t_file_info **file_info) {
 		}
 		if (dir_info->info_type == U) {
 			ft_file_list_add(file_info, tmp->val);
-		} else if (dir_info->info_type == L) {
+		} else {
 			tmp_file_info = NULL;
 			ft_init_file_info(&tmp_file_info);
 			total += ft_print_like_l(name, tmp->val, dir_info, tmp_file_info);

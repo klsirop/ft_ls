@@ -136,11 +136,19 @@ void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info, int is_dir) {
 		ft_strdel(&tmp_str);
 
 		ft_printf(" ");
-		ft_printf_width(tmp->usr_name, width_info->user, 0);
-		ft_printf("  ");
-		ft_printf("%s", tmp->grp_name);
+		if (dir_info->info_type != LG && dir_info->info_type != LOG) {
+			ft_printf_width(tmp->usr_name, width_info->user, 0);
+			ft_printf("  ");
+		}
+		if (dir_info->info_type != LO && dir_info->info_type != LOG) {
+			ft_printf("%s", tmp->grp_name);
+			ft_printf("  ");
+		}
+		if (dir_info->info_type == LOG) {
+			ft_printf("  ");
+		}
 
-		ft_printf("  ");
+		
 		tmp_str = ft_itoa(tmp->file_size);
 		ft_printf_width(tmp_str, width_info->size, 0);
 		ft_strdel(&tmp_str);
@@ -176,7 +184,7 @@ void	ft_print_dir(t_dir_info* dir_info, t_file_info *file_info, int is_dir) {
 	t_file_info *tmp;
 	int is_first;
 
-	if (dir_info->info_type == L) {
+	if (dir_info->info_type != U) {
 		ft_output_l(dir_info, file_info, is_dir);
 		return ;
 	}

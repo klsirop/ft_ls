@@ -25,15 +25,23 @@ enum e_order_type {
 	RALPH,
 	TMOD,
 	RTMOD,
-	TACC,
-	RTACC
+	// TACC,
+	// RTACC,
+	SIZE,
+	RSIZE
 };
 
 enum e_info_type {
-	L,
-	LU,
-	G,
-	U
+	L, // list (-l)
+	LG, // list(!) no user (-g)
+	LO, // list(!) no group (-o)
+	LOG, // list no group no user
+	U // usual
+	
+	//U, // no sort (-U)
+	//F, // no sort with .files (-f)
+	// LU,
+	// G,
 };
 
 typedef struct	s_lis {
@@ -194,8 +202,8 @@ void	ft_sort_names(t_lis **names, t_dir_info* dir_info);
 ** sort_names.c
 */
 
-void	ft_sort_by(t_lis *names, enum e_order_type sort_order);
-int		ft_is_right_order(t_lis *lhs, t_lis *rhs, enum e_order_type order_type);
+void	ft_sort_by(char *parent_name, t_lis *names, enum e_order_type sort_order);
+int		ft_is_right_order(char *parent_name, t_lis *lhs, t_lis *rhs, enum e_order_type order_type);
 
 /*
 ** out_dir.c
@@ -236,3 +244,9 @@ int	ft_is_dir(char *name);
 */
 
 char	*ft_get_next_dir_name(char *start, char *end);
+
+/*
+** manage_flags_overlap.c
+*/
+
+void	ft_manage_flags_overlap(t_info *info);

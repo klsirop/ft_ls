@@ -31,127 +31,103 @@ void	ft_delete_point(char **no_point, char *str) {
 	(*no_point)[i] = '\0';
 }
 
-int		ft_no_point_strcmp(char *lhs, char *rhs) {
-	char *lhs_no_point;
-	char *rhs_no_point;
-	int res;
+// int		ft_no_point_strcmp(char *lhs, char *rhs) {
+// 	char *lhs_no_point;
+// 	char *rhs_no_point;
+// 	int res;
 
-	lhs_no_point = NULL;
-	rhs_no_point = NULL;
+// 	lhs_no_point = NULL;
+// 	rhs_no_point = NULL;
 
-	// if ((lhs)[0] == '.')
-	// 	ft_delete_point(&lhs_no_point, lhs);
-	// else
-	// 	lhs_no_point = ft_strdup(lhs);
+// 	lhs_no_point = ft_strdup(lhs);
+// 	rhs_no_point = ft_strdup(rhs);
+// 	res = ft_strcmp(lhs_no_point, rhs_no_point);
 
-	// if ((rhs)[0] == '.')
-	// 	ft_delete_point(&rhs_no_point, rhs);
-	// else
-	// 	rhs_no_point = ft_strdup(rhs);
+// 	ft_strdel(&lhs_no_point);
+// 	ft_strdel(&rhs_no_point);
 
-	// ft_printf("before: %s after: %s\n", lhs, lhs_no_point);
-	// ft_printf("before: %s after: %s\n", rhs, rhs_no_point);
-	lhs_no_point = ft_strdup(lhs);
-	rhs_no_point = ft_strdup(rhs);
-	res = ft_strcmp(lhs_no_point, rhs_no_point);
-
-	ft_strdel(&lhs_no_point);
-	ft_strdel(&rhs_no_point);
-
-	return (res);
-}
+// 	return (res);
+// }
 
 int		ft_is_right_order_by_alph(char *lhs, char *rhs, enum e_order_type order_type) {
-	if (order_type == ALPH || order_type == TMOD || order_type == TACC) {
-		// ft_printf("alph\n");
-		// ft_printf("%s %s\n", lhs, rhs);
-		if (ft_no_point_strcmp(lhs, rhs) > 0) {
-			// ft_printf("one\n");
-			return 1;
-		}
-		else
+	if (order_type == ALPH || order_type == TMOD || order_type == SIZE) {
+		if (ft_strcmp(lhs, rhs) > 0)
 			return 0;
+		else
+			return 1;
 	} else {
-		if (ft_no_point_strcmp(lhs, rhs) < 0)
-			return 1;
-		else
+		if (ft_strcmp(lhs, rhs) < 0)
 			return 0;
+		else
+			return 1;
 	}
-	return (0);
+	return 0;
 }
 
-int		ft_is_right_order(t_lis *lhs, t_lis *rhs, enum e_order_type order_type) {
+int		ft_is_right_order(char *parent_name, t_lis *lhs, t_lis *rhs, enum e_order_type order_type) {
 	struct stat lhs_stat;
 	struct stat rhs_stat;
+	char *lhs_full;
+	char *rhs_full;
 
+	lhs_full = ft_get_next_dir_name(parent_name, lhs->val);
+	rhs_full = ft_get_next_dir_name(parent_name, rhs->val);
+	lstat(lhs_full, &lhs_stat);
+	lstat(rhs_full, &rhs_stat);
+	ft_strdel(&lhs_full);
+	ft_strdel(&rhs_full);
 
-	stat(lhs->val, &lhs_stat);
-	stat(rhs->val, &rhs_stat);
-
+	if (order_type == ORGN)
+		return 1;
 	if (order_type == ALPH) {
-		if (ft_no_point_strcmp(lhs->val, rhs->val) > 0)
-			return 1;
-		else
-			return 0;
+		return ft_is_right_order_by_alph(lhs->val, rhs->val, order_type);
 	} else if (order_type == RALPH) {
-		if (ft_no_point_strcmp(lhs->val, rhs->val) < 0)
-			return 1;
-		else
-			return 0;
-	} else if (order_type == TACC) {
-		// ft_printf("%s %ld %s %ld\n", lhs->val, lhs_stat.st_atime, rhs->val, rhs_stat.st_atime);
-		if (lhs_stat.st_atime < rhs_stat.st_atime)
-			return 1;
-		else if (lhs_stat.st_atime == rhs_stat.st_atime)
-			return ft_is_right_order_by_alph(lhs->val, rhs->val, order_type);
-		else
-			return 0;
-	} else if (order_type == RTACC) {
-		if (lhs_stat.st_atime >= rhs_stat.st_atime)
-			return 1;
-		else if (lhs_stat.st_atime == rhs_stat.st_atime)
-			return ft_is_right_order_by_alph(lhs->val, rhs->val, order_type);
-		else
-			return 0;
+		return ft_is_right_order_by_alph(lhs->val, rhs->val, order_type);
 	} else if (order_type == TMOD) {
-		// ft_printf("%s %s | %s %s\n", lhs->val, ctime(&lhs_stat.st_mtime), rhs->val, ctime(&rhs_stat.st_mtime));
-		// ft_printf("%s %ld | %s %ld\n", lhs->val, lhs_stat.st_mtime, rhs->val, rhs_stat.st_mtime);
-		if (lhs_stat.st_mtime < rhs_stat.st_mtime) {
-			// ft_printf("dont\n");
+		if (lhs_stat.st_mtime > rhs_stat.st_mtime)
 			return 1;
-		}
-		else if (lhs_stat.st_mtime == rhs_stat.st_mtime) {
-			// ft_printf("do\n");
+		else if (lhs_stat.st_mtime == rhs_stat.st_mtime)
 			return ft_is_right_order_by_alph(lhs->val, rhs->val, order_type);
-		}
-		else {
-			// ft_printf("dont1\n");
+		else
 			return 0;
-		}
 	} else if (order_type == RTMOD) {
-		if (lhs_stat.st_mtime >= rhs_stat.st_mtime)
+		if (lhs_stat.st_mtime < rhs_stat.st_mtime)
 			return 1;
-		else if (lhs_stat.st_mtime == rhs_stat.st_mtime) {
+		else if (lhs_stat.st_mtime == rhs_stat.st_mtime)
+			return ft_is_right_order_by_alph(lhs->val, rhs->val, order_type);/////////////////////////////////////chage!!!!
+		else
+			return 0;
+	} else if (order_type == SIZE) {
+		if (lhs_stat.st_size > rhs_stat.st_size)
+			return 1;
+		else if (lhs_stat.st_size == rhs_stat.st_size)
 			return ft_is_right_order_by_alph(lhs->val, rhs->val, order_type);
-		}
+		else 
+			return 0;
+	} else if (order_type == RSIZE) {
+		if (lhs_stat.st_size < rhs_stat.st_size)
+			return 1;
+		else if (lhs_stat.st_size == rhs_stat.st_size)
+			return ft_is_right_order_by_alph(lhs->val, rhs->val, order_type);
 		else
 			return 0;
 	}
 	return 0;
 }
 
-void	ft_sort_by(t_lis *names, enum e_order_type sort_order) {
+void	ft_sort_by(char *parent_name, t_lis *names, enum e_order_type sort_order) {
 	t_lis *tmp;
 	int len;
 	int i;
 
 	len = ft_find_list_len(names);
+	// ft_print_list(names);
 	i = 0;
 
 	while (i < len) {
 		tmp = names;
 		while (tmp) {
-			if (tmp && tmp->next && ft_is_right_order(tmp, tmp->next, sort_order)) {
+			if (tmp && tmp->next && !ft_is_right_order(parent_name, tmp, tmp->next, sort_order)) {
 				ft_swap_list_elements(tmp, tmp->next);
 			}
 			tmp = tmp->next;

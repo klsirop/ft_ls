@@ -39,8 +39,9 @@ void ft_free_after_split(char **arr) {
 }
 
 void	ft_print_size(struct stat *status, t_file_info *file_info) {
-	off_t size = status->st_size; //long int
+	off_t size = status->st_size; //long int ?
 	file_info->file_size = size;
+	// ft_printf("size: %lld\n", status->st_size);
 }
 
 void	ft_print_hard_links(struct stat status, t_file_info *file_info) {
@@ -253,6 +254,7 @@ int	ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info* dir_info, t_fi
 	char *path_to_file;
 	char *tmp;
 
+	// ft_printf("name: %s", dir_name);
 	if (parent_dir) {
 		char *hash = ft_strdup("/");
 		tmp = ft_strconcat(parent_dir, hash);

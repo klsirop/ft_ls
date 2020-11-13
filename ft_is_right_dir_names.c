@@ -32,7 +32,8 @@ void	ft_is_right_dir_names(t_info* info) {
 		// }
 		// closedir(dir);
 	}
-	ft_sort_by(wrong_dirs, ALPH);
+
+	ft_sort_by(NULL, wrong_dirs, ALPH);
 	tmp = wrong_dirs;
 	while (tmp) {
 		ft_putstr_fd("ls: ", 2);
