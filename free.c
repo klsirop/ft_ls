@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/14 21:07:15 by volyvar-          #+#    #+#             */
+/*   Updated: 2020/11/14 21:08:38 by volyvar-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
-void	ft_free_t_rights(t_rights **rights) {
+void	ft_free_t_rights(t_rights **rights)
+{
 	if ((*rights)->usr_rights)
 		ft_strdel(&(*rights)->usr_rights);
 	if ((*rights)->grp_rights)
@@ -11,7 +24,8 @@ void	ft_free_t_rights(t_rights **rights) {
 	*rights = NULL;
 }
 
-void	ft_free_t_dtime(t_dtime **time) {
+void	ft_free_t_dtime(t_dtime **time)
+{
 	if ((*time)->month)
 		ft_strdel(&((*time)->month));
 	if ((*time)->day)
@@ -26,37 +40,33 @@ void	ft_free_t_dtime(t_dtime **time) {
 	*time = NULL;
 }
 
-void	ft_free_t_file_info(t_file_info **head) {
+void	ft_free_t_file_info(t_file_info **head)
+{
 	t_file_info *tmp;
 
-	while (*head) {
+	while (*head)
+	{
 		tmp = *head;
 		*head = (*head)->next;
-
-		if (tmp->rights) {
+		if (tmp->rights)
 			ft_free_t_rights(&(tmp->rights));
-		}
-		if (tmp->usr_name) {
+		if (tmp->usr_name)
 			ft_strdel(&(tmp->usr_name));
-		}
-		if (tmp->grp_name) {
+		if (tmp->grp_name)
 			ft_strdel(&(tmp->grp_name));
-		}
-		if (tmp->time) {
+		if (tmp->time)
 			ft_free_t_dtime(&(tmp->time));
-		}
-		if (tmp->link_name) {
+		if (tmp->link_name)
 			ft_strdel(&(tmp->link_name));
-		}
-		if (tmp->file_name) {
+		if (tmp->file_name)
 			ft_strdel(&(tmp->file_name));
-		}
-		free (tmp);
+		free(tmp);
 		tmp = NULL;
 	}
 }
 
-void	ft_free_t_info(t_info **info) {
+void	ft_free_t_info(t_info **info)
+{
 	if (!(*info))
 		return ;
 	if ((*info)->flags)
@@ -71,11 +81,12 @@ void	ft_free_t_info(t_info **info) {
 	*info = NULL;
 }
 
-void	ft_free_t_dir_info(t_dir_info **dir_info) {
+void	ft_free_t_dir_info(t_dir_info **dir_info)
+{
 	if (!(*dir_info))
 		return ;
 	if ((*dir_info)->names)
 		ft_delete_list(&((*dir_info)->names));
-	free (*dir_info);
+	free(*dir_info);
 	*dir_info = NULL;
 }
