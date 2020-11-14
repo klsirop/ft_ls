@@ -139,11 +139,9 @@ int main(int argc, char *argv[]) {
 	t_info *info;
 	t_dir_info *dir_info;
 
-
 	info = NULL;
 	dir_info = NULL;
 	ft_init_info(&info);
-	// ft_init_file_info(&file_info);
 	ft_parse_input(argc, argv, info);
 	ft_manage_flags_overlap(info);
 	ft_is_right_dir_names(info);
@@ -153,6 +151,8 @@ int main(int argc, char *argv[]) {
 	ft_find_is_R(dir_info, info);
 	ft_find_is_hidden(dir_info, info);
 	ft_out_argc(info, dir_info);
+
+	ft_free_info(&info);
 
 	// ft_print_flags(info);
 	// ft_print_input_names(info);

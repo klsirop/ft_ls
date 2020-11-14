@@ -9,22 +9,14 @@ void ft_parse_flag(char* word, char** flags) {
 	while (word[i] != '\0') {
 		if (!ft_strchr(known_flags, word[i])) {
 			ft_wrong_flag(word[i]);
-		}
-		else {
-			if (!(*flags) || !ft_strchr(*flags, word[i]) || word[i] == 'l' || word[i] == '1' ||
-				word[i] == 'o' || word[i] == 'g') {
+		} else if (!(*flags) || !ft_strchr(*flags, word[i]) ||
+						word[i] == 'l' || word[i] == '1' ||
+						word[i] == 'o' || word[i] == 'g') {
 				ft_add_char_to_string(flags, word[i]);
-			}
-			// else if (word[i] == 'U' || word[i] == 'f' || word[i] == 't')
-			// 	ft_add_char_to_string(flags, word[i]);
 		}
 		i++;
 	}
 	ft_strdel(&known_flags);
-}
-
-void ft_parse_names(char* word, t_lis** names) {
-	ft_list_add(names, word);
 }
 
 void ft_parse_word(char* word, t_info* info) {
@@ -34,13 +26,10 @@ void ft_parse_word(char* word, t_info* info) {
 		is_end_option = 1;
 		return ;
 	}
-
-	if (!is_end_option && !is_end_option && word[0] == '-' && ft_strcmp(word, "-")) {
-		// ft_printf("0 %s %d\n", word, ft_strcmp(word, "-"));
+	if (!is_end_option && word[0] == '-' && ft_strcmp(word, "-")) {
 		ft_parse_flag(word, &(info->flags));
 	} else {
-		// ft_printf("1 %s %d\n", word, ft_strcmp(word, "-"));
-		ft_parse_names(word, &(info->names));
+		ft_list_add(&(info->names), word);
 		is_end_option = 1;
 	}
 }

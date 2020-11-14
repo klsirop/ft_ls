@@ -47,3 +47,16 @@ void	ft_free_t_file_info(t_file_info **head) {
 		tmp = NULL;
 	}
 }
+
+void	ft_free_info(t_info **info) {
+	if ((*info)->flags)
+		ft_strdel(&((*info)->flags));
+	if ((*info)->names)
+		ft_delete_list(&((*info)->names));
+	if ((*info)->file_names)
+		ft_delete_list(&((*info)->file_names));
+	if ((*info)->dir_names)
+		ft_delete_list(&((*info)->dir_names));
+	free(*info);
+	*info = NULL;
+}

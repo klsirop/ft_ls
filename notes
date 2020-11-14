@@ -48,8 +48,25 @@ max_cmd_size
 -g: как l только без указания владельца +++++++++
 -o: как l только без указания группы ++++
 -U: вообще не сортировать
--f: не сортировать, но выводить скрытые файлы
--S: сортировать по размеру файлов (большие вначале)
+-f: не сортировать, но выводить скрытые файлы ++++++++
+-S: сортировать по размеру файлов (большие вначале) +++++++
+
+bonus_03_test_opt_U.spec.c -- [FAIL] FFF
+bonus_21_test_opt_mix_sort.sp [FAIL] FF 
+bonus_22_test_sort_comb.spec. [FAIL] FFFFFFFFFFFF
+bonus_30_test_xattr.spec.c -- [FAIL] F 
+bonus_31_test_usr_xattr.spec. [FAIL] TF 
+bonus_32_test_ACL.spec.c ---- [FAIL] F
+
+
+
+sys_00_test_user_bin.spec.c - [FAIL] T... [TIME] 
+>>>> sys_01_test_dev.spec.c ------ [FAIL] .FF [FAIL] 
+>>>> sys_02_test_etc.spec.c ------ [FAIL] F [FAIL] 
+>>>> sys_03_test_many_files.spec.c [FAIL] T [TIME] 
+>>>> sys_04_test_var_run.spec.c -- [FAIL] F [FAIL] 
+
+
 
 goUfS
 
@@ -60,3 +77,10 @@ The -1, -C, -x, and -l options all override each other; the last one specified d
 
 Еще норм флаги:
 -s: выводит st_blocks для файла
+
+
+Идеи для ускорения:
+
+1. в ft_parse_flag не выделять каждый раз память под строку known_flags
+2. функция ft_add_char_to_string просто заново перезаписывает всю строку с флагами n раз - если флагов много, то может сильно тормозить
+3. функция ft_list_add для добавления элемента в лист пробегает по всему листу. это долго. используется для создания листа с именами папок в начала. возможно, не только тут 

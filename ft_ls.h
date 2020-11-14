@@ -224,6 +224,7 @@ void	ft_print_dir(t_dir_info* dir_info, t_file_info *file_info, int is_dir);
 */
 
 void	ft_free_t_file_info(t_file_info **head);
+void	ft_free_info(t_info **info);
 
 /*
 ** print_like_l.c
