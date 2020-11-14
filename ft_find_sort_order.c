@@ -22,14 +22,6 @@ void	ft_find_sort_order(t_dir_info* dir_info, t_info* info) {
 		return ;
 	}
 
-	// if (ft_strchr(info->flags, 'u')) {
-	// 	if (ft_strchr(info->flags, 'r'))
-	// 		dir_info->sort_order = RTACC;
-	// 	else
-	// 		dir_info->sort_order = TACC;
-	// 	return ;
-	// }
-
 	if (ft_strchr(info->flags, 'S')) {
 		if (ft_strchr(info->flags, 'r'))
 			dir_info->sort_order = 	RSIZE;
@@ -46,11 +38,13 @@ void	ft_find_sort_order(t_dir_info* dir_info, t_info* info) {
 		return ;
 	}
 
-	if (ft_strchr(info->flags, 'r'))
+	if (ft_strchr(info->flags, 'r')) {
 		dir_info->sort_order = RALPH;
-	else
+		return ;
+	}
+	else {
 		dir_info->sort_order = 	ALPH;
-
-	if (dir_info->sort_order == 0)//
-		ft_printf("ERROR: CANT FIND SORT ORDER\n");//
+		return ;
+	}
+	dir_info->sort_order= ORGN;
 }

@@ -6,11 +6,13 @@ int		ft_str_find_char(char *str, char c) {
 	int ind;
 
 	ind = -1;
-	i = 0;
-	while (str[i] != '\0') {
-		if (str[i] == c)
+	i = ft_strlen(str) - 1;
+	while (i >= 0) {
+		if (str[i] == c) {
 			ind = i;
-		i++;
+			return ind;
+		}
+		i--;
 	}
 	return ind;
 }
@@ -46,7 +48,7 @@ void	ft_delete_char_in_str(char **str, char c) {
 		}
 		i++;
 	}
-	new_str[i] = '\0';
+	new_str[j] = '\0';
 	ft_strdel(str);
 	*str = ft_strdup(new_str);
 	ft_strdel(&new_str);

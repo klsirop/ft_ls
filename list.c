@@ -25,20 +25,16 @@ void ft_file_list_add(t_file_info** head, char *str) {
 
 	tmp = *head;
 	if (tmp == NULL) {
-		// tmp = (t_file_info *)malloc(sizeof(t_file_info));
 		ft_init_file_info(&tmp);
 		tmp->file_name = ft_strdup(str);
-		// tmp->next = NULL;
 		*head = tmp;
 	} else {
 		while (tmp->next != NULL) {
 			tmp = tmp->next;
 		}
 		ft_init_file_info(&(tmp->next));
-		// tmp->next = (t_file_info *)malloc(sizeof(t_file_info));
 		tmp = tmp->next;
 		tmp->file_name = ft_strdup(str);
-		// tmp->next = NULL;
 	}
 }
 

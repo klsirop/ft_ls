@@ -1,17 +1,14 @@
 #include "ft_ls.h"
 
 void	ft_swap_list_elements(t_lis *here, t_lis *nex) {
-	char *nex_val;
-	char *here_val;
+	char *tmp;
 
-	nex_val = ft_strdup(nex->val);
-	here_val = ft_strdup(here->val);
+	tmp = ft_strdup(here->val);
 	ft_strdel(&(here->val));
+	here->val = ft_strdup(nex->val);
 	ft_strdel(&(nex->val));
-	here->val = ft_strdup(nex_val);
-	nex->val = ft_strdup(here_val);
-	ft_strdel(&here_val);
-	ft_strdel(&nex_val);
+	nex->val = ft_strdup(tmp);
+	ft_strdel(&tmp);
 }
 
 void	ft_delete_point(char **no_point, char *str) {
@@ -30,24 +27,6 @@ void	ft_delete_point(char **no_point, char *str) {
 	}
 	(*no_point)[i] = '\0';
 }
-
-// int		ft_no_point_strcmp(char *lhs, char *rhs) {
-// 	char *lhs_no_point;
-// 	char *rhs_no_point;
-// 	int res;
-
-// 	lhs_no_point = NULL;
-// 	rhs_no_point = NULL;
-
-// 	lhs_no_point = ft_strdup(lhs);
-// 	rhs_no_point = ft_strdup(rhs);
-// 	res = ft_strcmp(lhs_no_point, rhs_no_point);
-
-// 	ft_strdel(&lhs_no_point);
-// 	ft_strdel(&rhs_no_point);
-
-// 	return (res);
-// }
 
 int		ft_is_right_order_by_alph(char *lhs, char *rhs, enum e_order_type order_type) {
 	if (order_type == ALPH || order_type == TMOD || order_type == SIZE) {
@@ -94,7 +73,7 @@ int		ft_is_right_order(char *parent_name, t_lis *lhs, t_lis *rhs, enum e_order_t
 		if (lhs_stat.st_mtime < rhs_stat.st_mtime)
 			return 1;
 		else if (lhs_stat.st_mtime == rhs_stat.st_mtime)
-			return ft_is_right_order_by_alph(lhs->val, rhs->val, order_type);/////////////////////////////////////chage!!!!
+			return ft_is_right_order_by_alph(lhs->val, rhs->val, order_type);
 		else
 			return 0;
 	} else if (order_type == SIZE) {
@@ -119,15 +98,21 @@ void	ft_sort_by(char *parent_name, t_lis *names, enum e_order_type sort_order) {
 	t_lis *tmp;
 	int len;
 	int i;
+	int is_end_sorting;
+
+	if (sort_order == ORGN)
+		return ;
 
 	len = ft_find_list_len(names);
-	// ft_print_list(names);
 	i = 0;
 
-	while (i < len) {
+	is_end_sorting = 0;
+	while (i < len && !is_end_sorting) {
+		is_end_sorting = 1;
 		tmp = names;
 		while (tmp) {
 			if (tmp && tmp->next && !ft_is_right_order(parent_name, tmp, tmp->next, sort_order)) {
+				is_end_sorting = 0;
 				ft_swap_list_elements(tmp, tmp->next);
 			}
 			tmp = tmp->next;
@@ -136,15 +121,3 @@ void	ft_sort_by(char *parent_name, t_lis *names, enum e_order_type sort_order) {
 	}
 }
 
-// void	ft_sort_names(t_lis **names, t_dir_info* dir_info) {
-// 	// there is no parent dir
-// 	// if (dir_info->sort_order == ALPH) {
-// 	// 	return ;
-// 	// } else if (dir_info->sort_order == ALPH) {
-// 	// 	ft_sort_by_alph(*names);
-// 	// } else if (dir_info->sort_order == RALPH) {
-// 	// 	ft_sort_by_ralph(*names);
-// 	// } else if (dir_info->sort_order == TOPN) {
-// 	// 	ft_sort_by_topn(*names);
-// 	// }
-// }

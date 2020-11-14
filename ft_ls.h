@@ -59,8 +59,6 @@ typedef struct	s_info {
 
 typedef struct	s_dir_info {
 	t_lis* names;
-	// t_lis* file_names;
-	// t_lis* dir_names;
 	enum e_order_type sort_order;
 	enum e_info_type info_type;
 	int	is_Rec;
@@ -69,9 +67,6 @@ typedef struct	s_dir_info {
 
 typedef struct	s_rights {
 	char	mode;
-	// char usr_rights[2];
-	// char grp_rights[2];
-	// char oth_rights[2];
 	char *usr_rights;
 	char *grp_rights;
 	char *oth_rights;
@@ -99,7 +94,6 @@ typedef struct	s_file_info {
 	char *file_name;
 	int total;
 	struct s_file_info *next;
-
 }				t_file_info;
 
 typedef struct s_field_width
@@ -123,6 +117,8 @@ typedef struct s_field_width
 void	ft_init_info(t_info **info);
 void	ft_init_dir_info(t_dir_info** dir_info);
 void	ft_init_file_info(t_file_info **file_info);
+void	ft_init_t_rights(t_rights **rights);
+void	ft_init_t_dtime(t_dtime **time);
 
 /*
 ** parse_input.c
@@ -224,7 +220,8 @@ void	ft_print_dir(t_dir_info* dir_info, t_file_info *file_info, int is_dir);
 */
 
 void	ft_free_t_file_info(t_file_info **head);
-void	ft_free_info(t_info **info);
+void	ft_free_t_info(t_info **info);
+void	ft_free_t_dir_info(t_dir_info **dir_info);
 
 /*
 ** print_like_l.c
@@ -251,3 +248,21 @@ char	*ft_get_next_dir_name(char *start, char *end);
 */
 
 void	ft_manage_flags_overlap(t_info *info);
+
+/*
+** manage_rights.c
+*/
+
+void	ft_print_rights(struct stat status, char *path_to_file, t_file_info* file_info);
+
+/*
+** manage_file_time.c
+*/
+
+void	ft_print_time_modify(struct stat status, t_file_info* file_info);
+
+/*
+** ft_find_all_width.c
+*/
+
+void	ft_find_all_width(t_file_info *file_info, t_field_width **width_info);

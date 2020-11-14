@@ -29,3 +29,22 @@ void	ft_init_file_info(t_file_info **file_info) {
 	(*file_info)->next = NULL;
 	(*file_info)->total = 0;
 }
+
+void	ft_init_t_rights(t_rights **rights) {
+	(*rights) = (t_rights *)malloc(sizeof(t_rights));
+	(*rights)->usr_rights = (char *)malloc(sizeof(char) * 4);
+	(*rights)->grp_rights = (char *)malloc(sizeof(char) * 4);
+	(*rights)->oth_rights = (char *)malloc(sizeof(char) * 4);
+	(*rights)->usr_rights[3] = '\0';
+	(*rights)->grp_rights[3] = '\0';
+	(*rights)->oth_rights[3] = '\0';
+}
+
+void	ft_init_t_dtime(t_dtime **time) {
+	(*time) = (t_dtime *)malloc(sizeof(t_dtime));
+	(*time)->month = NULL;
+	(*time)->day = NULL;
+	(*time)->hour = NULL;
+	(*time)->min = NULL;
+	(*time)->year = NULL;
+}

@@ -22,7 +22,8 @@ SRC = 	main.c init.c parse_input.c list.c ft_add_char_to_string.c \
 		error.c unnesessary_func.c ft_is_right_dir_names.c \
 		ft_find_sort_order.c ft_flag_order.c ft_find_info_type.c \
 		sort_names.c out_dir.c print_dir.c free.c print_like_l.c \
-		separate_files_and_dirs.c manage_flags_overlap.c
+		separate_files_and_dirs.c manage_flags_overlap.c \
+		manage_rights.c manage_file_time.c ft_find_all_width.c
 # SRC =	error.c ft_add_char_to_string.c init.c \
 # 		main.c parse_string.c list.c clean.c \
 # 		ft_is_right_dir_names.c ft_find_sort_order.c \

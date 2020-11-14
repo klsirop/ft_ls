@@ -5,8 +5,6 @@ void	ft_out_files(t_info* info, t_dir_info* dir_info) {
 	t_lis* tmp;
 	t_file_info *tmp_file_info;
 
-	// if (info->file_names)
-	// 	ft_printf("ft_out_files: %s\n", info->file_names->val);
 	ft_sort_by(NULL, info->file_names, dir_info->sort_order);
 	file_info = NULL;
 	tmp = info->file_names;
@@ -21,15 +19,12 @@ void	ft_out_files(t_info* info, t_dir_info* dir_info) {
 			tmp_file_info = NULL;
 			ft_init_file_info(&tmp_file_info);
 			ft_print_like_l(NULL, tmp->val, dir_info, tmp_file_info);
-			// ft_printf("%s\n", tmp_file_info->rights->usr_rights);
 			ft_file_list_add_l(&file_info, tmp_file_info);
 		}
 		tmp = tmp->next;
 	}
-
 	ft_print_dir(dir_info, file_info, 0);
 	ft_free_t_file_info(&file_info);
-
 }
 
 char	*ft_get_next_dir_name(char *start, char *end) {
@@ -56,7 +51,6 @@ void	ft_do_papka(char *dir_name, t_dir_info *dir_info) {
 	char *full_name;
 
 	there_is_dirs_in_dir = 0;
-
 	file_info = NULL;
 	ft_out_dir(dir_name, dir_info, &file_info);
 	ft_print_dir(dir_info, file_info, 1);
@@ -64,19 +58,13 @@ void	ft_do_papka(char *dir_name, t_dir_info *dir_info) {
 
 	names_in_dir = NULL;
 	if (dir_info->is_Rec) {
-		// ft_printf("\ndir name: %s\n", dir_name);
 		there_is_dirs_in_dir = ft_insert_all_dir_names(dir_name, &names_in_dir, dir_info, 1);
-		// ft_printf("there_is_rec: %d\n", there_is_dirs_in_dir);
-		// ft_printf("list dirs: ");
-		// ft_print_list(names_in_dir);
 		if (there_is_dirs_in_dir != 0) {
 			tmp = names_in_dir;
 			while (tmp) {
-				// ft_printf("will do papka: %s\n", tmp->val);
 				full_name = ft_get_next_dir_name(dir_name, tmp->val);
 				ft_printf("\n%s:\n", full_name);
 				ft_do_papka(full_name, dir_info);
-				// ft_printf("end do papka\n");
 				ft_strdel(&full_name);
 				tmp = tmp->next;
 			}
@@ -85,9 +73,6 @@ void	ft_do_papka(char *dir_name, t_dir_info *dir_info) {
 		names_in_dir = NULL;
 	}
 	if (there_is_dirs_in_dir == 0) {
-		// if (full_name) {
-		// 	ft_strdel(&full_name);
-		// }
 		return ;
 	}
 }
@@ -96,34 +81,20 @@ void	ft_out_dirs(t_info* info, t_dir_info* dir_info) {
 	t_lis* tmp;
 	int is_first;
 
-	// if (info->dir_names)
-	// 	ft_printf("ft_out_dirs: %s\n", info->dir_names->val);
 	ft_sort_by(NULL, info->dir_names, dir_info->sort_order);
-
 	is_first = 1;
 	tmp = info->dir_names;
 	while (tmp) {
-		// ft_init_file_info(&file_info);
-
-
 		if (!is_first) {
 			ft_printf("\n");
 		}
 		if (is_first)
 			is_first = 0;
-
 		if (!(tmp == info->dir_names && tmp->next == NULL) || info->deleted_dir == 1)
 			ft_printf("%s:\n", tmp->val);
-		// remember info
-		// ft_printf("val: %s\n", tmp->val);
-
 		ft_do_papka(tmp->val, dir_info);
-
 		tmp = tmp->next;
 	}
-	// if (dir_info->is_Rec) {
-			
-	// }
 }
 
 void	ft_out_argc(t_info* info, t_dir_info* dir_info) {
@@ -152,7 +123,8 @@ int main(int argc, char *argv[]) {
 	ft_find_is_hidden(dir_info, info);
 	ft_out_argc(info, dir_info);
 
-	ft_free_info(&info);
+	ft_free_t_info(&info);
+	ft_free_t_dir_info(&dir_info);
 
 	// ft_print_flags(info);
 	// ft_print_input_names(info);

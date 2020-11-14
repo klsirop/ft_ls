@@ -9,13 +9,9 @@ int	ft_is_dir(char *name) {
 
 	lstat(name, &status);
 	mode = status.st_mode;
-	// ft_printf("name: %s\n", name);
 	if (S_ISLNK(mode)) {
-		// ft_printf("it is link\n");
 		ft_memset(buf, '\0', 256);
 		readlink(name, buf, 255);
-		// ft_printf("buf: %s\n", buf);
-		//get buf rights - check is it dir
 		lstat(buf, &link_status);
 		link_mode = link_status.st_mode;
 		if (S_ISDIR(link_mode))
@@ -23,8 +19,6 @@ int	ft_is_dir(char *name) {
 		else
 			return (0);
 	}
-	
-	
 	mode = mode & S_IFMT;
 	if (S_ISDIR(mode))
 		return (1);
@@ -32,6 +26,10 @@ int	ft_is_dir(char *name) {
 		return (0);
 }
 
+/*
+** separate files and dirs from 'info->names'
+** write dirs to 'info->dir_names', files to 'info->file_names'
+*/
 void	ft_separate_files_and_dirs(t_info *info) {
 	t_lis *tmp;
 	struct stat status;
@@ -41,11 +39,10 @@ void	ft_separate_files_and_dirs(t_info *info) {
 	while (tmp) {
 		lstat(tmp->val, &status);
 		mode = status.st_mode;
-		if (ft_is_dir(tmp->val)) {
+		if (ft_is_dir(tmp->val))
 			ft_list_add(&(info->dir_names), tmp->val);
-		} else {
+		else
 			ft_list_add(&(info->file_names), tmp->val);
-		}
 		tmp = tmp->next;
 	}
 }

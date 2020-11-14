@@ -1,5 +1,12 @@
 #include "ft_ls.h"
 
+/*
+** check that all names in info->names exists
+** write wrong names into 'wrong dirs'
+** delete wrong names from info->names
+** sort 'wrong dirs'
+** print about errors using 'wrong dirs'
+*/
 void	ft_is_right_dir_names(t_info* info) {
 	t_lis* tmp;
 	t_lis* prev;
@@ -12,7 +19,6 @@ void	ft_is_right_dir_names(t_info* info) {
 	while (tmp) {
 		if (lstat(tmp->val, &status)) {
 			info->deleted_dir = 1;
-			
 			ft_list_add(&wrong_dirs, tmp->val);
 			ft_list_delete_element(&info, prev);
 			tmp = tmp->next;
@@ -20,17 +26,6 @@ void	ft_is_right_dir_names(t_info* info) {
 			prev = tmp;
 			tmp = tmp->next;
 		}
-
-		// DIR* dir = opendir(tmp->val);
-		// if (dir == NULL) {
-		// 	ft_printf("ls: cannot access \'%s\': No such file or directory\n", tmp->val);
-		// 	tmp = tmp->next;
-		// 	ft_list_delete_element(&info, prev);
-		// } else {
-		// 	prev = tmp;
-		// 	tmp = tmp->next;
-		// }
-		// closedir(dir);
 	}
 
 	ft_sort_by(NULL, wrong_dirs, ALPH);
@@ -41,7 +36,6 @@ void	ft_is_right_dir_names(t_info* info) {
 		ft_putstr_fd(": No such file or directory\n", 2);
 		tmp = tmp->next;
 	}
-
-
-	// ft_printf("ok len: %d %s\n", ft_find_list_len(info->names), info->names->val);
+	if (wrong_dirs)
+		ft_delete_list(&wrong_dirs);
 }

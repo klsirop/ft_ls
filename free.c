@@ -1,18 +1,27 @@
 #include "ft_ls.h"
 
 void	ft_free_t_rights(t_rights **rights) {
-	ft_strdel(&(*rights)->usr_rights);
-	ft_strdel(&(*rights)->grp_rights);
-	ft_strdel(&(*rights)->oth_rights);
+	if ((*rights)->usr_rights)
+		ft_strdel(&(*rights)->usr_rights);
+	if ((*rights)->grp_rights)
+		ft_strdel(&(*rights)->grp_rights);
+	if ((*rights)->oth_rights)
+		ft_strdel(&(*rights)->oth_rights);
 	free(*rights);
 	*rights = NULL;
 }
 
 void	ft_free_t_dtime(t_dtime **time) {
-	ft_strdel(&((*time)->month));
-	ft_strdel(&((*time)->day));
-	ft_strdel(&((*time)->hour));
-	ft_strdel(&((*time)->min));
+	if ((*time)->month)
+		ft_strdel(&((*time)->month));
+	if ((*time)->day)
+		ft_strdel(&((*time)->day));
+	if ((*time)->hour)
+		ft_strdel(&((*time)->hour));
+	if ((*time)->min)
+		ft_strdel(&((*time)->min));
+	if ((*time)->year)
+		ft_strdel(&((*time)->year));
 	free(*time);
 	*time = NULL;
 }
@@ -42,13 +51,14 @@ void	ft_free_t_file_info(t_file_info **head) {
 		if (tmp->file_name) {
 			ft_strdel(&(tmp->file_name));
 		}
-
 		free (tmp);
 		tmp = NULL;
 	}
 }
 
-void	ft_free_info(t_info **info) {
+void	ft_free_t_info(t_info **info) {
+	if (!(*info))
+		return ;
 	if ((*info)->flags)
 		ft_strdel(&((*info)->flags));
 	if ((*info)->names)
@@ -59,4 +69,13 @@ void	ft_free_info(t_info **info) {
 		ft_delete_list(&((*info)->dir_names));
 	free(*info);
 	*info = NULL;
+}
+
+void	ft_free_t_dir_info(t_dir_info **dir_info) {
+	if (!(*dir_info))
+		return ;
+	if ((*dir_info)->names)
+		ft_delete_list(&((*dir_info)->names));
+	free (*dir_info);
+	*dir_info = NULL;
 }
