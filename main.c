@@ -9,7 +9,7 @@ void	ft_out_files(t_info* info, t_dir_info* dir_info) {
 	file_info = NULL;
 	tmp = info->file_names;
 	while (tmp) {
-		if (dir_info->is_Hidden == 0 && tmp->val[0] == '.') {
+		if (dir_info->is_hidden == 0 && tmp->val[0] == '.') {
 			tmp = tmp->next;
 			continue;
 		}
@@ -57,7 +57,7 @@ void	ft_do_papka(char *dir_name, t_dir_info *dir_info) {
 	ft_free_t_file_info(&file_info);
 
 	names_in_dir = NULL;
-	if (dir_info->is_Rec) {
+	if (dir_info->is_rec) {
 		there_is_dirs_in_dir = ft_insert_all_dir_names(dir_name, &names_in_dir, dir_info, 1);
 		if (there_is_dirs_in_dir != 0) {
 			tmp = names_in_dir;
@@ -119,7 +119,7 @@ int main(int argc, char *argv[]) {
 	ft_init_dir_info(&dir_info);
 	ft_find_sort_order(dir_info, info);
 	ft_find_info_type(dir_info, info);
-	ft_find_is_R(dir_info, info);
+	ft_find_is_r(dir_info, info);
 	ft_find_is_hidden(dir_info, info);
 	ft_out_argc(info, dir_info);
 
@@ -130,7 +130,7 @@ int main(int argc, char *argv[]) {
 	// ft_print_input_names(info);
 	// ft_print_sort_order(dir_info);
 	// ft_print_info_type(dir_info);
-	// ft_print_is_R(dir_info);
+	// ft_print_is_r(dir_info);
 	// ft_print_is_hidden(dir_info);
 
 	return (0);

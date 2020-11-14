@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:19:23 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/14 21:28:40 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/14 22:03:32 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,24 @@ void	ft_find_is_r(t_dir_info *dir_info, t_info *info)
 {
 	if (!info->flags)
 	{
-		dir_info->is_Rec = 0;
+		dir_info->is_rec = 0;
 		return ;
 	}
 	if (ft_strchr(info->flags, 'R'))
-		dir_info->is_Rec = 1;
+		dir_info->is_rec = 1;
 	else
-		dir_info->is_Rec = 0;
+		dir_info->is_rec = 0;
 }
 
 void	ft_find_is_hidden(t_dir_info *dir_info, t_info *info)
 {
 	if (!info->flags)
 	{
-		dir_info->is_Hidden = 0;
+		dir_info->is_hidden = 0;
 		return ;
 	}
 	if (ft_strchr(info->flags, 'a') || ft_strchr(info->flags, 'f'))
-		dir_info->is_Hidden = 1;
+		dir_info->is_hidden = 1;
 	else
-		dir_info->is_Hidden = 0;
+		dir_info->is_hidden = 0;
 }

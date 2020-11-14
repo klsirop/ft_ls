@@ -18,7 +18,7 @@ int	ft_insert_all_dir_names(char *name, t_lis **head, t_dir_info* dir_info, int 
 	while ((dirent = readdir(dir)) != NULL) {
 		full_name = ft_get_next_dir_name(name, dirent->d_name);
 		if (!is_only_dirs || ((ft_is_dir(full_name) && ft_strcmp(dirent->d_name, ".") && ft_strcmp(dirent->d_name, "..")))) {
-			if (is_only_dirs && dir_info->is_Hidden == 0 && dirent->d_name[0] == '.') {
+			if (is_only_dirs && dir_info->is_hidden == 0 && dirent->d_name[0] == '.') {
 				ft_strdel(&full_name);
 				continue;
 			}
@@ -58,7 +58,7 @@ void	ft_out_dir(char* name, t_dir_info* dir_info, t_file_info **file_info) {
 	total = 0;
 	tmp = names_in_dir;
 	while (tmp) {
-		if (dir_info->is_Hidden == 0 && tmp->val[0] == '.') {
+		if (dir_info->is_hidden == 0 && tmp->val[0] == '.') {
 			tmp = tmp->next;
 			continue;
 		}

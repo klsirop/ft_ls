@@ -55,15 +55,15 @@ void ft_print_info_type(t_dir_info *dir_info) {
 		ft_printf("ERROR: NO SORT ORDER\n");
 }
 
-void	ft_print_is_R(t_dir_info *dir_info) {
-	if (dir_info->is_Rec == 0)
+void	ft_print_is_r(t_dir_info *dir_info) {
+	if (dir_info->is_rec == 0)
 		ft_printf("is R: no\n");
 	else
 		ft_printf("is R: yes\n");
 }
 
 void	ft_print_is_hidden(t_dir_info *dir_info) {
-	if (dir_info->is_Hidden == 0)
+	if (dir_info->is_hidden == 0)
 		ft_printf("is hidden: no\n");
 	else
 		ft_printf("is hidden: yes\n");
