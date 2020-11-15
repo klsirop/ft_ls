@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/14 22:15:48 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/15 15:49:43 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ void	ft_sort_names(t_lis **names, t_dir_info *dir_info);
 
 void	ft_sort_by(char *parent_name, t_lis *names, enum e_order_type sort_order);
 int		ft_is_right_order(char *parent_name, t_lis *lhs, t_lis *rhs, enum e_order_type order_type);
+int		ft_is_right_order_by_alph(char *lhs, char *rhs, enum e_order_type order_type);
 
 /*
 ** out_dir.c
@@ -279,5 +280,19 @@ void	ft_print_time_modify(struct stat status, t_file_info *file_info);
 */
 
 void	ft_find_all_width(t_file_info *file_info, t_field_width **width_info);
+
+/*
+** manage_access_rights.c
+*/
+
+void	ft_get_usr_rights(mode_t mode, t_file_info *file_info);
+void	ft_get_group_rights(mode_t mode, t_file_info *file_info);
+void	ft_get_other_rights(mode_t mode, t_file_info *file_info);
+
+/*
+** ft_is_right_order.c
+*/
+
+int		ft_is_right_order(char *parent_name, t_lis *lhs, t_lis *rhs, enum e_order_type order_type);
 
 #endif

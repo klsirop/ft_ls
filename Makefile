@@ -6,7 +6,7 @@
 #    By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/01 17:44:02 by klsirop           #+#    #+#              #
-#    Updated: 2020/11/14 22:14:23 by volyvar-         ###   ########.fr        #
+#    Updated: 2020/11/15 15:48:54 by volyvar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC = 	main.c init.c parse_input.c list.c ft_add_char_to_string.c \
 		sort_names.c out_dir.c print_dir.c free.c print_like_l.c \
 		separate_files_and_dirs.c manage_flags_overlap.c \
 		manage_rights.c manage_file_time.c ft_find_all_width.c \
-		list_add.c
+		list_add.c manage_access_rights.c ft_is_right_order.c
 # SRC =	error.c ft_add_char_to_string.c init.c \
 # 		main.c parse_string.c list.c clean.c \
 # 		ft_is_right_dir_names.c ft_find_sort_order.c \

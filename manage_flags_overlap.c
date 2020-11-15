@@ -1,48 +1,71 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   manage_flags_overlap.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/15 15:17:33 by volyvar-          #+#    #+#             */
+/*   Updated: 2020/11/15 15:19:28 by volyvar-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
-// return last c's index
-int		ft_str_find_char(char *str, char c) {
+/*
+** return last c's index
+*/
+
+int		ft_str_find_char(char *str, char c)
+{
 	int i;
 	int ind;
 
 	ind = -1;
 	i = ft_strlen(str) - 1;
-	while (i >= 0) {
-		if (str[i] == c) {
+	while (i >= 0)
+	{
+		if (str[i] == c)
+		{
 			ind = i;
-			return ind;
+			return (ind);
 		}
 		i--;
 	}
-	return ind;
+	return (ind);
 }
 
-int		ft_count_c_in_str(char *str, char c) {
+int		ft_count_c_in_str(char *str, char c)
+{
 	int count;
 	int i;
 
 	i = 0;
 	count = 0;
-	while (str[i] != '\0') {
+	while (str[i] != '\0')
+	{
 		if (str[i] == c)
 			count++;
 		i++;
 	}
-	return count;
+	return (count);
 }
 
-void	ft_delete_char_in_str(char **str, char c) {
-	char *new_str;
-	int count_c;
-	int i;
-	int j;
+void	ft_delete_char_in_str(char **str, char c)
+{
+	char	*new_str;
+	int		count_c;
+	int		i;
+	int		j;
 
 	count_c = ft_count_c_in_str(*str, c);
 	new_str = (char *)malloc(sizeof(char) * (ft_strlen(*str) - count_c + 1));
 	i = 0;
 	j = 0;
-	while ((*str)[i] != '\0') {
-		if ((*str)[i] != c) {
+	while ((*str)[i] != '\0')
+	{
+		if ((*str)[i] != c)
+		{
 			new_str[j] = (*str)[i];
 			j++;
 		}
@@ -54,14 +77,18 @@ void	ft_delete_char_in_str(char **str, char c) {
 	ft_strdel(&new_str);
 }
 
-// The -1 and -l options all override each other; the last one specified determines the format used.
-void	ft_manage_flags_overlap(t_info *info) {
+/*
+** The -1 and -l options all override each other;
+** the last one specified determines the format used.
+*/
+
+void	ft_manage_flags_overlap(t_info *info)
+{
 	int ind_l;
 	int ind_1;
 
 	if (!info->flags)
 		return ;
-
 	ind_l = ft_str_find_char(info->flags, 'l');
 	ind_1 = ft_str_find_char(info->flags, '1');
 	if (ind_l == -1 || ind_1 == -1)
