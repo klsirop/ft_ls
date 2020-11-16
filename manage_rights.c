@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:19:35 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/15 15:22:14 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/15 16:36:04 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,16 @@ void	ft_get_spec_rights(mode_t mode, t_file_info *file_info)
 void	ft_get_file_acl(char *path_to_file, t_file_info *file_info)
 {
 	char	buf[101];
+	acl_t	acl;
 
-	if (listxattr(path_to_file, buf, sizeof(buf), 0) > 0)
+	if (listxattr(path_to_file, buf, sizeof(buf), XATTR_NOFOLLOW) > 0)
 		file_info->rights->acl = '@';
-	file_info->rights->acl = ' ';
+	else if ((acl = acl_get_link_np(path_to_file, ACL_TYPE_EXTENDED)))
+	{
+		file_info->rights->acl = '+';
+		acl_free(acl);
+	} else
+		file_info->rights->acl = ' ';
 }
 
 void	ft_print_rights(struct stat status,

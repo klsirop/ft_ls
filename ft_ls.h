@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/15 15:49:43 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/15 16:31:44 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 #  define LINFT_H
 #  include "./libft/includes/libft.h"
 # endif
+
+#include <sys/acl.h>
 
 enum	e_order_type {
 	ORGN,

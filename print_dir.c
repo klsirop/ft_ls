@@ -47,11 +47,11 @@ void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info, int is_dir) {
 		ft_printf(" ");
 
 		if (dir_info->info_type != LG && dir_info->info_type != LOG) {
-			ft_printf_width(tmp->usr_name, width_info->user, 0);
+			ft_printf_width(tmp->usr_name, width_info->user, 1);
 			ft_printf("  ");
 		}
 		if (dir_info->info_type != LO && dir_info->info_type != LOG) {
-			ft_printf("%s", tmp->grp_name);
+			ft_printf_width(tmp->grp_name, width_info->group, 1);
 			ft_printf("  ");
 		}
 		if (dir_info->info_type == LOG) {
@@ -79,7 +79,8 @@ void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info, int is_dir) {
 
 		if (tmp->link_name) {
 			ft_printf(" -> ");
-			ft_printf_width(tmp->link_name, width_info->linkname, 0);
+			// ft_printf_width(tmp->link_name, width_info->linkname, 0);
+			ft_printf("%s", tmp->link_name);
 		}
 
 		ft_printf("\n");
