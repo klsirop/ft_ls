@@ -26,6 +26,8 @@ char *ft_strconcat(char *s1, char *s2) {
 }
 
 void	ft_print_size(struct stat *status, t_file_info *file_info) {
+	if (file_info->rights->mode == 'c')
+		return ;
 	off_t size = status->st_size;
 	file_info->file_size = size;
 }
@@ -63,6 +65,18 @@ void	ft_print_link(char *path_to_file, t_file_info *file_info) {
 	file_info->link_name = ft_strdup(buf);
 }
 
+void	ft_get_deivce_num(struct stat status, t_file_info *file_info, t_dir_info* dir_info)
+{
+	dev_t dev;
+
+	if (file_info->rights->mode != 'c' && file_info->rights->mode != 'b')
+		return ;
+	dev = status.st_rdev;
+	file_info->major = major(dev);
+	file_info->minor = minor(dev);
+	file_info->is_device = 1;
+}
+
 int	ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info* dir_info, t_file_info *file_info) {
 	struct stat status;
 	char *path_to_file;
@@ -80,6 +94,7 @@ int	ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info* dir_info, t_fi
 	ft_print_hard_links(status, file_info);
 	ft_print_user_name(status, file_info);
 	ft_print_group_name(status, file_info);
+	ft_get_deivce_num(status, file_info, dir_info);
 	ft_print_size(&status, file_info);
 	ft_print_time_modify(status, file_info);
 	file_info->file_name = ft_strdup(dir_name);

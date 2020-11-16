@@ -20,6 +20,8 @@ void	ft_out_files(t_info* info, t_dir_info* dir_info) {
 			ft_init_file_info(&tmp_file_info);
 			ft_print_like_l(NULL, tmp->val, dir_info, tmp_file_info);
 			ft_file_list_add_l(&file_info, tmp_file_info);
+			if (tmp_file_info->is_device == 1)
+				file_info->is_device = 1;
 		}
 		tmp = tmp->next;
 	}
@@ -90,8 +92,11 @@ void	ft_out_dirs(t_info* info, t_dir_info* dir_info) {
 		}
 		if (is_first)
 			is_first = 0;
-		if (!(tmp == info->dir_names && tmp->next == NULL) || info->deleted_dir == 1)
+		// ft_printf("before ok\n");
+		if (!(tmp == info->dir_names && tmp->next == NULL) || info->deleted_dir == 1 || info->file_names) {
+			// ft_printf("ok\n");
 			ft_printf("%s:\n", tmp->val);
+		}
 		ft_do_papka(tmp->val, dir_info);
 		tmp = tmp->next;
 	}

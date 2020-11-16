@@ -69,6 +69,8 @@ void	ft_out_dir(char* name, t_dir_info* dir_info, t_file_info **file_info) {
 			ft_init_file_info(&tmp_file_info);
 			total += ft_print_like_l(name, tmp->val, dir_info, tmp_file_info);
 			ft_file_list_add_l(file_info, tmp_file_info);
+			if (tmp_file_info->is_device == 1)
+				(*file_info)->is_device = 1;
 		}
 		tmp = tmp->next;
 	}

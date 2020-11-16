@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/15 16:31:44 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/16 14:20:18 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ typedef struct			s_file_info {
 	char				*link_name;
 	char				*file_name;
 	int					total;
+	int					major;
+	int					minor;
+	int					is_device;
 	struct s_file_info	*next;
 }						t_file_info;
 
@@ -119,6 +122,8 @@ typedef struct	s_field_width
 	int			filename;
 	int			linkname;
 	int			time;
+	int			major;
+	int			minor;
 }				t_field_width;
 
 /*

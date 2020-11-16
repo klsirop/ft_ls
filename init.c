@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 22:09:46 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/14 22:10:24 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/16 14:20:31 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_init_file_info(t_file_info **file_info)
 	(*file_info)->file_name = NULL;
 	(*file_info)->next = NULL;
 	(*file_info)->total = 0;
+	(*file_info)->is_device = 0;
 }
 
 void	ft_init_t_rights(t_rights **rights)

@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:15:01 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/14 21:19:06 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/16 13:56:56 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	ft_init_width_info(t_field_width *width_info)
 	width_info->size = 0;
 	width_info->user = 0;
 	width_info->time = 0;
+	width_info->major = 0;
+	width_info->minor = 0;
 }
 
 void	ft_find_first_width(
@@ -44,11 +46,25 @@ void	ft_find_first_width(
 	len = ft_strlen(tmp->grp_name);
 	if ((*width_info)->group < len)
 		(*width_info)->group = len;
-	str_tmp = ft_itoa(tmp->file_size);
-	len = ft_strlen(str_tmp);
-	if ((*width_info)->size < len)
-		(*width_info)->size = len;
-	ft_strdel(&str_tmp);
+	if (tmp->rights->mode != 'c') {
+		str_tmp = ft_itoa(tmp->file_size);
+		len = ft_strlen(str_tmp);
+		if ((*width_info)->size < len)
+			(*width_info)->size = len;
+		ft_strdel(&str_tmp);
+	} else {
+		str_tmp = ft_itoa(tmp->minor);
+		len = ft_strlen(str_tmp);
+		if ((*width_info)->minor < len)
+			(*width_info)->minor = len;
+		ft_strdel(&str_tmp);
+
+		str_tmp = ft_itoa(tmp->major);
+		len = ft_strlen(str_tmp);
+		if ((*width_info)->major < len)
+			(*width_info)->major = len;
+		ft_strdel(&str_tmp);
+	}
 	len = ft_strlen(tmp->time->month);
 	if ((*width_info)->mounth < len)
 		(*width_info)->mounth = len;
