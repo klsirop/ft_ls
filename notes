@@ -94,3 +94,32 @@ The -1, -C, -x, and -l options all override each other; the last one specified d
 понятно, что некоторые функции используются только один раз, а некоторые - много. их и нужно исправлять в первую очередь.
 поэтому вот пункты, на которые стоит обратить особое внимание:
 5
+
+>>>> bonus_01_test_opt_d.spec.c -- [FAIL] FFFFFFFFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_02_test_opt_p.spec.c -- [FAIL] FFFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_03_test_opt_U.spec.c -- [FAIL] FFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_04_test_opt_c.spec.c -- [FAIL] FFFFFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_05_test_opt_S.spec.c -- [Ok !] .....
+>>>> bonus_06_test_opt_u.spec.c -- [FAIL] FFFFFFFFFFFFFFFFFFFFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_07_test_opt_A.spec.c -- [FAIL] FFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_08_test_opt_1.spec.c -- [Ok !] ..
+>>>> bonus_09_test_opt_f.spec.c -- [Ok !] ..
+>>>> bonus_10_test_opt_T.spec.c -- [FAIL] F [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_11_test_opt_g.spec.c -- [Ok !] ...
+>>>> bonus_12_test_opt_o_og.spec.c [Ok !] ....
+>>>> bonus_13_test_opt_F_Fp.spec.c [FAIL] FFFFFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_20_test_opt_comb_aA.spe [FAIL] FF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_21_test_opt_mix_sort.sp [FAIL] FF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_22_test_sort_comb.spec. [FAIL] FFFFFFFFFFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_30_test_xattr.spec.c -- [Ok !] .
+>>>> bonus_31_test_usr_xattr.spec. [FAIL] T. [TIME] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_32_test_ACL.spec.c ---- [FAIL] F [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> bonus_34_test_redis.spec.c -- [Ok !] .
+>>>> bonus_40_dir_root.spec.c ---- [Ok !] .
+>>>> sys_00_test_user_bin.spec.c - [FAIL] T... [TIME] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> sys_01_test_dev.spec.c ------ [FAIL] .FF [FAIL] unitTest_01 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> sys_02_test_etc.spec.c ------ [FAIL] F [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+>>>> sys_03_test_many_files.spec.c [Ok !] .
+>>>> sys_04_test_var_run.spec.c -- [Ok !] .
+[ ----------END OF UNIT TESTS---------- ]
+
