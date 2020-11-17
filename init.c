@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 22:09:46 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/16 14:20:31 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/17 12:17:53 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,11 @@ void	ft_init_t_dtime(t_dtime **time)
 	(*time)->hour = NULL;
 	(*time)->min = NULL;
 	(*time)->year = NULL;
+}
+
+void	ft_init_t_tree(t_tree **head) {
+	(*head) = (t_tree *)malloc(sizeof(t_tree));
+	(*head)->right = NULL;
+	(*head)->left = NULL;
+	(*head)->field = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/16 19:26:58 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/17 14:17:18 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,14 @@ typedef struct			s_file_info {
 	struct s_file_info	*next;
 }						t_file_info;
 
+typedef struct 			s_tree
+{
+		t_file_info		*field;
+		struct s_tree	*left;
+		struct s_tree	*right;
+}						t_tree;
+
+
 typedef struct	s_field_width
 {
 	int			hard_links;
@@ -160,6 +168,7 @@ void	ft_delete_list(t_lis **head);
 void	ft_reverse_list(t_lis **head);
 void	ft_reverse_list_file_info(t_file_info **head);
 int		ft_find_list_len_file_info(t_file_info *head);
+void	ft_init_t_tree(t_tree **head);
 
 /*
 ** list_add.c
@@ -233,15 +242,16 @@ void	ft_sort_by_file_info(char *parent_name, t_file_info **file_info, enum e_ord
 ** out_dir.c
 */
 
-void	ft_out_dir(char *name, t_dir_info *dir_info, t_file_info **file_info);
+t_tree	*ft_out_dir(char* name, t_dir_info* dir_info);
 int		ft_insert_all_dir_names(char *name, t_lis **head, t_dir_info *dir_info, int is_only_dirs);
-int	ft_insert_all_dir_rec(char *name, t_lis **head, t_dir_info* dir_info, int is_only_dirs) ;
+int	ft_insert_all_dir_names_rec(char *name, t_lis **head, t_dir_info* dir_info, int is_only_dirs);
 
 /*
 ** print_dir.c
 */
 
 void	ft_print_dir(t_dir_info *dir_info, t_file_info *file_info, int is_dir);
+void	ft_print_node(t_file_info *tmp, t_dir_info *dir_info, t_field_width *width_info, int is_device);
 
 /*
 ** free.c
@@ -294,6 +304,7 @@ void	ft_print_time_modify(struct stat status, t_file_info *file_info);
 */
 
 void	ft_find_all_width(t_file_info *file_info, t_field_width **width_info);
+void	ft_find_all_width_tree(t_tree *tree, t_field_width **width_info);
 
 /*
 ** manage_access_rights.c
@@ -308,5 +319,14 @@ void	ft_get_other_rights(mode_t mode, t_file_info *file_info);
 */
 
 int		ft_is_right_order(char *parent_name, char *lhs, char *rhs, enum e_order_type order_type);
+
+/*
+** tree.c
+*/
+
+void	ft_print_dir_tree(t_tree *head, t_dir_info *dir_info, t_field_width *width_info, int is_device);
+void ft_free_t_tree(t_tree *head);
+t_tree	*ft_insert_tree_element(t_tree *head, t_file_info *new, char *parent_name, enum e_order_type order_type);
+void	ft_just_print_tree(t_tree *head);
 
 #endif

@@ -93,41 +93,74 @@ int	ft_insert_all_dir_names_rec(char *name, t_lis **head, t_dir_info* dir_info, 
 	return res;
 }
 
-void	ft_out_dir(char* name, t_dir_info* dir_info, t_file_info **file_info) {
-	t_lis *names_in_dir;
-	t_lis *tmp;
+t_tree	*ft_out_dir(char* name, t_dir_info* dir_info) {
+	t_tree	*dir_tree;
+	DIR* dir;
+	struct dirent* dirent;
 	t_file_info *tmp_file_info;
 	int total;
-
-	names_in_dir = NULL;
-	if (ft_insert_all_dir_names(name, &names_in_dir, dir_info, 0) == -1) {
-		ft_delete_list(&names_in_dir);
-		names_in_dir = NULL;
-		ft_error_permission_denided(name);
-		return ;
-	}
-
+	
 	total = 0;
-	tmp = names_in_dir;
-	while (tmp) {
-		if (dir_info->is_hidden == 0 && tmp->val[0] == '.') {
-			tmp = tmp->next;
-			continue;
-		}
-		if (dir_info->info_type == U) {
-			ft_file_list_add_begin(file_info, tmp->val);
-		} else {
-			tmp_file_info = NULL;
-			ft_init_file_info(&tmp_file_info);
-			total += ft_print_like_l(name, tmp->val, dir_info, tmp_file_info);
-			ft_list_add_l_begin(file_info, tmp_file_info);
-			if (tmp_file_info->is_device == 1)
-				(*file_info)->is_device = 1;
-		}
-		tmp = tmp->next;
+	dir = opendir(name);
+	if (!dir) {
+		ft_error_permission_denided(name);
+		return NULL;
 	}
-	ft_sort_by_file_info(name, file_info, dir_info->sort_order);
-	if (*file_info)
-		(*file_info)->total = total;
-	ft_delete_list(&names_in_dir);
+	dir_tree = NULL;
+	while ((dirent = readdir(dir)) != NULL) {
+		if (dir_info->is_hidden == 0 && dirent->d_name[0] == '.')
+			continue;
+		tmp_file_info = NULL;
+		ft_init_file_info(&tmp_file_info);
+		if (dir_info->info_type == U)
+			tmp_file_info->file_name = ft_strdup(dirent->d_name);
+		else
+			total += ft_print_like_l(name, dirent->d_name, dir_info, tmp_file_info);
+		dir_tree = ft_insert_tree_element(dir_tree, tmp_file_info, name, dir_info->sort_order);
+		if (dir_info->info_type != U && tmp_file_info->is_device == 1)
+			dir_tree->field->is_device = 1;
+	}
+	closedir(dir);
+	if (dir_tree)
+		dir_tree->field->total = total;
+	return dir_tree;
 }
+
+// void	ft_out_dir(char* name, t_dir_info* dir_info, t_file_info **file_info) {
+// 	t_lis *names_in_dir;
+// 	t_lis *tmp;
+// 	t_file_info *tmp_file_info;
+// 	int total;
+
+// 	names_in_dir = NULL;
+// 	if (ft_insert_all_dir_names(name, &names_in_dir, dir_info, 0) == -1) {
+// 		ft_delete_list(&names_in_dir);
+// 		names_in_dir = NULL;
+// 		ft_error_permission_denided(name);
+// 		return ;
+// 	}
+
+// 	total = 0;
+// 	tmp = names_in_dir;
+// 	while (tmp) {
+// 		if (dir_info->is_hidden == 0 && tmp->val[0] == '.') {
+// 			tmp = tmp->next;
+// 			continue;
+// 		}
+// 		if (dir_info->info_type == U) {
+// 			ft_file_list_add_begin(file_info, tmp->val);
+// 		} else {
+// 			tmp_file_info = NULL;
+// 			ft_init_file_info(&tmp_file_info);
+// 			total += ft_print_like_l(name, tmp->val, dir_info, tmp_file_info);
+// 			ft_list_add_l_begin(file_info, tmp_file_info);
+// 			if (tmp_file_info->is_device == 1)
+// 				(*file_info)->is_device = 1;
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// 	ft_sort_by_file_info(name, file_info, dir_info->sort_order);
+// 	if (*file_info)
+// 		(*file_info)->total = total;
+// 	ft_delete_list(&names_in_dir);
+// }

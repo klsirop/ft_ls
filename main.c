@@ -51,17 +51,33 @@ char	*ft_get_next_dir_name(char *start, char *end) {
 // just output dir
 void	ft_do_papka(char *dir_name, t_dir_info *dir_info) {
 	static int count;
-	t_file_info* file_info;
+	// t_file_info* file_info;
 	int there_is_dirs_in_dir;
 	t_lis *names_in_dir;
 	t_lis *tmp;
 	char *full_name;
+	t_tree *dir_tree;
+	t_field_width *width_info;
 
 	there_is_dirs_in_dir = 0;
-	file_info = NULL;
-	ft_out_dir(dir_name, dir_info, &file_info);
-	ft_print_dir(dir_info, file_info, 1);
-	ft_free_t_file_info(&file_info);
+	dir_tree = ft_out_dir(dir_name, dir_info);
+	if (dir_tree) {
+		width_info = NULL;
+		if (dir_info->info_type != U) {
+			ft_find_all_width_tree(dir_tree, &width_info);
+			ft_printf("total %d\n", dir_tree->field->total);
+		}
+		ft_print_dir_tree(dir_tree, dir_info, width_info, dir_tree->field->is_device);
+		
+		// ft_just_print_tree(dir_tree);
+		
+		ft_free_t_tree(dir_tree);
+		
+		free(width_info);
+		width_info = NULL;
+		// ft_free_t_file_width(&width_info);
+	}
+	
 
 	names_in_dir = NULL;
 	if (dir_info->is_rec) {
@@ -131,6 +147,7 @@ int main(int argc, char *argv[]) {
 	ft_find_info_type(dir_info, info);
 	ft_find_is_r(dir_info, info);
 	ft_find_is_hidden(dir_info, info);
+
 	ft_out_argc(info, dir_info);
 
 	ft_free_t_info(&info);
