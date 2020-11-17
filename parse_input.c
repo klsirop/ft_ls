@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:23:22 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/15 15:25:19 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/16 18:36:03 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_parse_word(char *word, t_info *info)
 		ft_parse_flag(word, &(info->flags));
 	else
 	{
-		ft_list_add(&(info->names), word);
+		ft_list_add_begin(&(info->names), word);
 		is_end_option = 1;
 	}
 }

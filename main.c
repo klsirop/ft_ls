@@ -5,7 +5,7 @@ void	ft_out_files(t_info* info, t_dir_info* dir_info) {
 	t_lis* tmp;
 	t_file_info *tmp_file_info;
 
-	ft_sort_by(NULL, info->file_names, dir_info->sort_order);
+	// ft_sort_by(NULL, &(info->file_names), dir_info->sort_order);
 	file_info = NULL;
 	tmp = info->file_names;
 	while (tmp) {
@@ -14,17 +14,18 @@ void	ft_out_files(t_info* info, t_dir_info* dir_info) {
 			continue;
 		}
 		if (dir_info->info_type == U) {
-			ft_file_list_add(&file_info, tmp->val);
+			ft_file_list_add_begin(&file_info, tmp->val);
 		} else {
 			tmp_file_info = NULL;
 			ft_init_file_info(&tmp_file_info);
 			ft_print_like_l(NULL, tmp->val, dir_info, tmp_file_info);
-			ft_file_list_add_l(&file_info, tmp_file_info);
+			ft_list_add_l_begin(&file_info, tmp_file_info);
 			if (tmp_file_info->is_device == 1)
 				file_info->is_device = 1;
 		}
 		tmp = tmp->next;
 	}
+	ft_sort_by_file_info(NULL, &(file_info), dir_info->sort_order);
 	ft_print_dir(dir_info, file_info, 0);
 	ft_free_t_file_info(&file_info);
 }
@@ -37,9 +38,13 @@ char	*ft_get_next_dir_name(char *start, char *end) {
 		full = ft_strdup(end);
 		return full;
 	}
-	tmp = ft_strconcat(start, "/");
-	full = ft_strconcat(tmp, end);
-	ft_strdel(&tmp);
+	if (start[ft_strlen(start) - 1] != '/') {
+		tmp = ft_strconcat(start, "/");
+		full = ft_strconcat(tmp, end);
+		ft_strdel(&tmp);
+	}
+	else
+		full = ft_strconcat(start, end);	
 	return full;
 }
 
@@ -60,7 +65,7 @@ void	ft_do_papka(char *dir_name, t_dir_info *dir_info) {
 
 	names_in_dir = NULL;
 	if (dir_info->is_rec) {
-		there_is_dirs_in_dir = ft_insert_all_dir_names(dir_name, &names_in_dir, dir_info, 1);
+		there_is_dirs_in_dir = ft_insert_all_dir_names_rec(dir_name, &names_in_dir, dir_info, 1);
 		if (there_is_dirs_in_dir != 0) {
 			tmp = names_in_dir;
 			while (tmp) {
@@ -83,7 +88,7 @@ void	ft_out_dirs(t_info* info, t_dir_info* dir_info) {
 	t_lis* tmp;
 	int is_first;
 
-	ft_sort_by(NULL, info->dir_names, dir_info->sort_order);
+	ft_sort_by(NULL, &(info->dir_names), dir_info->sort_order);
 	is_first = 1;
 	tmp = info->dir_names;
 	while (tmp) {

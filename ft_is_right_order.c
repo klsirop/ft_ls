@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:33:50 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/15 15:48:25 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/16 18:46:01 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,58 +14,58 @@
 
 int		ft_is_right_order_tmod(struct stat lhs_stat,
 								struct stat rhs_stat,
-								t_lis *lhs,
-								t_lis *rhs)
+								char *lhs,
+								char *rhs)
 {
 	if (lhs_stat.st_mtime > rhs_stat.st_mtime)
 		return (1);
 	else if (lhs_stat.st_mtime == rhs_stat.st_mtime)
-		return (ft_is_right_order_by_alph(lhs->val, rhs->val, TMOD));
+		return (ft_is_right_order_by_alph(lhs, rhs, TMOD));
 	else
 		return (0);
 }
 
 int		ft_is_right_order_rtmod(struct stat lhs_stat,
 								struct stat rhs_stat,
-								t_lis *lhs,
-								t_lis *rhs)
+								char *lhs,
+								char *rhs)
 {
 	if (lhs_stat.st_mtime < rhs_stat.st_mtime)
 		return (1);
 	else if (lhs_stat.st_mtime == rhs_stat.st_mtime)
-		return (ft_is_right_order_by_alph(lhs->val, rhs->val, RTMOD));
+		return (ft_is_right_order_by_alph(lhs, rhs, RTMOD));
 	else
 		return (0);
 }
 
 int		ft_is_right_order_size(struct stat lhs_stat,
 								struct stat rhs_stat,
-								t_lis *lhs,
-								t_lis *rhs)
+								char *lhs,
+								char *rhs)
 {
 	if (lhs_stat.st_size > rhs_stat.st_size)
 		return (1);
 	else if (lhs_stat.st_size == rhs_stat.st_size)
-		return (ft_is_right_order_by_alph(lhs->val, rhs->val, SIZE));
+		return (ft_is_right_order_by_alph(lhs, rhs, SIZE));
 	else
 		return (0);
 }
 
 int		ft_is_right_order_rsize(struct stat lhs_stat,
 								struct stat rhs_stat,
-								t_lis *lhs,
-								t_lis *rhs)
+								char *lhs,
+								char *rhs)
 {
 	if (lhs_stat.st_size < rhs_stat.st_size)
 		return (1);
 	else if (lhs_stat.st_size == rhs_stat.st_size)
-		return (ft_is_right_order_by_alph(lhs->val, rhs->val, RSIZE));
+		return (ft_is_right_order_by_alph(lhs, rhs, RSIZE));
 	else
 		return (0);
 }
 
 int		ft_is_right_order(char *parent_name,
-							t_lis *lhs, t_lis *rhs,
+							char *lhs, char *rhs,
 							enum e_order_type order_type)
 {
 	struct stat	lhs_stat;
@@ -73,16 +73,16 @@ int		ft_is_right_order(char *parent_name,
 	char		*lhs_full;
 	char		*rhs_full;
 
-	lhs_full = ft_get_next_dir_name(parent_name, lhs->val);
-	rhs_full = ft_get_next_dir_name(parent_name, rhs->val);
+	lhs_full = ft_get_next_dir_name(parent_name, lhs);
+	rhs_full = ft_get_next_dir_name(parent_name, rhs);
 	lstat(lhs_full, &lhs_stat);
 	lstat(rhs_full, &rhs_stat);
 	ft_strdel(&lhs_full);
 	ft_strdel(&rhs_full);
 	if (order_type == ALPH)
-		return (ft_is_right_order_by_alph(lhs->val, rhs->val, order_type));
+		return (ft_is_right_order_by_alph(lhs, rhs, order_type));
 	if (order_type == RALPH)
-		return (ft_is_right_order_by_alph(lhs->val, rhs->val, order_type));
+		return (ft_is_right_order_by_alph(lhs, rhs, order_type));
 	if (order_type == TMOD)
 		return (ft_is_right_order_tmod(lhs_stat, rhs_stat, lhs, rhs));
 	if (order_type == RTMOD)

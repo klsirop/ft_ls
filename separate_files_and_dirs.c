@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:25:31 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/15 15:30:37 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/16 18:35:56 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void	ft_separate_files_and_dirs(t_info *info)
 		lstat(tmp->val, &status);
 		mode = status.st_mode;
 		if (ft_is_dir(tmp->val))
-			ft_list_add(&(info->dir_names), tmp->val);
+			ft_list_add_begin(&(info->dir_names), tmp->val);
 		else
-			ft_list_add(&(info->file_names), tmp->val);
+			ft_list_add_begin(&(info->file_names), tmp->val);
 		tmp = tmp->next;
 	}
 }

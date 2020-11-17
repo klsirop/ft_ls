@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:41:33 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/14 21:45:48 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/16 18:36:14 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_print_error_nonexist_dir(t_lis *wrong_dirs)
 {
 	t_lis	*tmp;
 
-	ft_sort_by(NULL, wrong_dirs, ALPH);
+	ft_sort_by(NULL, &wrong_dirs, ALPH);
 	tmp = wrong_dirs;
 	while (tmp)
 	{
@@ -50,7 +50,7 @@ void	ft_is_right_dir_names(t_info *info)
 		if (lstat(tmp->val, &status))
 		{
 			info->deleted_dir = 1;
-			ft_list_add(&wrong_dirs, tmp->val);
+			ft_list_add_begin(&wrong_dirs, tmp->val);
 			ft_list_delete_element(&info, prev);
 		}
 		else

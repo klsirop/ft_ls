@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/16 14:20:18 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/16 19:26:58 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,14 +157,20 @@ void	ft_list_delete_element(t_info **info, t_lis *prev);
 int		ft_find_list_len(t_lis *head);
 void	ft_print_list(t_lis *head);
 void	ft_delete_list(t_lis **head);
+void	ft_reverse_list(t_lis **head);
+void	ft_reverse_list_file_info(t_file_info **head);
+int		ft_find_list_len_file_info(t_file_info *head);
 
 /*
 ** list_add.c
 */
 
+void	ft_list_add_begin(t_lis **head, char *str);
 void	ft_list_add(t_lis **head, char *str);
 void	ft_file_list_add(t_file_info **head, char *str);
 void	ft_file_list_add_l(t_file_info **head, t_file_info *new_el);
+void	ft_list_add_l_begin(t_file_info **head, t_file_info *new_el);
+void	ft_file_list_add_begin(t_file_info **head, char *str);
 
 /*
 ** ft_add_char_to_string.c
@@ -219,9 +225,9 @@ void	ft_sort_names(t_lis **names, t_dir_info *dir_info);
 ** sort_names.c
 */
 
-void	ft_sort_by(char *parent_name, t_lis *names, enum e_order_type sort_order);
-int		ft_is_right_order(char *parent_name, t_lis *lhs, t_lis *rhs, enum e_order_type order_type);
+void	ft_sort_by(char *parent_name, t_lis **names, enum e_order_type sort_order);
 int		ft_is_right_order_by_alph(char *lhs, char *rhs, enum e_order_type order_type);
+void	ft_sort_by_file_info(char *parent_name, t_file_info **file_info, enum e_order_type sort_order);
 
 /*
 ** out_dir.c
@@ -229,6 +235,7 @@ int		ft_is_right_order_by_alph(char *lhs, char *rhs, enum e_order_type order_typ
 
 void	ft_out_dir(char *name, t_dir_info *dir_info, t_file_info **file_info);
 int		ft_insert_all_dir_names(char *name, t_lis **head, t_dir_info *dir_info, int is_only_dirs);
+int	ft_insert_all_dir_rec(char *name, t_lis **head, t_dir_info* dir_info, int is_only_dirs) ;
 
 /*
 ** print_dir.c
@@ -300,6 +307,6 @@ void	ft_get_other_rights(mode_t mode, t_file_info *file_info);
 ** ft_is_right_order.c
 */
 
-int		ft_is_right_order(char *parent_name, t_lis *lhs, t_lis *rhs, enum e_order_type order_type);
+int		ft_is_right_order(char *parent_name, char *lhs, char *rhs, enum e_order_type order_type);
 
 #endif

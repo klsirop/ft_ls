@@ -8,7 +8,9 @@
 max_cmd_size
 что делать если одна и та же папка(файл) были поданы как аргументы несколько раз
 добавить флаги
-
+/usr/local/bin:
+zsh: segmentation fault  ./ft_ls -lR /usr/
+переписать ft_find_sort_order (щас по линуксу)
 
 по делу:
 посмотреть ft_find_sort_order - done
@@ -95,31 +97,39 @@ The -1, -C, -x, and -l options all override each other; the last one specified d
 поэтому вот пункты, на которые стоит обратить особое внимание:
 5
 
->>>> bonus_01_test_opt_d.spec.c -- [FAIL] FFFFFFFFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_02_test_opt_p.spec.c -- [FAIL] FFFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_03_test_opt_U.spec.c -- [FAIL] FFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_04_test_opt_c.spec.c -- [FAIL] FFFFFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_05_test_opt_S.spec.c -- [Ok !] .....
->>>> bonus_06_test_opt_u.spec.c -- [FAIL] FFFFFFFFFFFFFFFFFFFFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_07_test_opt_A.spec.c -- [FAIL] FFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_08_test_opt_1.spec.c -- [Ok !] ..
->>>> bonus_09_test_opt_f.spec.c -- [Ok !] ..
->>>> bonus_10_test_opt_T.spec.c -- [FAIL] F [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_11_test_opt_g.spec.c -- [Ok !] ...
->>>> bonus_12_test_opt_o_og.spec.c [Ok !] ....
->>>> bonus_13_test_opt_F_Fp.spec.c [FAIL] FFFFFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_20_test_opt_comb_aA.spe [FAIL] FF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_21_test_opt_mix_sort.sp [FAIL] FF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_22_test_sort_comb.spec. [FAIL] FFFFFFFFFFFF [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_30_test_xattr.spec.c -- [Ok !] .
->>>> bonus_31_test_usr_xattr.spec. [FAIL] T. [TIME] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_32_test_ACL.spec.c ---- [FAIL] F [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> bonus_34_test_redis.spec.c -- [Ok !] .
->>>> bonus_40_dir_root.spec.c ---- [Ok !] .
->>>> sys_00_test_user_bin.spec.c - [FAIL] T... [TIME] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> sys_01_test_dev.spec.c ------ [FAIL] .FF [FAIL] unitTest_01 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> sys_02_test_etc.spec.c ------ [FAIL] F [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> sys_03_test_many_files.spec.c [Ok !] .
->>>> sys_04_test_var_run.spec.c -- [Ok !] .
-[ ----------END OF UNIT TESTS---------- ]
+!! ./ft_ls -R /usr/ - ПОЧЕМУ ТО ДВА СЛЭША?????
 
+До ускорения:
+./ft_ls -R /usr/  25.31s user 51.86s system 96% cpu 1:19.64 total
+./ft_ls -R /usr/bin  1.07s user 3.98s system 99% cpu 5.076 total
+./ft_ls -R /usr/lib/  4.45s user 14.36s system 99% cpu 18.981 total
+
+add ft_list_add_begin:
+./ft_ls -R /usr/bin  1.15s user 4.15s system 57% cpu 9.202 total
+
+add: ft_swap_list_elements_new and with ft_list_add_begin:
+./ft_ls -R /usr/bin/  0.64s user 3.12s system 99% cpu 3.787 total
+./ft_ls -R /usr/lib  3.12s user 10.93s system 98% cpu 14.193 total
+./ft_ls -lR /usr/bin/  0.69s user 3.16s system 97% cpu 3.958 total
+./ft_ls -alR /usr/bin/  0.70s user 3.17s system 96% cpu 4.000 total
+
+add: ft_swap_list_elements_new and withOUT ft_list_add_begin:
+./ft_ls -R /usr/bin/  0.64s user 3.12s system 99% cpu 3.782 total
+./ft_ls -R /usr/lib  3.11s user 10.85s system 98% cpu 14.103 total
+./ft_ls -lR /usr/bin  0.85s user 3.16s system 96% cpu 4.147 total
+./ft_ls -alR /usr/bin/  0.69s user 3.16s system 96% cpu 3.974 total
+
+
+Timeout test1:
+ls -lR /usr/bin  0.02s user 0.05s system 61% cpu 0.115 total
+./ft_ls -lR /usr/bin  0.86s user 3.18s system 96% cpu 4.181 total
+
+ls -R /usr/bin  0.01s user 0.00s system 93% cpu 0.011 total
+./ft_ls -R /usr/bin  0.80s user 3.11s system 99% cpu 3.933 total
+
+
+change ft_out_files:
+./ft_ls -lR /usr/bin  0.85s user 3.19s system 96% cpu 4.179 total
+./ft_ls -R /usr/bin  0.81s user 3.16s system 99% cpu 4.003 total
+
+./ft_ls -lR /usr/  12.75s user 23.64s system 92% cpu 39.192 total
