@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/17 14:17:18 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/17 17:00:37 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ void	ft_init_dir_info(t_dir_info **dir_info);
 void	ft_init_file_info(t_file_info **file_info);
 void	ft_init_t_rights(t_rights **rights);
 void	ft_init_t_dtime(t_dtime **time);
+void	ft_init_width_info(t_field_width *width_info);
 
 /*
 ** parse_input.c
@@ -242,9 +243,9 @@ void	ft_sort_by_file_info(char *parent_name, t_file_info **file_info, enum e_ord
 ** out_dir.c
 */
 
-t_tree	*ft_out_dir(char* name, t_dir_info* dir_info);
 int		ft_insert_all_dir_names(char *name, t_lis **head, t_dir_info *dir_info, int is_only_dirs);
 int	ft_insert_all_dir_names_rec(char *name, t_lis **head, t_dir_info* dir_info, int is_only_dirs);
+t_tree	*ft_out_dir(char* name, t_dir_info* dir_info, t_field_width **width_info);
 
 /*
 ** print_dir.c
@@ -305,6 +306,12 @@ void	ft_print_time_modify(struct stat status, t_file_info *file_info);
 
 void	ft_find_all_width(t_file_info *file_info, t_field_width **width_info);
 void	ft_find_all_width_tree(t_tree *tree, t_field_width **width_info);
+void	ft_find_first_width(
+								t_field_width **width_info,
+								t_file_info *tmp);
+void	ft_find_last_width(
+								t_field_width **width_info,
+								t_file_info *tmp);
 
 /*
 ** manage_access_rights.c

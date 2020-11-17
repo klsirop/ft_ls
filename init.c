@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 22:09:46 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/17 12:17:53 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/17 17:00:29 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,19 @@ void	ft_init_t_tree(t_tree **head) {
 	(*head)->right = NULL;
 	(*head)->left = NULL;
 	(*head)->field = NULL;
+}
+
+void	ft_init_width_info(t_field_width *width_info)
+{
+	width_info->day = 0;
+	width_info->filename = 0;
+	width_info->group = 0;
+	width_info->hard_links = 0;
+	width_info->linkname = 0;
+	width_info->mounth = 0;
+	width_info->size = 0;
+	width_info->user = 0;
+	width_info->time = 0;
+	width_info->major = 0;
+	width_info->minor = 0;
 }

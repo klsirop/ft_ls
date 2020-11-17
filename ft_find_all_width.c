@@ -6,26 +6,11 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:15:01 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/17 16:26:14 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/17 17:00:18 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void	ft_init_width_info(t_field_width *width_info)
-{
-	width_info->day = 0;
-	width_info->filename = 0;
-	width_info->group = 0;
-	width_info->hard_links = 0;
-	width_info->linkname = 0;
-	width_info->mounth = 0;
-	width_info->size = 0;
-	width_info->user = 0;
-	width_info->time = 0;
-	width_info->major = 0;
-	width_info->minor = 0;
-}
 
 void	ft_find_first_width(
 								t_field_width **width_info,

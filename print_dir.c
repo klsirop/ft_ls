@@ -121,9 +121,12 @@ void	ft_print_node_l(t_file_info *tmp, t_dir_info *dir_info, t_field_width *widt
 	ft_printf("%s", tmp->rights->usr_rights);
 	ft_printf("%s", tmp->rights->grp_rights);
 	ft_printf("%s", tmp->rights->oth_rights);
+
 	ft_printf("%c", tmp->rights->acl);
+
 	ft_printf(" ");
 	ft_printf("%*hu ", width_info->hard_links, tmp->hard_links);
+
 
 	if (dir_info->info_type != LG && dir_info->info_type != LOG)
 		ft_printf("%-*s  ", width_info->user, tmp->usr_name);

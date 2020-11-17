@@ -60,11 +60,11 @@ void	ft_do_papka(char *dir_name, t_dir_info *dir_info) {
 	t_field_width *width_info;
 
 	there_is_dirs_in_dir = 0;
-	dir_tree = ft_out_dir(dir_name, dir_info);
+	width_info = NULL;
+	dir_tree = ft_out_dir(dir_name, dir_info, &width_info);
 	if (dir_tree) {
-		width_info = NULL;
 		if (dir_info->info_type != U) {
-			ft_find_all_width_tree(dir_tree, &width_info);
+			// ft_find_all_width_tree(dir_tree, &width_info);
 			ft_printf("total %d\n", dir_tree->field->total);
 		}
 		ft_print_dir_tree(dir_tree, dir_info, width_info, dir_tree->field->is_device);
@@ -72,9 +72,12 @@ void	ft_do_papka(char *dir_name, t_dir_info *dir_info) {
 		// ft_just_print_tree(dir_tree);
 		
 		ft_free_t_tree(dir_tree);
+		dir_tree = NULL;
 		
-		free(width_info);
-		width_info = NULL;
+		if (dir_info->info_type != U) {
+			free(width_info);
+			width_info = NULL;
+		}
 		// ft_free_t_file_width(&width_info);
 	}
 	

@@ -45,7 +45,10 @@ void	ft_print_user_name(struct stat status, t_file_info *file_info) {
 
 	st_uid = status.st_uid;
 	pass = getpwuid(st_uid);
-	file_info->usr_name = ft_strdup(pass->pw_name);
+	if (!pass)
+		file_info->usr_name = ft_itoa(st_uid);
+	else
+		file_info->usr_name = ft_strdup(pass->pw_name);
 }
 
 void	ft_print_group_name(struct stat status, t_file_info *file_info) {
@@ -54,7 +57,10 @@ void	ft_print_group_name(struct stat status, t_file_info *file_info) {
 
 	st_gid = status.st_gid;
 	gr = getgrgid(st_gid);
-	file_info->grp_name = ft_strdup(gr->gr_name);
+	if (!gr)
+		file_info->grp_name = ft_itoa(st_gid);
+	else
+		file_info->grp_name = ft_strdup(gr->gr_name);
 }
 
 void	ft_print_link(char *path_to_file, t_file_info *file_info) {
@@ -81,6 +87,10 @@ int	ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info* dir_info, t_fi
 	struct stat status;
 	char *path_to_file;
 	char *tmp;
+	static long int all_time;
+
+	time_t start_time = time(NULL);
+
 
 	if (parent_dir) {
 		tmp = ft_strconcat(parent_dir, "/");
@@ -89,17 +99,28 @@ int	ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info* dir_info, t_fi
 	} else {
 		path_to_file = ft_strdup(dir_name);
 	}
+	
 	lstat(path_to_file, &status);
 	ft_print_rights(status, path_to_file, file_info);
+	
 	ft_print_hard_links(status, file_info);
 	ft_print_user_name(status, file_info);
 	ft_print_group_name(status, file_info);
+	
 	ft_get_deivce_num(status, file_info, dir_info);
+	
 	ft_print_size(&status, file_info);
+	
 	ft_print_time_modify(status, file_info);
 	file_info->file_name = ft_strdup(dir_name);
+	
 	if (file_info->rights->mode == 'l')
 		ft_print_link(path_to_file, file_info);
 	ft_strdel(&path_to_file);
+
+	time_t end_time = time(NULL);
+	all_time += end_time - start_time;
+	// ft_printf("sec: %ld\n", all_time);
+
 	return status.st_blocks;
 }
