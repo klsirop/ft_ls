@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:07:15 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 16:24:50 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 18:18:50 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ void	ft_free_t_file_info(t_file_info **head)
 			ft_strdel(&(tmp->grp_name));
 		if (tmp->time)
 			ft_free_t_dtime(&(tmp->time));
-		// ft_printf("okk\n");
 		if (tmp->time_birth)
 			ft_free_t_dtime(&(tmp->time_birth));
-		// ft_printf("okk1\n");
 		if (tmp->link_name)
 			ft_strdel(&(tmp->link_name));
 		if (tmp->file_name)

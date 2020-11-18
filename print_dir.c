@@ -1,24 +1,5 @@
 #include "ft_ls.h"
 
-// void	ft_printf_width(char *str, int width, int is_left) {
-// 	char *arg;
-// 	char *full_arg;
-// 	char *num_width;
-
-// 	num_width = ft_itoa(width);
-// 	if (!is_left)
-// 		arg = ft_strconcat("%", num_width);
-// 	else
-// 		arg = ft_strconcat("%-", num_width);
-
-// 	ft_strdel(&num_width);
-
-// 	full_arg = ft_strconcat(arg, "s");
-// 	ft_strdel(&arg);
-// 	ft_printf(full_arg, str);
-// 	ft_strdel(&full_arg);
-// }
-
 int	ft_max(int a, int b)
 {
 	return a > b ? a : b;

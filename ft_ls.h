@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 17:36:45 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 20:56:10 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,14 @@ void	ft_init_dir_info(t_dir_info **dir_info);
 void	ft_init_file_info(t_file_info **file_info);
 void	ft_init_t_rights(t_rights **rights);
 void	ft_init_t_dtime(t_dtime **time);
+
+
+/*
+** init_structs.c
+*/
+
 void	ft_init_width_info(t_field_width *width_info);
+void	ft_init_t_tree(t_tree **head);
 
 /*
 ** parse_input.c
@@ -164,6 +171,8 @@ void	ft_parse_input(int argc, char **argv, t_info *info);
 
 void	ft_wrong_flag(char wrong_flag);
 void	ft_error_permission_denided(char *dir_name);
+void	ft_malloc_error();
+void	ft_lstat_error(void);
 
 /*
 ** list.c
@@ -173,11 +182,14 @@ void	ft_list_delete_element(t_info **info, t_lis *prev);
 int		ft_find_list_len(t_lis *head);
 void	ft_print_list(t_lis *head);
 void	ft_delete_list(t_lis **head);
+int		ft_find_list_len_file_info(t_file_info *head);
+
+/*
+** ft_reverse_list.c
+*/
+
 void	ft_reverse_list(t_lis **head);
 void	ft_reverse_list_file_info(t_file_info **head);
-int		ft_find_list_len_file_info(t_file_info *head);
-void	ft_init_t_tree(t_tree **head);
-void	ft_print_list_t_info(t_file_info *head);
 
 /*
 ** list_add.c
@@ -185,7 +197,6 @@ void	ft_print_list_t_info(t_file_info *head);
 
 void	ft_list_add_begin(t_lis **head, char *str);
 void	ft_list_add(t_lis **head, char *str);
-void	ft_file_list_add(t_file_info **head, char *str);
 void	ft_file_list_add_l(t_file_info **head, t_file_info *new_el);
 void	ft_list_add_l_begin(t_file_info **head, t_file_info *new_el);
 void	ft_file_list_add_begin(t_file_info **head, char *str);
@@ -218,12 +229,6 @@ void	ft_is_right_dir_names(t_info *info);
 */
 
 void	ft_find_sort_order(t_dir_info *dir_info, t_info *info);
-
-/*
-** ft_flag_order.c
-*/
-
-int		ft_flag_order(char fflag, char sflag, char *flags);
 
 /*
 ** ft_find_info_type.c
@@ -308,6 +313,21 @@ void	ft_print_rights(struct stat status, char *path_to_file, t_file_info *file_i
 
 void	ft_print_time_modify(struct stat status, t_file_info *file_info);
 void	ft_print_time_birth(struct stat status, t_file_info *file_info);
+void	ft_free_after_split(char **arr);
+
+/*
+** ft_find_time_or_year.c
+*/
+
+void	ft_find_year_or_time_birth(char **separate_date,
+								char **separate_time,
+								t_file_info *file_info,
+								time_t bitime);
+void	ft_find_year_or_time(char **separate_date,
+								char **separate_time,
+								t_file_info *file_info,
+								time_t mtime);
+
 
 /*
 ** ft_find_all_width.c
@@ -319,6 +339,17 @@ void	ft_find_first_width(
 								t_field_width **width_info,
 								t_file_info *tmp);
 void	ft_find_last_width(
+								t_field_width **width_info,
+								t_file_info *tmp);
+
+/*
+** ft_find_field_width.c
+*/
+
+void	ft_find_device_width(
+								t_field_width **width_info,
+								t_file_info *tmp);
+void	ft_find_time_width(
 								t_field_width **width_info,
 								t_file_info *tmp);
 
@@ -344,5 +375,58 @@ void	ft_print_dir_tree(t_tree *head, t_dir_info *dir_info, t_field_width *width_
 void ft_free_t_tree(t_tree *head);
 t_tree	*ft_insert_tree_element(t_tree *head, t_file_info *new, char *parent_name, enum e_order_type order_type);
 void	ft_just_print_tree(t_tree *head);
+
+/*
+** ft_is_right_order_by.c
+*/
+
+int		ft_is_right_order_tmod(struct stat lhs_stat,
+								struct stat rhs_stat,
+								char *lhs,
+								char *rhs);
+int		ft_is_right_order_tbirth(struct stat lhs_stat,
+	struct stat rhs_stat,
+	char *lhs,
+	char *rhs);
+int		ft_is_right_order_rtmod(struct stat lhs_stat,
+								struct stat rhs_stat,
+								char *lhs,
+								char *rhs);
+int		ft_is_right_order_rtbirth(struct stat lhs_stat,
+								struct stat rhs_stat,
+								char *lhs,
+								char *rhs);
+
+void	ft_print_list_t_info(t_file_info *head);
+
+/*
+** ft_do_papka.c
+*/
+
+void	ft_do_papka(char *dir_name, t_dir_info *dir_info);
+
+/*
+** ft_out_files.c
+*/
+
+void	ft_out_files(t_info *info, t_dir_info *dir_info);
+
+/*
+** ft_insert_all_dir_names.c
+*/
+
+int	ft_insert_all_dir_names_rec(char *name,
+								t_lis **head,
+								t_dir_info *dir_info,
+								int is_only_dirs);
+
+/*
+** get_file_info.c
+*/
+
+void	ft_print_size(struct stat *status, t_file_info *file_info);
+void	ft_print_hard_links(struct stat status, t_file_info *file_info);
+void	ft_print_user_name(struct stat status, t_file_info *file_info);
+void	ft_print_group_name(struct stat status, t_file_info *file_info);
 
 #endif

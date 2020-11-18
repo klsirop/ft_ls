@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:19:35 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/16 14:59:02 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 20:44:16 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	ft_get_file_acl(char *path_to_file, t_file_info *file_info)
 	{
 		file_info->rights->acl = '+';
 		acl_free(acl);
-	} else
+	}
+	else
 		file_info->rights->acl = ' ';
 }
 

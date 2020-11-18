@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:30:59 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 17:37:12 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 19:47:04 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ void	ft_swap_list_elements(t_lis *here, t_lis *nex)
 {
 	char *tmp;
 
-	tmp = ft_strdup(here->val);
+	if (!(tmp = ft_strdup(here->val)))
+		ft_malloc_error();
 	ft_strdel(&(here->val));
-	here->val = ft_strdup(nex->val);
+	if (!(here->val = ft_strdup(nex->val)))
+		ft_malloc_error();
 	ft_strdel(&(nex->val));
-	nex->val = ft_strdup(tmp);
+	if (!(nex->val = ft_strdup(tmp)))
+		ft_malloc_error();
 	ft_strdel(&tmp);
 }
 
@@ -125,9 +128,7 @@ void	ft_sort_by_file_info(char *parent_name,
 	t_file_info	*prev;
 
 	if (sort_order == ORGN) {
-		ft_print_list_t_info(*file_info);
 		ft_reverse_list_file_info(file_info);
-		ft_print_list_t_info(*file_info);
 		return ;
 	}
 	len = ft_find_list_len_file_info(*file_info);

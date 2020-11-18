@@ -4,3 +4,20 @@
 1. защитить функции
 2. удалить ненужные функции
 3. норминатор
+
+Функции, которые нужно защитить:
+malloc
+ft_strdup
+ft_itoa
+ft_strsub
+stat and lstat (in case of error returns -1)
+
+ПРОБЛЕМЫ:
+почему проблемы с защитой lstat ?
+
+КОСЯКИ:
+./ft_ls ./libft/includes/ft_printf.h - ничего не выводится (считается что файл скрытый, хотя это не так)
+
+mkdir test
+touch test/a test/B
+./ft_ls -1f test

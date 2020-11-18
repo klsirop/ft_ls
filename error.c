@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:04:04 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 17:51:59 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 19:20:43 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ char	*ft_cut_path(char *path)
 	}
 	if (last_slash != 0)
 		last_slash++;
-	name = ft_strsub(path, last_slash, ft_strlen(path) - last_slash);
+	if (!(name = ft_strsub(path, last_slash, ft_strlen(path) - last_slash)))
+		ft_malloc_error();
 	return (name);
 }
 
@@ -50,4 +51,16 @@ void	ft_error_permission_denided(char *dir_name)
 	ft_putstr_fd(only_name, 2);
 	ft_putstr_fd(": Permission denied\n", 2);
 	ft_strdel(&only_name);
+}
+
+void	ft_malloc_error(void)
+{
+	ft_printf("malloc\n");
+	exit(1);
+}
+
+void	ft_lstat_error(void)
+{
+	ft_printf("lstat\n");
+	exit(1);
 }

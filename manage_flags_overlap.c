@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:17:33 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/15 15:19:28 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 20:43:58 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ void	ft_delete_char_in_str(char **str, char c)
 	int		j;
 
 	count_c = ft_count_c_in_str(*str, c);
-	new_str = (char *)malloc(sizeof(char) * (ft_strlen(*str) - count_c + 1));
+	if (!(new_str = (char *)malloc(sizeof(char) *
+		(ft_strlen(*str) - count_c + 1))))
+		ft_malloc_error();
 	i = 0;
 	j = 0;
 	while ((*str)[i] != '\0')
@@ -73,7 +75,8 @@ void	ft_delete_char_in_str(char **str, char c)
 	}
 	new_str[j] = '\0';
 	ft_strdel(str);
-	*str = ft_strdup(new_str);
+	if (!(*str = ft_strdup(new_str)))
+		ft_malloc_error();
 	ft_strdel(&new_str);
 }
 

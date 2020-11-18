@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 22:10:33 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 17:53:09 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 19:26:16 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		ft_find_list_len(t_lis *head)
 int		ft_find_list_len_file_info(t_file_info *head)
 {
 	t_file_info	*tmp;
-	int		len;
+	int			len;
 
 	len = 0;
 	tmp = head;
@@ -58,6 +58,20 @@ int		ft_find_list_len_file_info(t_file_info *head)
 		tmp = tmp->next;
 	}
 	return (len);
+}
+
+void	ft_delete_list(t_lis **head)
+{
+	t_lis *tmp;
+
+	tmp = *head;
+	while (*head)
+	{
+		*head = (*head)->next;
+		ft_strdel(&(tmp->val));
+		free(tmp);
+		tmp = *head;
+	}
 }
 
 void	ft_print_list(t_lis *head)
@@ -84,68 +98,4 @@ void	ft_print_list_t_info(t_file_info *head)
 		tmp = tmp->next;
 	}
 	ft_printf("\n");
-}
-
-void	ft_delete_list(t_lis **head)
-{
-	t_lis *tmp;
-
-	tmp = *head;
-	while (*head)
-	{
-		*head = (*head)->next;
-		ft_strdel(&(tmp->val));
-		free(tmp);
-		tmp = *head;
-	}
-}
-
-void	ft_reverse_list(t_lis **head)
-{
-	t_lis *nex;
-	t_lis *here;
-	t_lis *tmp;
-
-	here = *head;
-	nex = NULL;
-	while (here) {
-		nex = here->next;
-		if (here == *head)
-			here->next = NULL;
-		else
-			here->next = tmp;
-		if (nex == NULL) {
-			*head = here;
-			return ;
-		}
-		tmp = nex->next;
-		nex->next = here;
-		here = tmp;
-		tmp = nex;
-	}
-}
-
-void	ft_reverse_list_file_info(t_file_info **head)
-{
-	t_file_info *nex;
-	t_file_info *here;
-	t_file_info *tmp;
-
-	here = *head;
-	nex = NULL;
-	while (here) {
-		nex = here->next;
-		if (here == *head)
-			here->next = NULL;
-		else
-			here->next = tmp;
-		if (nex == NULL) {
-			*head = here;
-			return ;
-		}
-		tmp = nex->next;
-		nex->next = here;
-		here = tmp;
-		tmp = nex;
-	}
 }

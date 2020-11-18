@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:23:22 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/16 18:36:03 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 18:32:47 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	ft_parse_flag(char *word, char **flags)
 	int		i;
 
 	i = 1;
-	known_flags = ft_strdup("lRart1goUfS");
+	if (!(known_flags = ft_strdup("lRart1goUfS")))
+		ft_malloc_error();
 	while (word[i] != '\0')
 	{
 		if (!ft_strchr(known_flags, word[i]))
