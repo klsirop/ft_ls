@@ -120,7 +120,7 @@ t_tree	*ft_out_dir(char* name, t_dir_info* dir_info, t_field_width **width_info)
 			tmp_file_info->file_name = ft_strdup(dirent->d_name);
 		}
 		else {
-			total += ft_print_like_l(name, dirent->d_name, dir_info, tmp_file_info);
+			total += ft_print_like_l(name, dirent->d_name, tmp_file_info);
 			ft_find_first_width(width_info, tmp_file_info);
 			ft_find_last_width(width_info, tmp_file_info);
 		}

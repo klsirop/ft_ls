@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:31:46 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 15:23:55 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 17:53:58 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,9 @@
 
 int		ft_check_first_sort_order(t_dir_info *dir_info, t_info *info)
 {
-	// if (ft_strchr(info->flags, 'U'))
-	// {
-	// 	if (!ft_strchr(info->flags, 't') || ft_flag_order('t', 'U',
-	// 														info->flags))
-	// 		dir_info->sort_order = ORGN;
-	// 	else
-	// 		dir_info->sort_order = TMOD;
-	// 	return (1);
-	// }
 	if (ft_strchr(info->flags, 'f'))
 	{
-		if (!ft_strchr(info->flags, 't') || ft_flag_order('t', 'f',
-															info->flags))
-			dir_info->sort_order = ORGN;
-		else
-			dir_info->sort_order = TMOD;
+		dir_info->sort_order = ORGN;
 		return (1);
 	}
 	return (0);

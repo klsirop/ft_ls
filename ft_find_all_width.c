@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:15:01 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 14:56:54 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 17:28:23 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	ft_find_last_width(
 								t_field_width **width_info,
 								t_file_info *tmp)
 {
-	char		*str_tmp;
 	int			len;
 
 	len = ft_strlen(tmp->time->day);
@@ -101,8 +100,6 @@ void	ft_find_last_width(
 void	ft_find_all_width(t_file_info *file_info, t_field_width **width_info)
 {
 	t_file_info	*tmp;
-	char		*str_tmp;
-	int			len;
 
 	*width_info = (t_field_width *)malloc(sizeof(t_field_width));
 	ft_init_width_info(*width_info);
@@ -130,10 +127,6 @@ void	ft_go_throw_tree(t_tree *head, t_field_width **width_info) {
 
 void	ft_find_all_width_tree(t_tree *tree, t_field_width **width_info)
 {
-	t_file_info	*tmp;
-	char		*str_tmp;
-	int			len;
-
 	*width_info = (t_field_width *)malloc(sizeof(t_field_width));
 	ft_init_width_info(*width_info);
 	ft_go_throw_tree(tree, width_info);

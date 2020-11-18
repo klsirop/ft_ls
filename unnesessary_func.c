@@ -51,8 +51,6 @@ void ft_print_info_type(t_dir_info *dir_info) {
 		ft_printf("%s\n", "LOG");
 	else if (info_type == U)
 		ft_printf("%s\n", "U");
-	else
-		ft_printf("ERROR: NO SORT ORDER\n");
 }
 
 void	ft_print_is_r(t_dir_info *dir_info) {

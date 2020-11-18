@@ -6,13 +6,13 @@
 #    By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/01 17:44:02 by klsirop           #+#    #+#              #
-#    Updated: 2020/11/17 12:37:36 by volyvar-         ###   ########.fr        #
+#    Updated: 2020/11/18 17:25:28 by volyvar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 CC = gcc
-CFLAGS =
+CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -L ./libft/ -lft
 HEAD = ./ft_ls.h
 LIBFT = ./libft/libft.a

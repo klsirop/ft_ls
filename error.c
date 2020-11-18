@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:04:04 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/14 21:07:02 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 17:51:59 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_wrong_flag(char wrong_flag)
 {
-	ft_putstr_fd("/bin/ls: illegal option -- ", 2);
+	ft_putstr_fd("ls: illegal option -- ", 2);
 	ft_putchar_fd(wrong_flag, 2);
 	ft_putstr_fd(
 		"\nusage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]\n", 2);

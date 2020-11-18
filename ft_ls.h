@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 16:02:41 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 17:36:45 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void	ft_reverse_list(t_lis **head);
 void	ft_reverse_list_file_info(t_file_info **head);
 int		ft_find_list_len_file_info(t_file_info *head);
 void	ft_init_t_tree(t_tree **head);
+void	ft_print_list_t_info(t_file_info *head);
 
 /*
 ** list_add.c
@@ -273,7 +274,7 @@ void	ft_free_t_dir_info(t_dir_info **dir_info);
 ** print_like_l.c
 */
 
-int		ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info *dir_info, t_file_info *file_info);
+int		ft_print_like_l(char *parent_dir, char *dir_name, t_file_info *file_info);
 char	*ft_strconcat(char *s1, char *s2);
 
 /*

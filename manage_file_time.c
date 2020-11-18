@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:14:35 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 14:53:37 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 17:27:32 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	ft_print_time_modify(struct stat status, t_file_info *file_info)
 	char	*full_time;
 	char	**separate_date;
 	char	**separate_time;
-	int		is_need_year;
 
 	ft_init_t_dtime(&(file_info->time));
 	mtime = status.st_mtime;
@@ -117,7 +116,6 @@ void	ft_print_time_birth(struct stat status, t_file_info *file_info)
 	char	*full_time;
 	char	**separate_date;
 	char	**separate_time;
-	int		is_need_year;
 
 	ft_init_t_dtime(&(file_info->time_birth));
 	bitime = status.st_birthtimespec.tv_sec;

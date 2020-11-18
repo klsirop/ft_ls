@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 22:10:33 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/16 18:52:42 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 17:53:09 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,19 @@ void	ft_print_list(t_lis *head)
 	ft_printf("\n");
 }
 
+void	ft_print_list_t_info(t_file_info *head)
+{
+	t_file_info *tmp;
+
+	tmp = head;
+	while (tmp)
+	{
+		ft_printf("%s ", tmp->file_name);
+		tmp = tmp->next;
+	}
+	ft_printf("\n");
+}
+
 void	ft_delete_list(t_lis **head)
 {
 	t_lis *tmp;
@@ -96,16 +109,19 @@ void	ft_reverse_list(t_lis **head)
 	here = *head;
 	nex = NULL;
 	while (here) {
+		nex = here->next;
+		if (here == *head)
+			here->next = NULL;
+		else
+			here->next = tmp;
 		if (nex == NULL) {
 			*head = here;
 			return ;
 		}
-		if (here == *head)
-			here->next = NULL;
-		tmp = nex;
-		nex = nex->next;
-		tmp->next = here; 
+		tmp = nex->next;
+		nex->next = here;
 		here = tmp;
+		tmp = nex;
 	}
 }
 
@@ -118,15 +134,18 @@ void	ft_reverse_list_file_info(t_file_info **head)
 	here = *head;
 	nex = NULL;
 	while (here) {
+		nex = here->next;
+		if (here == *head)
+			here->next = NULL;
+		else
+			here->next = tmp;
 		if (nex == NULL) {
 			*head = here;
 			return ;
 		}
-		if (here == *head)
-			here->next = NULL;
-		tmp = nex;
-		nex = nex->next;
-		tmp->next = here; 
+		tmp = nex->next;
+		nex->next = here;
 		here = tmp;
+		tmp = nex;
 	}
 }

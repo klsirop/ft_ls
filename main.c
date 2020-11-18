@@ -18,7 +18,7 @@ void	ft_out_files(t_info* info, t_dir_info* dir_info) {
 		} else {
 			tmp_file_info = NULL;
 			ft_init_file_info(&tmp_file_info);
-			ft_print_like_l(NULL, tmp->val, dir_info, tmp_file_info);
+			ft_print_like_l(NULL, tmp->val, tmp_file_info);
 			ft_list_add_l_begin(&file_info, tmp_file_info);
 			if (tmp_file_info->is_device == 1)
 				file_info->is_device = 1;
@@ -50,7 +50,6 @@ char	*ft_get_next_dir_name(char *start, char *end) {
 
 // just output dir
 void	ft_do_papka(char *dir_name, t_dir_info *dir_info) {
-	static int count;
 	// t_file_info* file_info;
 	int there_is_dirs_in_dir;
 	t_lis *names_in_dir;
