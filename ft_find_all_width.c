@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:15:01 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/17 17:00:18 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 14:56:54 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,16 @@ void	ft_find_last_width(
 	else if ((*width_info)->time < 5)
 	{
 		(*width_info)->time = 5;
+	}
+	if (tmp->time_birth->year)
+	{
+		len = ft_strlen(tmp->time_birth->year);
+		if ((*width_info)->time_birth < len)
+			(*width_info)->time_birth = len;
+	}
+	else if ((*width_info)->time_birth < 5)
+	{
+		(*width_info)->time_birth = 5;
 	}
 }
 

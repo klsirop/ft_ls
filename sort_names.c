@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:30:59 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/16 19:11:43 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 15:20:58 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_is_right_order_by_alph(char *lhs,
 									char *rhs,
 									enum e_order_type order_type)
 {
-	if (order_type == ALPH || order_type == TMOD || order_type == SIZE)
+	if (order_type == ALPH || order_type == TMOD || order_type == SIZE || order_type == TBITRH)
 	{
 		if (ft_strcmp(lhs, rhs) > 0)
 			return (0);

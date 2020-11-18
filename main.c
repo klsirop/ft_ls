@@ -38,13 +38,13 @@ char	*ft_get_next_dir_name(char *start, char *end) {
 		full = ft_strdup(end);
 		return full;
 	}
-	if (start[ft_strlen(start) - 1] != '/') {
+	// if (start[ft_strlen(start) - 1] != '/') {
 		tmp = ft_strconcat(start, "/");
 		full = ft_strconcat(tmp, end);
 		ft_strdel(&tmp);
-	}
-	else
-		full = ft_strconcat(start, end);	
+	// }
+	// else
+	// 	full = ft_strconcat(start, end);	
 	return full;
 }
 
@@ -70,8 +70,9 @@ void	ft_do_papka(char *dir_name, t_dir_info *dir_info) {
 		ft_print_dir_tree(dir_tree, dir_info, width_info, dir_tree->field->is_device);
 		
 		// ft_just_print_tree(dir_tree);
-		
+		// ft_printf("ok\n");
 		ft_free_t_tree(dir_tree);
+		// ft_printf("ok1\n");
 		dir_tree = NULL;
 		
 		if (dir_info->info_type != U) {
@@ -127,7 +128,7 @@ void	ft_out_dirs(t_info* info, t_dir_info* dir_info) {
 }
 
 void	ft_out_argc(t_info* info, t_dir_info* dir_info) {
-	ft_separate_files_and_dirs(info);
+	ft_separate_files_and_dirs(info, dir_info);
 	ft_out_files(info, dir_info);
 	if (info->dir_names && info->file_names) {
 		ft_printf("\n");
@@ -152,6 +153,7 @@ int main(int argc, char *argv[]) {
 	ft_find_is_hidden(dir_info, info);
 
 	ft_out_argc(info, dir_info);
+	// ft_print_sort_order(dir_info);
 
 	ft_free_t_info(&info);
 	ft_free_t_dir_info(&dir_info);

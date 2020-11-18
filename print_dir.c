@@ -69,12 +69,22 @@ void	ft_output_l(t_dir_info* dir_info, t_file_info *file_info, int is_dir) {
 		} else
 			ft_printf("%*d, %*d ", width_info->major, tmp->major, width_info->minor, tmp->minor);
 
-		ft_printf("%*s %*s ", width_info->mounth, tmp->time->month, width_info->day, tmp->time->day);
+		if (dir_info->is_birth_time == 0) {
+			ft_printf("%*s %*s ", width_info->mounth, tmp->time->month, width_info->day, tmp->time->day);
 
-		if (tmp->time->hour) {
-			ft_printf("%s:%s", tmp->time->hour, tmp->time->min);
+			if (tmp->time->hour) {
+				ft_printf("%s:%s", tmp->time->hour, tmp->time->min);
+			} else {
+				ft_printf(" %s", tmp->time->year);
+			}
 		} else {
-			ft_printf(" %s", tmp->time->year);
+			ft_printf("%*s %*s ", width_info->mounth_birth, tmp->time_birth->month, width_info->day_birth, tmp->time_birth->day);
+
+			if (tmp->time_birth->hour) {
+				ft_printf("%s:%s", tmp->time_birth->hour, tmp->time_birth->min);
+			} else {
+				ft_printf(" %s", tmp->time_birth->year);
+			}
 		}
 
 		ft_printf(" ");
@@ -145,13 +155,26 @@ void	ft_print_node_l(t_file_info *tmp, t_dir_info *dir_info, t_field_width *widt
 	} else
 		ft_printf("%*d, %*d ", width_info->major, tmp->major, width_info->minor, tmp->minor);
 
-	ft_printf("%*s %*s ", width_info->mounth, tmp->time->month, width_info->day, tmp->time->day);
+	// ft_printf("birth: %d\n", dir_info->is_birth_time);
+	if (dir_info->is_birth_time == 0) {
+		ft_printf("%*s %*s ", width_info->mounth, tmp->time->month, width_info->day, tmp->time->day);
 
-	if (tmp->time->hour) {
-		ft_printf("%s:%s", tmp->time->hour, tmp->time->min);
+		if (tmp->time->hour) {
+			ft_printf("%s:%s", tmp->time->hour, tmp->time->min);
+		} else {
+			ft_printf(" %s", tmp->time->year);
+		}
 	} else {
-		ft_printf(" %s", tmp->time->year);
+		ft_printf("%*s %*s ", width_info->mounth, tmp->time_birth->month, width_info->day, tmp->time_birth->day);
+
+		if (tmp->time_birth->hour) {
+			ft_printf("%s:%s", tmp->time_birth->hour, tmp->time_birth->min);
+		} else {
+			ft_printf(" %s", tmp->time_birth->year);
+		}
 	}
+
+
 
 	ft_printf(" ");
 	ft_printf("%s", tmp->file_name);

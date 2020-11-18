@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:31:46 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/14 21:39:14 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 15:23:55 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int		ft_check_first_sort_order(t_dir_info *dir_info, t_info *info)
 {
-	if (ft_strchr(info->flags, 'U'))
-	{
-		if (!ft_strchr(info->flags, 't') || ft_flag_order('t', 'U',
-															info->flags))
-			dir_info->sort_order = ORGN;
-		else
-			dir_info->sort_order = TMOD;
-		return (1);
-	}
+	// if (ft_strchr(info->flags, 'U'))
+	// {
+	// 	if (!ft_strchr(info->flags, 't') || ft_flag_order('t', 'U',
+	// 														info->flags))
+	// 		dir_info->sort_order = ORGN;
+	// 	else
+	// 		dir_info->sort_order = TMOD;
+	// 	return (1);
+	// }
 	if (ft_strchr(info->flags, 'f'))
 	{
 		if (!ft_strchr(info->flags, 't') || ft_flag_order('t', 'f',
@@ -43,6 +43,14 @@ int		ft_check_last_sort_order(t_dir_info *dir_info, t_info *info)
 			dir_info->sort_order = RSIZE;
 		else
 			dir_info->sort_order = SIZE;
+		return (1);
+	}
+	if (ft_strchr(info->flags, 'U') && ft_strchr(info->flags, 't'))
+	{
+		if (ft_strchr(info->flags, 'r'))
+			dir_info->sort_order = RTBIRTH;
+		else
+			dir_info->sort_order = TBITRH;
 		return (1);
 	}
 	if (ft_strchr(info->flags, 't'))

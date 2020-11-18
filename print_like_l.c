@@ -112,6 +112,9 @@ int	ft_print_like_l(char *parent_dir, char *dir_name, t_dir_info* dir_info, t_fi
 	ft_print_size(&status, file_info);
 	
 	ft_print_time_modify(status, file_info);
+	ft_print_time_birth(status, file_info);
+
+
 	file_info->file_name = ft_strdup(dir_name);
 	
 	if (file_info->rights->mode == 'l')

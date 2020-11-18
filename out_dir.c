@@ -17,7 +17,7 @@ int	ft_insert_all_dir_names(char *name, t_lis **head, t_dir_info* dir_info, int 
 	}
 	while ((dirent = readdir(dir)) != NULL) {
 		full_name = ft_get_next_dir_name(name, dirent->d_name);
-		if (!is_only_dirs || ((ft_is_dir(full_name) && ft_strcmp(dirent->d_name, ".") && ft_strcmp(dirent->d_name, "..")))) {
+		if (!is_only_dirs || ((ft_is_dir(full_name, dir_info) && ft_strcmp(dirent->d_name, ".") && ft_strcmp(dirent->d_name, "..")))) {
 			if (is_only_dirs && dir_info->is_hidden == 0 && dirent->d_name[0] == '.') {
 				ft_strdel(&full_name);
 				continue;
@@ -63,7 +63,7 @@ int	ft_insert_all_dir_names_rec(char *name, t_lis **head, t_dir_info* dir_info, 
 	}
 	while ((dirent = readdir(dir)) != NULL) {
 		full_name = ft_get_next_dir_name(name, dirent->d_name);
-		if (!is_only_dirs || ((ft_is_dir(full_name) && ft_strcmp(dirent->d_name, ".") && ft_strcmp(dirent->d_name, "..")))) {
+		if (!is_only_dirs || ((ft_is_dir(full_name, dir_info) && ft_strcmp(dirent->d_name, ".") && ft_strcmp(dirent->d_name, "..")))) {
 			if (is_only_dirs && dir_info->is_hidden == 0 && dirent->d_name[0] == '.') {
 				ft_strdel(&full_name);
 				continue;

@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:19:23 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/14 22:03:32 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 14:44:06 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	ft_find_info_type(t_dir_info *dir_info, t_info *info)
 		dir_info->info_type = U;
 		return ;
 	}
+	if (ft_strchr(info->flags, 'U'))
+		dir_info->is_birth_time = 1;
 	if (ft_strchr(info->flags, '1') && ft_is_further(info->flags, '1', "lgo"))
 	{
 		dir_info->info_type = U;

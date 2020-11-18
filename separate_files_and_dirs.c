@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:25:31 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/16 18:35:56 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 16:02:26 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		ft_is_link_dir(char *name, mode_t mode)
 	return (-1);
 }
 
-int		ft_is_dir(char *name)
+int		ft_is_dir(char *name, t_dir_info *dir_info)
 {
 	struct stat	status;
 	mode_t		mode;
@@ -41,9 +41,12 @@ int		ft_is_dir(char *name)
 	lstat(name, &status);
 	mode = status.st_mode;
 	is_link_dir = ft_is_link_dir(name, mode);
-	if (is_link_dir == 1)
-		return (1);
-	else if (is_link_dir == 0)
+	if (dir_info->info_type == U) {
+		if (is_link_dir == 1)
+			return (1);
+		else if (is_link_dir == 0)
+			return (0);
+	} else if (is_link_dir != -1)
 		return (0);
 	mode = mode & S_IFMT;
 	if (S_ISDIR(mode))
@@ -57,7 +60,7 @@ int		ft_is_dir(char *name)
 ** write dirs to 'info->dir_names', files to 'info->file_names'
 */
 
-void	ft_separate_files_and_dirs(t_info *info)
+void	ft_separate_files_and_dirs(t_info *info, t_dir_info *dir_info)
 {
 	t_lis		*tmp;
 	struct stat	status;
@@ -68,7 +71,7 @@ void	ft_separate_files_and_dirs(t_info *info)
 	{
 		lstat(tmp->val, &status);
 		mode = status.st_mode;
-		if (ft_is_dir(tmp->val))
+		if (ft_is_dir(tmp->val, dir_info))
 			ft_list_add_begin(&(info->dir_names), tmp->val);
 		else
 			ft_list_add_begin(&(info->file_names), tmp->val);

@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/17 17:00:37 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/18 16:02:41 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ enum	e_order_type {
 	TMOD,
 	RTMOD,
 	SIZE,
-	RSIZE
+	RSIZE,
+	TBITRH,
+	RTBIRTH
 };
 
 enum	e_info_type {
@@ -76,6 +78,7 @@ typedef struct			s_dir_info {
 	enum e_info_type	info_type;
 	int					is_rec;
 	int					is_hidden;
+	int					is_birth_time;
 }						t_dir_info;
 
 typedef struct	s_rights {
@@ -102,6 +105,7 @@ typedef struct			s_file_info {
 	char				*grp_name;
 	off_t				file_size;
 	t_dtime				*time;
+	t_dtime				*time_birth;
 	char				*link_name;
 	char				*file_name;
 	int					total;
@@ -127,9 +131,12 @@ typedef struct	s_field_width
 	int			size;
 	int			mounth;
 	int			day;
+	int			mounth_birth;
+	int			day_birth;
 	int			filename;
 	int			linkname;
 	int			time;
+	int			time_birth;
 	int			major;
 	int			minor;
 }				t_field_width;
@@ -273,8 +280,8 @@ char	*ft_strconcat(char *s1, char *s2);
 ** separate_files_and_dirs.c
 */
 
-void	ft_separate_files_and_dirs(t_info *info);
-int		ft_is_dir(char *name);
+void	ft_separate_files_and_dirs(t_info *info, t_dir_info *dir_info);
+int		ft_is_dir(char *name, t_dir_info *dir_info);
 
 /*
 ** main.c
@@ -299,6 +306,7 @@ void	ft_print_rights(struct stat status, char *path_to_file, t_file_info *file_i
 */
 
 void	ft_print_time_modify(struct stat status, t_file_info *file_info);
+void	ft_print_time_birth(struct stat status, t_file_info *file_info);
 
 /*
 ** ft_find_all_width.c
