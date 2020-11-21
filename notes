@@ -15,9 +15,15 @@ stat and lstat (in case of error returns -1)
 ПРОБЛЕМЫ:
 почему проблемы с защитой lstat ?
 
-КОСЯКИ:
-./ft_ls ./libft/includes/ft_printf.h - ничего не выводится (считается что файл скрытый, хотя это не так)
 
-mkdir test
-touch test/a test/B
-./ft_ls -1f test
+
+
+Оставшиеся ошибки:
+
+valgrind ./ft_ls -Raglfo ../42FileChecker > our - ошибка валгринда (неициализированные)
+
+valgrind ./ft_ls -gS ../42FileChecker  - ошибка валгрина с принтфом
+
+valgrind ./ft_ls 99 - ошибка валгринда (фришится больше чем выделено)
+
+почему проблемы с защитой lstat?
