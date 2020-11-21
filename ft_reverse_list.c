@@ -6,11 +6,21 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 19:12:33 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 15:58:41 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 21:12:34 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	ft_change_pointers(t_lis **tmp,
+							t_lis **nex,
+							t_lis **here)
+{
+	*tmp = (*nex)->next;
+	(*nex)->next = *here;
+	*here = *tmp;
+	*tmp = *nex;
+}
 
 void	ft_reverse_list(t_lis **head)
 {
@@ -32,10 +42,7 @@ void	ft_reverse_list(t_lis **head)
 			*head = here;
 			return ;
 		}
-		tmp = nex->next;
-		nex->next = here;
-		here = tmp;
-		tmp = nex;
+		ft_change_pointers(&tmp, &nex, &here);
 		if (here == NULL)
 		{
 			*head = tmp;
@@ -44,14 +51,22 @@ void	ft_reverse_list(t_lis **head)
 	}
 }
 
+void	ft_change_pointers_file_info(t_file_info **tmp,
+							t_file_info **nex,
+							t_file_info **here)
+{
+	*tmp = (*nex)->next;
+	(*nex)->next = *here;
+	*here = *tmp;
+	*tmp = *nex;
+}
+
 void	ft_reverse_list_file_info(t_file_info **head)
 {
 	t_file_info *nex;
 	t_file_info *here;
 	t_file_info *tmp;
 
-	// ft_printf("start: %s\n", (*head)->file_name);
-	// ft_printf("start1: %s\n", ((*head)->next)->file_name);
 	here = *head;
 	nex = NULL;
 	while (here)
@@ -66,10 +81,7 @@ void	ft_reverse_list_file_info(t_file_info **head)
 			*head = here;
 			return ;
 		}
-		tmp = nex->next;
-		nex->next = here;
-		here = tmp;
-		tmp = nex;
+		ft_change_pointers_file_info(&tmp, &nex, &here);
 		if (here == NULL)
 		{
 			*head = tmp;
