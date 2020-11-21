@@ -1,0 +1,12 @@
+#! /bin/bash
+
+valgrind ./ft_ls $*
+
+echo "" > myres
+echo "" > res
+echo "" > diff_file
+
+./ft_ls $* > myres
+ls $* > res
+
+diff myres res
