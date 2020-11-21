@@ -1,51 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_dir.c                                        :+:      :+:    :+:   */
+/*   ft_output_l.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/21 14:25:47 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 14:33:32 by volyvar-         ###   ########.fr       */
+/*   Created: 2020/11/21 14:33:34 by volyvar-          #+#    #+#             */
+/*   Updated: 2020/11/21 14:42:34 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	ft_max(int a, int b)
-{
-	return a > b ? a : b;
-}
-
-void	ft_print_dir(t_dir_info *dir_info, t_file_info *file_info, int is_dir)
-{
-	t_file_info	*tmp;
-	int			is_first;
-
-	if (dir_info->info_type != U)
-	{
-		ft_output_l(dir_info, file_info, is_dir);
-		return ;
-	}
-	is_first = 1;
-	tmp = file_info;
-	while (tmp)
-	{
-		if (!is_first)
-			ft_printf("\n");
-		if (is_first)
-			is_first = 0;
-		ft_printf("%s", tmp->file_name);
-		tmp = tmp->next;
-	}
-	if (file_info != NULL)
-		ft_printf("\n");
-}
-
-void	ft_print_node_l(t_file_info *tmp,
-						t_dir_info *dir_info,
-						t_field_width *width_info,
-						int is_device)
+void	ft_output_l_four_col(t_dir_info *dir_info,
+							t_file_info *tmp,
+							t_field_width *width_info)
 {
 	ft_printf("%c", tmp->rights->mode);
 	ft_printf("%s", tmp->rights->usr_rights);
@@ -60,20 +29,35 @@ void	ft_print_node_l(t_file_info *tmp,
 		ft_printf("%-*s  ", width_info->group, tmp->grp_name);
 	if (dir_info->info_type == LOG)
 		ft_printf("  ");
+}
+
+void	ft_output_l_size(t_file_info *file_info,
+						t_file_info *tmp,
+						t_field_width *width_info)
+{
 	if (tmp->rights->mode != 'c' && tmp->rights->mode != 'b')
 	{
-		if (is_device == 1)
-			ft_printf("%*lld", ft_max(width_info->size, width_info->minor) +
-									1 + width_info->major + 1, tmp->file_size);
+		if (file_info->is_device == 1)
+			ft_printf("%*lld",
+				ft_max(width_info->size, width_info->minor) +
+				1 + width_info->major + 1, tmp->file_size);
 		else
 			ft_printf("%*lld", width_info->size, tmp->file_size);
 		ft_printf(" ");
 	}
 	else
-		ft_printf("%*d, %*d ", width_info->major, tmp->major, width_info->minor, tmp->minor);
+		ft_printf("%*d, %*d ", width_info->major, tmp->major,
+		width_info->minor, tmp->minor);
+}
+
+void	ft_output_l_time(t_dir_info *dir_info,
+						t_field_width *width_info,
+						t_file_info *tmp)
+{
 	if (dir_info->is_birth_time == 0)
 	{
-		ft_printf("%*s %*s ", width_info->mounth, tmp->time->month, width_info->day, tmp->time->day);
+		ft_printf("%*s %*s ", width_info->mounth, tmp->time->month,
+								width_info->day, tmp->time->day);
 		if (tmp->time->hour)
 			ft_printf("%s:%s", tmp->time->hour, tmp->time->min);
 		else
@@ -81,33 +65,39 @@ void	ft_print_node_l(t_file_info *tmp,
 	}
 	else
 	{
-		ft_printf("%*s %*s ", width_info->mounth, tmp->time_birth->month,
-				width_info->day, tmp->time_birth->day);
+		ft_printf("%*s %*s ", width_info->mounth_birth,
+				tmp->time_birth->month, width_info->day_birth,
+										tmp->time_birth->day);
 		if (tmp->time_birth->hour)
 			ft_printf("%s:%s", tmp->time_birth->hour, tmp->time_birth->min);
 		else
 			ft_printf(" %s", tmp->time_birth->year);
 	}
-	ft_printf(" ");
-	ft_printf("%s", tmp->file_name);
-	if (tmp->link_name)
-	{
-		ft_printf(" -> ");
-		ft_printf("%s", tmp->link_name);
-	}
 }
 
-void	ft_print_node(t_file_info *tmp,
-						t_dir_info *dir_info,
-						t_field_width *width_info,
-						int is_device)
+void	ft_output_l(t_dir_info *dir_info, t_file_info *file_info, int is_dir)
 {
-	if (dir_info->info_type != U)
+	t_field_width	*width_info;
+	t_file_info		*tmp;
+
+	width_info = NULL;
+	ft_find_all_width(file_info, &width_info);
+	if (file_info && is_dir)
+		ft_printf("total %d\n", file_info->total);
+	tmp = file_info;
+	while (tmp)
 	{
-		ft_print_node_l(tmp, dir_info, width_info, is_device);
+		ft_output_l_four_col(dir_info, tmp, width_info);
+		ft_output_l_size(file_info, tmp, width_info);
+		ft_output_l_time(dir_info, width_info, tmp);
+		ft_printf(" ");
+		ft_printf("%s", tmp->file_name);
+		if (tmp->link_name)
+		{
+			ft_printf(" -> ");
+			ft_printf("%s", tmp->link_name);
+		}
 		ft_printf("\n");
-		return ;
+		tmp = tmp->next;
 	}
-	ft_printf("%s", tmp->file_name);
-	ft_printf("\n");
 }

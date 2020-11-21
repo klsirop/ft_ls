@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:30:59 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 19:47:04 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 14:24:17 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int		ft_is_right_order_by_alph(char *lhs,
 									char *rhs,
 									enum e_order_type order_type)
 {
-	if (order_type == ALPH || order_type == TMOD || order_type == SIZE || order_type == TBITRH)
+	if (order_type == ALPH || order_type == TMOD ||
+		order_type == SIZE || order_type == TBITRH)
 	{
 		if (ft_strcmp(lhs, rhs) > 0)
 			return (0);
@@ -48,36 +49,36 @@ int		ft_is_right_order_by_alph(char *lhs,
 	return (0);
 }
 
-void	ft_swap_list_elements_new(t_lis **head, t_lis *prev, t_lis **here) {
+void	ft_swap_list_elements_new(t_lis **head, t_lis *prev, t_lis **here)
+{
 	t_lis *nex;
 	t_lis *tmp;
 
 	nex = (*here)->next;
-	if (prev == NULL) {
+	if (prev == NULL)
 		*head = nex;
-	}
 	tmp = nex->next;
 	nex->next = *here;
 	(*here)->next = tmp;
 	if (prev)
 		prev->next = nex;
-	// *here = (*here)->next;
 }
 
-void	ft_swap_list_elements_new_file_info(t_file_info **head, t_file_info *prev, t_file_info **here) {
+void	ft_swap_list_elements_new_file_info(t_file_info **head,
+											t_file_info *prev,
+											t_file_info **here)
+{
 	t_file_info *nex;
 	t_file_info *tmp;
 
 	nex = (*here)->next;
-	if (prev == NULL) {
+	if (prev == NULL)
 		*head = nex;
-	}
 	tmp = nex->next;
 	nex->next = *here;
 	(*here)->next = tmp;
 	if (prev)
 		prev->next = nex;
-	// *here = (*here)->next;
 }
 
 void	ft_sort_by(char *parent_name,
@@ -90,7 +91,8 @@ void	ft_sort_by(char *parent_name,
 	int		is_end_sorting;
 	t_lis	*prev;
 
-	if (sort_order == ORGN) {
+	if (sort_order == ORGN)
+	{
 		ft_reverse_list(names);
 		return ;
 	}
@@ -105,7 +107,8 @@ void	ft_sort_by(char *parent_name,
 		while (tmp)
 		{
 			if (tmp && tmp->next &&
-				!ft_is_right_order(parent_name, tmp->val, (tmp->next)->val, sort_order))
+				!ft_is_right_order(parent_name, tmp->val,
+									(tmp->next)->val, sort_order))
 			{
 				is_end_sorting = 0;
 				ft_swap_list_elements_new(names, prev, &tmp);
@@ -122,12 +125,13 @@ void	ft_sort_by_file_info(char *parent_name,
 					enum e_order_type sort_order)
 {
 	t_file_info	*tmp;
-	int		len;
-	int		i;
-	int		is_end_sorting;
+	int			len;
+	int			i;
+	int			is_end_sorting;
 	t_file_info	*prev;
 
-	if (sort_order == ORGN) {
+	if (sort_order == ORGN)
+	{
 		ft_reverse_list_file_info(file_info);
 		return ;
 	}
@@ -142,7 +146,8 @@ void	ft_sort_by_file_info(char *parent_name,
 		while (tmp)
 		{
 			if (tmp && tmp->next &&
-				!ft_is_right_order(parent_name, tmp->file_name, (tmp->next)->file_name, sort_order))
+				!ft_is_right_order(parent_name, tmp->file_name,
+									(tmp->next)->file_name, sort_order))
 			{
 				is_end_sorting = 0;
 				ft_swap_list_elements_new_file_info(file_info, prev, &tmp);

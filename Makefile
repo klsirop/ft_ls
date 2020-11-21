@@ -6,7 +6,7 @@
 #    By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/01 17:44:02 by klsirop           #+#    #+#              #
-#    Updated: 2020/11/18 20:54:53 by volyvar-         ###   ########.fr        #
+#    Updated: 2020/11/21 14:33:01 by volyvar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC = 	main.c init.c parse_input.c list.c ft_add_char_to_string.c \
 		tree.c ft_find_field_width.c ft_is_right_order_by.c \
 		ft_reverse_list.c ft_do_papka.c ft_out_files.c \
 		ft_find_time_or_year.c ft_insert_all_dir_names.c \
-		get_file_info.c
+		get_file_info.c ft_output_l.c
 
 OBJ = $(SRC:.c=.o)
 

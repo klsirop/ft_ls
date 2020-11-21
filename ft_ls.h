@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 20:56:10 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 14:42:06 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,7 @@ t_tree	*ft_out_dir(char* name, t_dir_info* dir_info, t_field_width **width_info)
 ** print_dir.c
 */
 
+int	ft_max(int a, int b);
 void	ft_print_dir(t_dir_info *dir_info, t_file_info *file_info, int is_dir);
 void	ft_print_node(t_file_info *tmp, t_dir_info *dir_info, t_field_width *width_info, int is_device);
 
@@ -428,5 +429,11 @@ void	ft_print_size(struct stat *status, t_file_info *file_info);
 void	ft_print_hard_links(struct stat status, t_file_info *file_info);
 void	ft_print_user_name(struct stat status, t_file_info *file_info);
 void	ft_print_group_name(struct stat status, t_file_info *file_info);
+
+/*
+** ft_output_l.c
+*/
+
+void	ft_output_l(t_dir_info *dir_info, t_file_info *file_info, int is_dir);
 
 #endif
