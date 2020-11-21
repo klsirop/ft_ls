@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 14:52:37 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 16:30:24 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,6 +300,7 @@ char	*ft_get_next_dir_name(char *start, char *end);
 ** manage_flags_overlap.c
 */
 
+int		ft_str_find_char(char *str, char c);
 void	ft_manage_flags_overlap(t_info *info);
 
 /*
@@ -404,6 +405,7 @@ void	ft_print_list_t_info(t_file_info *head);
 ** ft_do_papka.c
 */
 
+int		ft_is_hidden(char *name);
 void	ft_do_papka(char *dir_name, t_dir_info *dir_info);
 
 /*

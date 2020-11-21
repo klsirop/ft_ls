@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:08:39 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 20:28:55 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 16:04:26 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_out_dirs(t_info *info, t_dir_info *dir_info)
 	t_lis	*tmp;
 	int		is_first;
 
+	// ft_printf("sort\n");
 	ft_sort_by(NULL, &(info->dir_names), dir_info->sort_order);
 	is_first = 1;
 	tmp = info->dir_names;

@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:28:43 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 20:29:00 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 16:39:04 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	ft_out_files(t_info *info, t_dir_info *dir_info)
 	tmp = info->file_names;
 	while (tmp)
 	{
-		if (dir_info->is_hidden == 0 && tmp->val[0] == '.')
+		// ft_printf("name: %s\n", tmp->val);
+		if (dir_info->is_hidden == 0 && ft_is_hidden(tmp->val))
 		{
 			tmp = tmp->next;
 			continue;
@@ -47,6 +48,8 @@ void	ft_out_files(t_info *info, t_dir_info *dir_info)
 		tmp = tmp->next;
 	}
 	ft_sort_by_file_info(NULL, &(file_info), dir_info->sort_order);
+	// ft_printf("name0: %s\n", file_info->file_name);
+	// ft_printf("name00: %s\n", (file_info->next)->file_name);
 	ft_print_dir(dir_info, file_info, 0);
 	ft_free_t_file_info(&file_info);
 }

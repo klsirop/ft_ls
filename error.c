@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:04:04 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 19:20:43 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 18:59:31 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_wrong_flag(char wrong_flag)
 	ft_putstr_fd("ls: illegal option -- ", 2);
 	ft_putchar_fd(wrong_flag, 2);
 	ft_putstr_fd(
-		"\nusage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]\n", 2);
+		"\nusage: ls [-afglortRSU1] [file ...]\n", 2);
 	exit(1);
 }
 
@@ -55,12 +55,12 @@ void	ft_error_permission_denided(char *dir_name)
 
 void	ft_malloc_error(void)
 {
-	ft_printf("malloc\n");
+	// ft_printf("malloc\n");
 	exit(1);
 }
 
 void	ft_lstat_error(void)
 {
-	ft_printf("lstat\n");
+	// ft_printf("lstat\n");
 	exit(1);
 }

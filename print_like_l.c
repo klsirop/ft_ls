@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:51:39 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 20:58:18 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 17:58:26 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ int		ft_print_like_l(char *parent_dir,
 		if (!(path_to_file = ft_strdup(dir_name)))
 			ft_malloc_error();
 	}
-	lstat(path_to_file, &status);
+	if (lstat(path_to_file, &status) == -1)
+		ft_lstat_error();
 	ft_get_main_info(status, file_info, path_to_file);
 	if (!(file_info->file_name = ft_strdup(dir_name)))
 		ft_malloc_error();

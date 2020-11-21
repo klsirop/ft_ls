@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:25:31 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 14:25:05 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 19:02:28 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ int		ft_is_dir(char *name, t_dir_info *dir_info)
 	mode_t		mode;
 	int			is_link_dir;
 
-	lstat(name, &status);
+	mode = 0;
+	if (lstat(name, &status) == -1)
+		exit(1);
 	mode = status.st_mode;
 	is_link_dir = ft_is_link_dir(name, mode);
 	if (dir_info->info_type == U)
@@ -71,7 +73,8 @@ void	ft_separate_files_and_dirs(t_info *info, t_dir_info *dir_info)
 	tmp = info->names;
 	while (tmp)
 	{
-		lstat(tmp->val, &status);
+		if (lstat(tmp->val, &status) == -1)
+			ft_lstat_error();
 		mode = status.st_mode;
 		if (ft_is_dir(tmp->val, dir_info))
 			ft_list_add_begin(&(info->dir_names), tmp->val);

@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 19:12:33 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 19:12:52 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 15:58:41 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void	ft_reverse_list(t_lis **head)
 		nex->next = here;
 		here = tmp;
 		tmp = nex;
+		if (here == NULL)
+		{
+			*head = tmp;
+			return ;
+		}
 	}
 }
 
@@ -45,6 +50,8 @@ void	ft_reverse_list_file_info(t_file_info **head)
 	t_file_info *here;
 	t_file_info *tmp;
 
+	// ft_printf("start: %s\n", (*head)->file_name);
+	// ft_printf("start1: %s\n", ((*head)->next)->file_name);
 	here = *head;
 	nex = NULL;
 	while (here)
@@ -63,5 +70,10 @@ void	ft_reverse_list_file_info(t_file_info **head)
 		nex->next = here;
 		here = tmp;
 		tmp = nex;
+		if (here == NULL)
+		{
+			*head = tmp;
+			return ;
+		}
 	}
 }

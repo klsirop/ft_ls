@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:44:31 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 15:06:21 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 16:31:23 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ t_tree	*ft_out_dir(char *name,
 	dir_tree = NULL;
 	while ((dirent = readdir(dir)) != NULL)
 	{
-		if (dir_info->is_hidden == 0 && dirent->d_name[0] == '.')
+		// ft_printf("%s\n", dirent->d_name);
+		if (dir_info->is_hidden == 0 && ft_is_hidden(dirent->d_name))
 			continue;
 		tmp_file_info = NULL;
 		ft_init_file_info(&tmp_file_info);

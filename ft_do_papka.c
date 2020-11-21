@@ -6,11 +6,24 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:11:46 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 20:23:21 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 16:32:38 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+int		ft_is_hidden(char *name)
+{
+	long int slash_ind;
+	if (!name)
+		return (0);
+	if (name[0] != '.')
+		return (0);
+	slash_ind = ft_str_find_char(name, '/');
+	if (name[0] == '.' && (slash_ind == -1 || slash_ind == (long int)ft_strlen(name) - 1))
+		return (1);
+	return (0);
+}
 
 void	ft_do_papka_print(char *dir_name, t_dir_info *dir_info)
 {

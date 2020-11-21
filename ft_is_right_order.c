@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:33:50 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 15:06:57 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 19:01:00 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		ft_is_right_order(char *parent_name,
 		return (ft_is_right_order_size(lhs_stat, rhs_stat, lhs, rhs));
 	if (order_type == RSIZE)
 		return (ft_is_right_order_rsize(lhs_stat, rhs_stat, lhs, rhs));
-	// if (order_type == ORGN)
-	// 	return (1);
+	if (order_type == ORGN)
+		return (1);
 	return (0);
 }

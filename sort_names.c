@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:30:59 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 14:24:17 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 16:04:17 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ void	ft_sort_by(char *parent_name,
 
 	if (sort_order == ORGN)
 	{
-		ft_reverse_list(names);
+		// ft_printf("ok\n");
+		// ft_reverse_list(names);
 		return ;
 	}
 	len = ft_find_list_len(*names);
@@ -132,6 +133,7 @@ void	ft_sort_by_file_info(char *parent_name,
 
 	if (sort_order == ORGN)
 	{
+		// ft_printf("ok\n");
 		ft_reverse_list_file_info(file_info);
 		return ;
 	}

@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 22:10:33 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 15:09:30 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 19:24:17 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ void	ft_list_delete_element(t_info **info, t_lis *prev)
 
 	if (prev == NULL)
 	{
-		tmp = (*info)->names;
-		(*info)->names = tmp->next;
-		ft_strdel(&(tmp->val));
-		free(tmp);
+		tmp = NULL;
+		if ((*info)->names)
+		{
+			tmp = ((*info)->names)->next;
+			ft_strdel(&(((*info)->names)->val));
+			free((*info)->names);
+		}
+		(*info)->names = tmp;
 		return ;
 	}
 	tmp = prev->next;

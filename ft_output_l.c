@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 14:33:34 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 14:58:13 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 17:00:48 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,6 @@ void	ft_output_l(t_dir_info *dir_info, t_file_info *file_info, int is_dir)
 		ft_printf("\n");
 		tmp = tmp->next;
 	}
+	if (width_info)
+		free(width_info);
 }
