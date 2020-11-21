@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 22:14:28 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 15:59:22 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 21:14:13 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	ft_file_list_add_begin(t_file_info **head, char *str)
 		if (!((*head)->file_name = ft_strdup(str)))
 			ft_malloc_error();
 		(*head)->next = NULL;
-		// ft_printf("head1: %s\n", (*head)->file_name);
 	}
 	else
 	{
@@ -81,8 +80,6 @@ void	ft_file_list_add_begin(t_file_info **head, char *str)
 			ft_malloc_error();
 		tmp->next = *head;
 		*head = tmp;
-		// ft_printf("head2: %s\n", (*head)->file_name);
-		// ft_printf("head3: %s\n", ((*head)->next)->file_name);
 	}
 }
 

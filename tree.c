@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 12:37:27 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 15:42:43 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 22:04:29 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_tree	*ft_insert_tree_element(t_tree *head,
 											head->field->file_name,
 											new->file_name,
 											order_type);
-		// ft_printf("is right order: %d\n", is_right_order);
 		if (is_right_order == 0)
 			head->left = ft_insert_tree_element(head->left,
 												new,

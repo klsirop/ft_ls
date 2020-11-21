@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 20:07:34 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 22:14:23 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,13 +251,23 @@ void	ft_sort_names(t_lis **names, t_dir_info *dir_info);
 void	ft_sort_by(char *parent_name, t_lis **names, enum e_order_type sort_order);
 int		ft_is_right_order_by_alph(char *lhs, char *rhs, enum e_order_type order_type);
 void	ft_sort_by_file_info(char *parent_name, t_file_info **file_info, enum e_order_type sort_order);
+void	ft_swap_list_elements_new(t_lis **head, t_lis *prev,
+								t_lis **here, int *is_end_sorting);
+void	ft_swap_file_info(t_file_info **head,
+											t_file_info *prev,
+											t_file_info **here,
+											int *is_end_sorting);
 
 /*
 ** out_dir.c
 */
 
 int		ft_insert_all_dir_names(char *name, t_lis **head, t_dir_info *dir_info, int is_only_dirs);
-t_tree	*ft_out_dir(char* name, t_dir_info* dir_info, t_field_width **width_info);
+// t_tree	*ft_out_dir(char* name, t_dir_info* dir_info, t_field_width **width_info);
+void	ft_out_dir(char *name,
+					t_dir_info *dir_info,
+					t_field_width **width_info,
+					t_tree **dir_tree);
 
 /*
 ** print_dir.c

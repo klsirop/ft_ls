@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:11:46 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 20:20:27 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 22:19:32 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	ft_do_papka_print(char *dir_name, t_dir_info *dir_info)
 	t_field_width	*width_info;
 
 	width_info = NULL;
-	dir_tree = ft_out_dir(dir_name, dir_info, &width_info);
+	dir_tree = NULL;
+	ft_out_dir(dir_name, dir_info, &width_info, &dir_tree);
 	if (dir_tree)
 	{
 		if (dir_info->info_type != U)
@@ -61,12 +62,11 @@ void	ft_do_papka_rec(char *dir_name,
 	names_in_dir = NULL;
 	if (dir_info->is_rec)
 	{
-		*there_is_dirs_in_dir = ft_insert_all_dir_names_rec(dir_name,
+		if ((*there_is_dirs_in_dir = ft_insert_all_dir_names_rec(dir_name,
 															&names_in_dir,
-															dir_info);
-		ft_sort_by(dir_name, &names_in_dir, dir_info->sort_order);
-		if (there_is_dirs_in_dir != 0)
+															dir_info)) != 0)
 		{
+			ft_sort_by(dir_name, &names_in_dir, dir_info->sort_order);
 			tmp = names_in_dir;
 			while (tmp)
 			{
