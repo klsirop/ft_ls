@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:49:14 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 20:49:30 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 15:10:06 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_insert_all_dir_names_rec(char *name,
 	this = NULL;
 	dir = opendir(name);
 	if (!dir)
-		return -1;
+		return (-1);
 	while ((dirent = readdir(dir)) != NULL)
 	{
 		full_name = ft_get_next_dir_name(name, dirent->d_name);
@@ -56,5 +56,5 @@ int	ft_insert_all_dir_names_rec(char *name,
 	}
 	closedir(dir);
 	ft_sort_by(name, head, dir_info->sort_order);
-	return res;
+	return (res);
 }

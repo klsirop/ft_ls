@@ -6,15 +6,15 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 14:25:47 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 14:33:32 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 14:58:46 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	ft_max(int a, int b)
+int		ft_max(int a, int b)
 {
-	return a > b ? a : b;
+	return (a > b ? a : b);
 }
 
 void	ft_print_dir(t_dir_info *dir_info, t_file_info *file_info, int is_dir)
@@ -42,24 +42,10 @@ void	ft_print_dir(t_dir_info *dir_info, t_file_info *file_info, int is_dir)
 		ft_printf("\n");
 }
 
-void	ft_print_node_l(t_file_info *tmp,
-						t_dir_info *dir_info,
-						t_field_width *width_info,
-						int is_device)
+void	ft_print_node_l_size(t_file_info *tmp,
+							int is_device,
+							t_field_width *width_info)
 {
-	ft_printf("%c", tmp->rights->mode);
-	ft_printf("%s", tmp->rights->usr_rights);
-	ft_printf("%s", tmp->rights->grp_rights);
-	ft_printf("%s", tmp->rights->oth_rights);
-	ft_printf("%c", tmp->rights->acl);
-	ft_printf(" ");
-	ft_printf("%*hu ", width_info->hard_links, tmp->hard_links);
-	if (dir_info->info_type != LG && dir_info->info_type != LOG)
-		ft_printf("%-*s  ", width_info->user, tmp->usr_name);
-	if (dir_info->info_type != LO && dir_info->info_type != LOG)
-		ft_printf("%-*s  ", width_info->group, tmp->grp_name);
-	if (dir_info->info_type == LOG)
-		ft_printf("  ");
 	if (tmp->rights->mode != 'c' && tmp->rights->mode != 'b')
 	{
 		if (is_device == 1)
@@ -70,31 +56,18 @@ void	ft_print_node_l(t_file_info *tmp,
 		ft_printf(" ");
 	}
 	else
-		ft_printf("%*d, %*d ", width_info->major, tmp->major, width_info->minor, tmp->minor);
-	if (dir_info->is_birth_time == 0)
-	{
-		ft_printf("%*s %*s ", width_info->mounth, tmp->time->month, width_info->day, tmp->time->day);
-		if (tmp->time->hour)
-			ft_printf("%s:%s", tmp->time->hour, tmp->time->min);
-		else
-			ft_printf(" %s", tmp->time->year);
-	}
-	else
-	{
-		ft_printf("%*s %*s ", width_info->mounth, tmp->time_birth->month,
-				width_info->day, tmp->time_birth->day);
-		if (tmp->time_birth->hour)
-			ft_printf("%s:%s", tmp->time_birth->hour, tmp->time_birth->min);
-		else
-			ft_printf(" %s", tmp->time_birth->year);
-	}
-	ft_printf(" ");
-	ft_printf("%s", tmp->file_name);
-	if (tmp->link_name)
-	{
-		ft_printf(" -> ");
-		ft_printf("%s", tmp->link_name);
-	}
+		ft_printf("%*d, %*d ", width_info->major,
+					tmp->major, width_info->minor, tmp->minor);
+}
+
+void	ft_print_node_l(t_file_info *tmp,
+						t_dir_info *dir_info,
+						t_field_width *width_info,
+						int is_device)
+{
+	ft_output_l_four_col(dir_info, tmp, width_info);
+	ft_print_node_l_size(tmp, is_device, width_info);
+	ft_output_l_time(dir_info, width_info, tmp);
 }
 
 void	ft_print_node(t_file_info *tmp,

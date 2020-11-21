@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 14:42:06 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 14:52:37 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -435,5 +435,11 @@ void	ft_print_group_name(struct stat status, t_file_info *file_info);
 */
 
 void	ft_output_l(t_dir_info *dir_info, t_file_info *file_info, int is_dir);
+void	ft_output_l_four_col(t_dir_info *dir_info,
+							t_file_info *tmp,
+							t_field_width *width_info);
+void	ft_output_l_time(t_dir_info *dir_info,
+						t_field_width *width_info,
+						t_file_info *tmp);
 
 #endif

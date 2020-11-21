@@ -6,7 +6,7 @@
 #    By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/01 17:44:02 by klsirop           #+#    #+#              #
-#    Updated: 2020/11/21 14:33:01 by volyvar-         ###   ########.fr        #
+#    Updated: 2020/11/21 15:12:28 by volyvar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT = ./libft/libft.a
 
 
 SRC = 	main.c init.c parse_input.c list.c ft_add_char_to_string.c \
-		error.c unnesessary_func.c ft_is_right_dir_names.c \
+		error.c ft_is_right_dir_names.c \
 		ft_find_sort_order.c init_structs.c ft_find_info_type.c \
 		sort_names.c out_dir.c print_dir.c free.c print_like_l.c \
 		separate_files_and_dirs.c manage_flags_overlap.c \

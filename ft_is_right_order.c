@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:33:50 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 20:07:10 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 15:06:57 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ int		ft_is_right_order(char *parent_name,
 	lhs_full = ft_get_next_dir_name(parent_name, lhs);
 	rhs_full = ft_get_next_dir_name(parent_name, rhs);
 	lstat(lhs_full, &lhs_stat);
-		// ft_lstat_error();
 	lstat(rhs_full, &rhs_stat);
-		// ft_lstat_error();
 	ft_strdel(&lhs_full);
 	ft_strdel(&rhs_full);
 	if (order_type == ALPH)

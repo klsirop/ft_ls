@@ -6,20 +6,22 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:44:31 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 20:49:27 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 15:06:21 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_tree	*ft_out_dir(char* name, t_dir_info *dir_info, t_field_width **width_info)
+t_tree	*ft_out_dir(char *name,
+					t_dir_info *dir_info,
+					t_field_width **width_info)
 {
 	t_tree			*dir_tree;
 	DIR				*dir;
 	struct dirent	*dirent;
 	t_file_info		*tmp_file_info;
 	int				total;
-	
+
 	if (dir_info->info_type != U)
 	{
 		if (!(*width_info = (t_field_width *)malloc(sizeof(t_field_width))))
@@ -31,7 +33,7 @@ t_tree	*ft_out_dir(char* name, t_dir_info *dir_info, t_field_width **width_info)
 	if (!dir)
 	{
 		ft_error_permission_denided(name);
-		return NULL;
+		return (NULL);
 	}
 	dir_tree = NULL;
 	while ((dirent = readdir(dir)) != NULL)
@@ -51,7 +53,8 @@ t_tree	*ft_out_dir(char* name, t_dir_info *dir_info, t_field_width **width_info)
 			ft_find_first_width(width_info, tmp_file_info);
 			ft_find_last_width(width_info, tmp_file_info);
 		}
-		dir_tree = ft_insert_tree_element(dir_tree, tmp_file_info, name, dir_info->sort_order);
+		dir_tree = ft_insert_tree_element(dir_tree, tmp_file_info,
+											name, dir_info->sort_order);
 		if (dir_info->info_type != U && tmp_file_info->is_device == 1)
 			dir_tree->field->is_device = 1;
 	}
@@ -61,9 +64,9 @@ t_tree	*ft_out_dir(char* name, t_dir_info *dir_info, t_field_width **width_info)
 	if (dir_info->info_type != U)
 	{
 		if ((*width_info)->day < 2)
-		(*width_info)->day = 2;
+			(*width_info)->day = 2;
 		(*width_info)->minor = 3;
 		(*width_info)->major = 3;
 	}
-	return dir_tree;
+	return (dir_tree);
 }

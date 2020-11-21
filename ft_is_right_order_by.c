@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 19:00:07 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 19:55:55 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 15:08:45 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int		ft_is_right_order_tbirth(struct stat lhs_stat,
 {
 	if (lhs_stat.st_birthtimespec.tv_sec > rhs_stat.st_birthtimespec.tv_sec)
 		return (1);
-	else if (lhs_stat.st_birthtimespec.tv_sec == rhs_stat.st_birthtimespec.tv_sec)
+	else if (lhs_stat.st_birthtimespec.tv_sec
+			== rhs_stat.st_birthtimespec.tv_sec)
 		return (ft_is_right_order_by_alph(lhs, rhs, TBITRH));
 	else
 		return (0);
@@ -58,7 +59,8 @@ int		ft_is_right_order_rtbirth(struct stat lhs_stat,
 {
 	if (lhs_stat.st_birthtimespec.tv_sec < rhs_stat.st_birthtimespec.tv_sec)
 		return (1);
-	else if (lhs_stat.st_birthtimespec.tv_sec == rhs_stat.st_birthtimespec.tv_sec)
+	else if (lhs_stat.st_birthtimespec.tv_sec
+				== rhs_stat.st_birthtimespec.tv_sec)
 		return (ft_is_right_order_by_alph(lhs, rhs, RTBIRTH));
 	else
 		return (0);

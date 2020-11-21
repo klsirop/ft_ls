@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 14:33:34 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 14:42:34 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 14:58:13 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,12 @@ void	ft_output_l_time(t_dir_info *dir_info,
 		else
 			ft_printf(" %s", tmp->time_birth->year);
 	}
+	ft_printf(" %s", tmp->file_name);
+	if (tmp->link_name)
+	{
+		ft_printf(" -> ");
+		ft_printf("%s", tmp->link_name);
+	}
 }
 
 void	ft_output_l(t_dir_info *dir_info, t_file_info *file_info, int is_dir)
@@ -90,13 +96,6 @@ void	ft_output_l(t_dir_info *dir_info, t_file_info *file_info, int is_dir)
 		ft_output_l_four_col(dir_info, tmp, width_info);
 		ft_output_l_size(file_info, tmp, width_info);
 		ft_output_l_time(dir_info, width_info, tmp);
-		ft_printf(" ");
-		ft_printf("%s", tmp->file_name);
-		if (tmp->link_name)
-		{
-			ft_printf(" -> ");
-			ft_printf("%s", tmp->link_name);
-		}
 		ft_printf("\n");
 		tmp = tmp->next;
 	}
