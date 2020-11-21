@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 16:30:24 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 20:07:34 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,6 @@ void	ft_sort_by_file_info(char *parent_name, t_file_info **file_info, enum e_ord
 */
 
 int		ft_insert_all_dir_names(char *name, t_lis **head, t_dir_info *dir_info, int is_only_dirs);
-int	ft_insert_all_dir_names_rec(char *name, t_lis **head, t_dir_info* dir_info, int is_only_dirs);
 t_tree	*ft_out_dir(char* name, t_dir_info* dir_info, t_field_width **width_info);
 
 /*
@@ -420,8 +419,7 @@ void	ft_out_files(t_info *info, t_dir_info *dir_info);
 
 int	ft_insert_all_dir_names_rec(char *name,
 								t_lis **head,
-								t_dir_info *dir_info,
-								int is_only_dirs);
+								t_dir_info *dir_info);
 
 /*
 ** get_file_info.c

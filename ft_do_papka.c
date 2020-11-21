@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:11:46 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 16:32:38 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 20:20:27 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 int		ft_is_hidden(char *name)
 {
 	long int slash_ind;
+
 	if (!name)
 		return (0);
 	if (name[0] != '.')
 		return (0);
 	slash_ind = ft_str_find_char(name, '/');
-	if (name[0] == '.' && (slash_ind == -1 || slash_ind == (long int)ft_strlen(name) - 1))
+	if (name[0] == '.' && (slash_ind == -1 ||
+		slash_ind == (long int)ft_strlen(name) - 1))
 		return (1);
 	return (0);
 }
@@ -61,7 +63,8 @@ void	ft_do_papka_rec(char *dir_name,
 	{
 		*there_is_dirs_in_dir = ft_insert_all_dir_names_rec(dir_name,
 															&names_in_dir,
-															dir_info, 1);
+															dir_info);
+		ft_sort_by(dir_name, &names_in_dir, dir_info->sort_order);
 		if (there_is_dirs_in_dir != 0)
 		{
 			tmp = names_in_dir;

@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:04:04 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 18:59:31 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 19:54:35 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,10 @@ void	ft_error_permission_denided(char *dir_name)
 
 void	ft_malloc_error(void)
 {
-	// ft_printf("malloc\n");
 	exit(1);
 }
 
 void	ft_lstat_error(void)
 {
-	// ft_printf("lstat\n");
 	exit(1);
 }
