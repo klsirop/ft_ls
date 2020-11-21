@@ -6,13 +6,13 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 15:33:50 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 19:01:00 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/21 21:06:06 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		ft_is_right_order_size(struct stat lhs_stat,
+int			ft_is_right_order_size(struct stat lhs_stat,
 								struct stat rhs_stat,
 								char *lhs,
 								char *rhs)
@@ -25,7 +25,7 @@ int		ft_is_right_order_size(struct stat lhs_stat,
 		return (0);
 }
 
-int		ft_is_right_order_rsize(struct stat lhs_stat,
+int			ft_is_right_order_rsize(struct stat lhs_stat,
 								struct stat rhs_stat,
 								char *lhs,
 								char *rhs)
@@ -38,25 +38,42 @@ int		ft_is_right_order_rsize(struct stat lhs_stat,
 		return (0);
 }
 
-int		ft_is_right_order(char *parent_name,
+struct stat	ft_get_full_name(char *parent_name,
+					char *hs)
+{
+	char		*full;
+	struct stat	status;
+
+	full = ft_get_next_dir_name(parent_name, hs);
+	lstat(full, &status);
+	ft_strdel(&full);
+	return (status);
+}
+
+int			ft_check_order_type(char *lhs, char *rhs,
+							enum e_order_type order_type)
+{
+	if (order_type == ALPH)
+		return (ft_is_right_order_by_alph(lhs, rhs, order_type));
+	if (order_type == RALPH)
+		return (ft_is_right_order_by_alph(lhs, rhs, order_type));
+	if (order_type == ORGN)
+		return (1);
+	return (-1);
+}
+
+int			ft_is_right_order(char *parent_name,
 							char *lhs, char *rhs,
 							enum e_order_type order_type)
 {
 	struct stat	lhs_stat;
 	struct stat	rhs_stat;
-	char		*lhs_full;
-	char		*rhs_full;
+	int			ret;
 
-	lhs_full = ft_get_next_dir_name(parent_name, lhs);
-	rhs_full = ft_get_next_dir_name(parent_name, rhs);
-	lstat(lhs_full, &lhs_stat);
-	lstat(rhs_full, &rhs_stat);
-	ft_strdel(&lhs_full);
-	ft_strdel(&rhs_full);
-	if (order_type == ALPH)
-		return (ft_is_right_order_by_alph(lhs, rhs, order_type));
-	if (order_type == RALPH)
-		return (ft_is_right_order_by_alph(lhs, rhs, order_type));
+	rhs_stat = ft_get_full_name(parent_name, rhs);
+	lhs_stat = ft_get_full_name(parent_name, lhs);
+	if ((ret = ft_check_order_type(lhs, rhs, order_type)) != -1)
+		return (ret);
 	if (order_type == TBITRH)
 		return (ft_is_right_order_tbirth(lhs_stat, rhs_stat, lhs, rhs));
 	if (order_type == RTBIRTH)
@@ -69,7 +86,5 @@ int		ft_is_right_order(char *parent_name,
 		return (ft_is_right_order_size(lhs_stat, rhs_stat, lhs, rhs));
 	if (order_type == RSIZE)
 		return (ft_is_right_order_rsize(lhs_stat, rhs_stat, lhs, rhs));
-	if (order_type == ORGN)
-		return (1);
 	return (0);
 }
