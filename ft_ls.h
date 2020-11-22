@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:50:17 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 22:50:31 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/22 13:59:52 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,9 +178,8 @@ void					ft_lstat_error(void);
 ** list.c
 */
 
-void					ft_list_delete_element(t_info **info, t_lis *prev);
+t_lis					*ft_list_delete_element(t_info **info, t_lis *prev);
 int						ft_find_list_len(t_lis *head);
-void					ft_print_list(t_lis *head);
 void					ft_delete_list(t_lis **head);
 int						ft_find_list_len_file_info(t_file_info *head);
 
@@ -197,8 +196,6 @@ void					ft_reverse_list_file_info(t_file_info **head);
 
 void					ft_list_add_begin(t_lis **head, char *str);
 void					ft_list_add(t_lis **head, char *str);
-void					ft_file_list_add_l(t_file_info **head,
-										t_file_info *new_el);
 void					ft_list_add_l_begin(t_file_info **head,
 										t_file_info *new_el);
 void					ft_file_list_add_begin(t_file_info **head, char *str);
@@ -239,12 +236,8 @@ void					ft_sort_names(t_lis **names, t_dir_info *dir_info);
 ** sort_names.c
 */
 
-void					ft_sort_by(char *parent_name, t_lis **names,
-					enum e_order_type sort_order);
 int						ft_is_right_order_by_alph(char *lhs, char *rhs,
 					enum e_order_type order_type);
-void					ft_sort_by_file_info(char *parent_name,
-					t_file_info **file_info, enum e_order_type sort_order);
 void					ft_swap_list_elements_new(t_lis **head,
 						t_lis *prev, t_lis **here, int *is_end_sorting);
 void					ft_swap_file_info(t_file_info **head, t_file_info *prev,
@@ -254,8 +247,6 @@ void					ft_swap_file_info(t_file_info **head, t_file_info *prev,
 ** out_dir.c
 */
 
-int						ft_insert_all_dir_names(char *name, t_lis **head,
-								t_dir_info *dir_info, int is_only_dirs);
 void					ft_out_dir(char *name, t_dir_info *dir_info,
 								t_field_width **width_info, t_tree **dir_tree);
 
@@ -439,5 +430,14 @@ void					ft_output_l_four_col(t_dir_info *dir_info,
 					t_file_info *tmp, t_field_width *width_info);
 void					ft_output_l_time(t_dir_info *dir_info,
 					t_field_width *width_info, t_file_info *tmp);
+
+/*
+** ft_sort_by.c
+*/
+
+void					ft_sort_by(char *parent_name,
+						t_lis **names, enum e_order_type sort_order);
+void					ft_sort_by_file_info(char *parent_name,
+				t_file_info **file_info, enum e_order_type sort_order);
 
 #endif

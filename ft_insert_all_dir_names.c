@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:49:14 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 20:29:10 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/22 13:12:51 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int		ft_is_usual_dir(char *name,
 	char			*full_name;
 
 	full_name = ft_get_next_dir_name(name, dirent->d_name);
-	if ((ft_is_dir(full_name, dir_info) &&
-		ft_strcmp(dirent->d_name, ".") &&
-		ft_strcmp(dirent->d_name, "..")))
+	if ((ft_strcmp(dirent->d_name, ".") &&
+		ft_strcmp(dirent->d_name, "..") &&
+		ft_is_dir(full_name, dir_info)))
 	{
 		ft_strdel(&full_name);
 		return (1);

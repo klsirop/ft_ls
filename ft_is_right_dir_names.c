@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 21:41:33 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 19:24:50 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/22 14:01:27 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ void	ft_is_right_dir_names(t_info *info)
 		{
 			info->deleted_dir = 1;
 			ft_list_add_begin(&wrong_dirs, tmp->val);
-			ft_list_delete_element(&info, prev);
+			tmp = ft_list_delete_element(&info, prev);
 		}
 		else
+		{
 			prev = tmp;
-		tmp = tmp->next;
+			tmp = tmp->next;
+		}
 	}
 	ft_print_error_nonexist_dir(wrong_dirs);
 	if (wrong_dirs)

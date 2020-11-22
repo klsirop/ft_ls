@@ -6,13 +6,13 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 22:10:33 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/21 19:29:20 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/22 13:01:37 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_list_delete_element(t_info **info, t_lis *prev)
+t_lis	*ft_list_delete_element(t_info **info, t_lis *prev)
 {
 	t_lis *tmp;
 
@@ -26,12 +26,13 @@ void	ft_list_delete_element(t_info **info, t_lis *prev)
 			free((*info)->names);
 		}
 		(*info)->names = tmp;
-		return ;
+		return ((*info)->names);
 	}
 	tmp = prev->next;
 	prev->next = tmp->next;
 	ft_strdel(&(tmp->val));
 	free(tmp);
+	return (prev->next);
 }
 
 int		ft_find_list_len(t_lis *head)

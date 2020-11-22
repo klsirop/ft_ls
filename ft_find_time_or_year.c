@@ -6,7 +6,7 @@
 /*   By: volyvar- <volyvar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 20:41:25 by volyvar-          #+#    #+#             */
-/*   Updated: 2020/11/18 20:41:58 by volyvar-         ###   ########.fr       */
+/*   Updated: 2020/11/22 13:53:11 by volyvar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@ int		ft_time_or_year_birth(time_t now_time,
 								char **separate_time,
 								t_file_info *file_info)
 {
-	if (((now_time - bitime) / (60 * 60 * 24))
-							< 182 && (now_time - bitime) >= 0)
+	int days;
+	int hyear;
+
+	days = 60 * 60 * 24;
+	hyear = 182;
+	if (((now_time - bitime) / days)
+							< hyear && (now_time - bitime) >= 0)
 	{
 		if (!(file_info->time_birth->hour = ft_strdup(separate_time[0])))
 			ft_malloc_error();
@@ -66,7 +71,12 @@ int		ft_time_ot_year(time_t now_time,
 						t_file_info *file_info,
 						char **separate_time)
 {
-	if (((now_time - mtime) / (60 * 60 * 24)) < 182 && (now_time - mtime) >= 0)
+	int days;
+	int hyear;
+
+	days = 60 * 60 * 24;
+	hyear = 182;
+	if (((now_time - mtime) / days) < hyear && (now_time - mtime) >= 0)
 	{
 		if (!(file_info->time->hour = ft_strdup(separate_time[0])))
 			ft_malloc_error();
